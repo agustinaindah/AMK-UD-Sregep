@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AMK UDS</string>
+
+    <string name="base_url"></string>
+    <string name="X_API_KEY"></string>
+
+    <string name="action_back_pressed">If you click once again the app will be closed</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+</resources>
