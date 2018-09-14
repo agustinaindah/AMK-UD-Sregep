@@ -9,10 +9,36 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="back_pressed">Tekan sekali lagi untuk keluar</string>
-    <string name="username">Username</string>
+    <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="label_login">Login</string>
+    <string name="label_login">LOGIN</string>
     <string name="label_data_karyawan">Data Karyawan</string>
     <string name="label_logout">Logout</string>
     <string name="label_input_karyawan">Input Data Karyawan</string>
+    <string name="male">Pria</string>
+    <string name="female">Wanita</string>
+    <string name="religion">Agama</string>
+    <string name="status">Status</string>
+    <string name="status_kar">Status Karyawan</string>
+
+    <!--data dummy-->
+    <string-array name="data_religion">
+        <item>Islam</item>
+        <item>Kristen Protestan</item>
+        <item>Kristen Katolik</item>
+        <item>Hindu</item>
+        <item>Buddha</item>
+        <item>Konghucu</item>
+    </string-array>
+
+    <string-array name="data_status">
+        <item>Kawin</item>
+        <item>Belum Kawin</item>
+    </string-array>
+
+    <string-array name="data_status_karyawan">
+        <item>Kontrak</item>
+        <item>Tetap</item>
+    </string-array>
+
 </resources>

@@ -1,11 +1,21 @@
 package com.amkuds.app.features.main;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.support.v7.widget.CardView;
 
 import com.amkuds.app.R;
 import com.amkuds.app.base.BaseFragment;
+import com.amkuds.app.features.input_data.FormInputDataActivity;
+
+import butterknife.BindView;
+import butterknife.OnClick;
 
 public class MainFragment extends BaseFragment {
+
+    @BindView(R.id.cardInputKaryawan)
+    CardView cardInputKaryawan;
 
     public static MainFragment newInstance() {
 
@@ -15,9 +25,14 @@ public class MainFragment extends BaseFragment {
         return fragment;
     }
 
-
     @Override
     protected int setView() {
         return R.layout.fragment_main;
+    }
+
+    @OnClick(R.id.cardInputKaryawan)
+    public void inputData(){
+        Intent intent = new Intent(getActivity(), FormInputDataActivity.class);
+        startActivity(intent);
     }
 }
