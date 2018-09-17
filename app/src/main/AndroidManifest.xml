@@ -30,10 +30,13 @@
         <activity
             android:name=".features.main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-
         <activity
             android:name=".features.input_data.FormInputDataActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden"/>
+        <activity
+            android:name=".features.list_data.ListDataEmployeeActivity"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

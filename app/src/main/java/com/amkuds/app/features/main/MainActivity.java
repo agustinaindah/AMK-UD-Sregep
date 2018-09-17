@@ -16,6 +16,8 @@ import android.view.View;
 
 import com.amkuds.app.R;
 import com.amkuds.app.base.BaseActivity;
+import com.amkuds.app.features.input_data.FormInputDataActivity;
+import com.amkuds.app.features.list_data.ListDataEmployeeActivity;
 import com.amkuds.app.utils.Helper;
 
 import butterknife.BindString;
@@ -102,8 +104,10 @@ public class MainActivity extends BaseActivity implements
         Intent intent = null;
         switch (item.getItemId()){
             case R.id.nav_data_karyawan:
+                intent = new Intent(this, ListDataEmployeeActivity.class);
                 break;
             case R.id.nav_input_data_karyawan:
+                intent = new Intent(this, FormInputDataActivity.class);
                 break;
             case R.id.nav_logout:
                 break;

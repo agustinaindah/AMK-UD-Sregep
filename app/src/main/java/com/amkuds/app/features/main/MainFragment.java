@@ -8,12 +8,15 @@ import android.support.v7.widget.CardView;
 import com.amkuds.app.R;
 import com.amkuds.app.base.BaseFragment;
 import com.amkuds.app.features.input_data.FormInputDataActivity;
+import com.amkuds.app.features.list_data.ListDataEmployeeActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 public class MainFragment extends BaseFragment {
 
+    @BindView(R.id.cardDataKaryawan)
+    CardView cardDataKaryawan;
     @BindView(R.id.cardInputKaryawan)
     CardView cardInputKaryawan;
 
@@ -28,6 +31,12 @@ public class MainFragment extends BaseFragment {
     @Override
     protected int setView() {
         return R.layout.fragment_main;
+    }
+
+    @OnClick(R.id.cardDataKaryawan)
+    public void listData(){
+        Intent intent = new Intent(getActivity(), ListDataEmployeeActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.cardInputKaryawan)

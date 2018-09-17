@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="#cfd8dc">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp">
+        android:padding="8dp">
 
         <android.support.v7.widget.CardView
             android:id="@+id/cardDataPribadi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="10dp">
+            app:cardCornerRadius="8dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:layout_marginBottom="5dp">
 
                 <TextView
@@ -28,12 +29,12 @@
                     android:layout_margin="7dp"
                     android:text="Data Pribadi"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="18sp" />
+                    android:textSize="22sp" />
 
                 <FrameLayout
                     android:id="@+id/frDataPribadi"
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="3dp"
                     android:layout_below="@id/txtTitleDataPribadi"
                     android:layout_margin="7dp"
                     android:background="@color/colorPrimary" />
@@ -45,7 +46,8 @@
                     android:layout_below="@id/frDataPribadi"
                     android:layout_margin="7dp"
                     android:layout_marginTop="10dp"
-                    android:text="Nama Lengkap" />
+                    android:text="Nama Lengkap"
+                    android:textColor="@color/color_text_form"/>
 
                 <EditText
                     android:id="@+id/edtNamaLengkap"
@@ -60,6 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtNamaLengkap"
                     android:layout_margin="7dp"
+                    android:textColor="@color/color_text_form"
                     android:text="Jenis Kelamin" />
 
                 <RadioGroup
@@ -88,6 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/rgGender"
                     android:layout_margin="7dp"
+                    android:textColor="@color/color_text_form"
                     android:text="Tempat Lahir" />
 
                 <EditText
@@ -103,6 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtTmptLahir"
                     android:layout_margin="7dp"
+                    android:textColor="@color/color_text_form"
                     android:text="Tanggal Lahir" />
 
                 <TextView
@@ -113,6 +118,7 @@
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
                     android:drawablePadding="5dp"
+                    android:drawableLeft="@drawable/ic_calendar"
                     android:text="01 Januari 2018"
                     android:textSize="16sp" />
 
@@ -122,6 +128,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtTglLahir"
                     android:layout_margin="7dp"
+                    android:textColor="@color/color_text_form"
                     android:text="Agama" />
 
                 <Spinner
@@ -141,6 +148,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/spinReligion"
                     android:layout_margin="7dp"
+                    android:textColor="@color/color_text_form"
                     android:text="Alamat" />
 
                 <EditText
@@ -156,6 +164,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtAlamat"
                     android:layout_margin="7dp"
+                    android:textColor="@color/color_text_form"
                     android:text="Alamat Domisili" />
 
                 <EditText
@@ -171,6 +180,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtAlamatKtp"
                     android:layout_margin="7dp"
+                    android:textColor="@color/color_text_form"
                     android:text="No Telepon/ Hp" />
 
                 <EditText
@@ -178,7 +188,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelNoHp"
-                    android:layout_margin="5dp" />
+                    android:layout_margin="5dp"
+                    android:inputType="number"/>
 
                 <TextView
                     android:id="@+id/txtLabelEmail"
@@ -186,6 +197,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtNoHp"
                     android:layout_margin="7dp"
+                    android:textColor="@color/color_text_form"
                     android:text="Email" />
 
                 <EditText
@@ -202,6 +214,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtEmail"
                     android:layout_margin="7dp"
+                    android:textColor="@color/color_text_form"
                     android:text="Status" />
 
                 <Spinner
@@ -224,7 +237,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/cardDataPribadi"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="15dp"
+            app:cardCornerRadius="8dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -237,12 +251,12 @@
                     android:layout_margin="7dp"
                     android:text="Data Info Karyawan"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="18sp" />
+                    android:textSize="22sp" />
 
                 <FrameLayout
                     android:id="@+id/frDataKaryawan"
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="3dp"
                     android:layout_below="@id/txtTitleDataKaryawan"
                     android:layout_margin="7dp"
                     android:background="@color/colorPrimary" />
@@ -253,6 +267,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/frDataKaryawan"
                     android:layout_margin="7dp"
+                    android:textColor="@color/color_text_form"
                     android:text="NIK (Nomor Induk Kependudukan)" />
 
                 <EditText
@@ -260,7 +275,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelNik"
-                    android:layout_margin="5dp" />
+                    android:layout_margin="5dp"
+                    android:inputType="number"/>
 
                 <TextView
                     android:id="@+id/txtLabelPosition"
@@ -268,6 +284,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtNik"
                     android:layout_margin="7dp"
+                    android:textColor="@color/color_text_form"
                     android:text="Jabatan" />
 
                 <EditText
@@ -283,6 +300,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtPosition"
                     android:layout_margin="7dp"
+                    android:textColor="@color/color_text_form"
                     android:text="Status Karyawan" />
 
                 <Spinner
@@ -301,45 +319,48 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/spinStatusKary"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="7dp"
+                    android:textColor="@color/color_text_form"
                     android:text="Tanggal Masuk" />
 
                 <TextView
                     android:id="@+id/txtTglMasuk"
                     style="@style/WrapWrapLayout"
                     android:layout_below="@id/txtLabelTglMasuk"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="7dp"
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
+                    android:drawableLeft="@drawable/ic_calendar_range"
                     android:drawablePadding="5dp"
                     android:text="01 Januari 2018"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtLabelTglKeluar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/spinStatusKary"
-                    android:layout_marginLeft="100dp"
+                    android:layout_marginLeft="80dp"
                     android:layout_marginTop="7dp"
                     android:layout_toRightOf="@id/txtLabelTglMasuk"
+                    android:textColor="@color/color_text_form"
                     android:text="Tanggal Keluar" />
 
                 <TextView
                     android:id="@+id/txtTglKeluar"
                     style="@style/WrapWrapLayout"
                     android:layout_below="@id/txtLabelTglKeluar"
-                    android:layout_marginLeft="65dp"
+                    android:layout_marginLeft="35dp"
                     android:layout_marginTop="7dp"
                     android:layout_toRightOf="@id/txtTglMasuk"
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
                     android:drawablePadding="5dp"
-                    android:padding="5dp"
+                    android:drawableLeft="@drawable/ic_calendar_range"
                     android:text="01 Januari 2018"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtLabelSalary"
@@ -347,6 +368,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtTglMasuk"
                     android:layout_margin="7dp"
+                    android:textColor="@color/color_text_form"
                     android:text="Gaji" />
 
                 <EditText
@@ -362,6 +384,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtSalary"
                     android:layout_margin="7dp"
+                    android:textColor="@color/color_text_form"
                     android:text="Upload Foto Diri" />
 
                 <RelativeLayout
@@ -378,7 +401,14 @@
                         android:layout_height="80dp"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/flat_clouds" />
+                        android:background="#bdbdbd" />
+
+                    <Button
+                        android:id="@+id/btnUploadFotoDiri"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/ic_circle_add" />
 
                     <!--   <Button
                            android:id="@+id/btnUploadFoto"
@@ -402,6 +432,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/layFotoDiri"
                     android:layout_margin="7dp"
+                    android:textColor="@color/color_text_form"
                     android:text="Upload Foto Diri" />
 
                 <RelativeLayout
@@ -418,7 +449,14 @@
                         android:layout_height="80dp"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/flat_clouds" />
+                        android:background="#bdbdbd" />
+
+                    <Button
+                        android:id="@+id/btnUploadFotoData"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/ic_circle_add" />
 
                     <!-- <Button
                          android:id="@+id/btnUploadFotoData"
@@ -442,6 +480,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/layFotoData"
                     android:layout_margin="7dp"
+                    android:textColor="@color/color_text_form"
                     android:text="Upload File" />
 
                 <RelativeLayout
@@ -458,7 +497,14 @@
                         android:layout_height="80dp"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
-                        android:background="@color/flat_clouds" />
+                        android:background="#bdbdbd" />
+
+                    <Button
+                        android:id="@+id/btnUploadFile"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/ic_circle_add" />
 
                     <!--  <Button
                           android:id="@+id/btnUploadFile"
@@ -482,8 +528,8 @@
 
         <Button
             android:id="@+id/btnSubmit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/MatchWrapLayout"
+            android:layout_marginTop="5dp"
             android:layout_below="@id/cardInfoKaryawan"
             android:text="Submit"
             android:theme="@style/ButtonColoredPrimary" />
