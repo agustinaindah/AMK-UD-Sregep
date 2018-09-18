@@ -3,7 +3,6 @@ package com.amkuds.app;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
 
@@ -14,16 +13,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class DateDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener{
+public class StartDateDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
-    public static final String TAG = "DateDialog";
+    public static final String TAG = "StartDateDialog";
 
-    private static OnDateDialog mCallback;
+    private static StartOnDateDialog mCallback;
 
-    public static DateDialog newInstance(String date, OnDateDialog listener) {
+    public static StartDateDialog newInstance(String date, StartOnDateDialog listener) {
         Bundle args = new Bundle();
         args.putString(Consts.ARG_DATA, date);
-        DateDialog fragment = new DateDialog();
+        StartDateDialog fragment = new StartDateDialog();
         mCallback = listener;
         fragment.setArguments(args);
         return fragment;
@@ -54,10 +53,10 @@ public class DateDialog extends DialogFragment implements DatePickerDialog.OnDat
                 .append((monthOfYear + 1))
                 .append("-")
                 .append(dayOfMonth);
-        mCallback.onSelectedDate(sbDate + "");
+        mCallback.onStartSelectedDate(sbDate + "");
     }
 
-    public interface OnDateDialog {
-        void onSelectedDate(String onDate);
+    public interface StartOnDateDialog {
+        void onStartSelectedDate(String startDate);
     }
 }

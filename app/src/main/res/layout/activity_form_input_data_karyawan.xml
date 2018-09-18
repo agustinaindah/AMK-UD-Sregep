@@ -335,7 +335,7 @@
                     android:drawableLeft="@drawable/ic_calendar_range"
                     android:drawablePadding="5dp"
                     android:text="01 Januari 2018"
-                    android:textSize="14sp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/txtLabelTglKeluar"
@@ -360,7 +360,7 @@
                     android:drawablePadding="5dp"
                     android:drawableLeft="@drawable/ic_calendar_range"
                     android:text="01 Januari 2018"
-                    android:textSize="14sp" />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/txtLabelSalary"

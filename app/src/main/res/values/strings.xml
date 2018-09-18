@@ -21,6 +21,12 @@
     <string name="status">Status</string>
     <string name="status_kar">Status Karyawan</string>
 
+    <!--option camera -->
+    <string name="label_take_photo">Ambil Gambar</string>
+    <string name="label_choose_gallery">Pilih dari Gallery</string>
+    <string name="label_cancel">Batal</string>
+    <string name="label_add_photo">Tambah Gambar</string>
+
     <!--data dummy-->
     <string-array name="data_religion">
         <item>Islam</item>

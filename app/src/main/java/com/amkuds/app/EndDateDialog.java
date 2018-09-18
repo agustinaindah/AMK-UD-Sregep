@@ -14,16 +14,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class DateDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener{
+public class EndDateDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
-    public static final String TAG = "DateDialog";
+    public static final String TAG = "EndDateDialog";
 
-    private static OnDateDialog mCallback;
+    private static EndOnDateDialog mCallback;
 
-    public static DateDialog newInstance(String date, OnDateDialog listener) {
+    public static EndDateDialog newInstance(String date, EndOnDateDialog listener) {
         Bundle args = new Bundle();
         args.putString(Consts.ARG_DATA, date);
-        DateDialog fragment = new DateDialog();
+        EndDateDialog fragment = new EndDateDialog();
         mCallback = listener;
         fragment.setArguments(args);
         return fragment;
@@ -43,21 +43,21 @@ public class DateDialog extends DialogFragment implements DatePickerDialog.OnDat
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-        return new DatePickerDialog(getActivity(), this, year, month, day );
+        return new DatePickerDialog(getActivity(), this, year, month, day+1 );
     }
 
     @Override
-    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+    public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
         StringBuilder sbDate = new StringBuilder("");
         sbDate.append(year)
                 .append("-")
                 .append((monthOfYear + 1))
                 .append("-")
                 .append(dayOfMonth);
-        mCallback.onSelectedDate(sbDate + "");
+        mCallback.onEndSelectedDate(sbDate + "");
     }
 
-    public interface OnDateDialog {
-        void onSelectedDate(String onDate);
+    public interface EndOnDateDialog {
+        void onEndSelectedDate(String EndDate);
     }
 }
