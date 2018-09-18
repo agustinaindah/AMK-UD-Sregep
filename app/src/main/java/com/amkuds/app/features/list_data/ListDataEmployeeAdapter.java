@@ -1,15 +1,18 @@
 package com.amkuds.app.features.list_data;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.amkuds.app.R;
+import com.amkuds.app.features.list_data.detail.ListDetailEmployeeActivity;
 import com.amkuds.app.model.Employee;
 import com.amkuds.app.utils.Helper;
 
@@ -47,6 +50,14 @@ public class ListDataEmployeeAdapter extends RecyclerView.Adapter<ListDataEmploy
         holder.txtJabatanEmp.setText(employee.getEmployeePosition());
         holder.txtSttsEmp.setText(employee.getEmployeeStatus());
         holder.txtDateEndEmp.setText(employee.getEmployeeEndContract());
+
+        holder.layItemEmployee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ListDetailEmployeeActivity.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -56,6 +67,8 @@ public class ListDataEmployeeAdapter extends RecyclerView.Adapter<ListDataEmploy
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
+        @BindView(R.id.layItemEmployee)
+        RelativeLayout layItemEmployee;
         @BindView(R.id.imgItemEmployee)
         ImageView imgItemEmployee;
         @BindView(R.id.txtNameEmp)

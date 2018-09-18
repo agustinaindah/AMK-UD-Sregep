@@ -40,10 +40,28 @@
                     android:background="@color/colorPrimary" />
 
                 <TextView
-                    android:id="@+id/txtLabelNmLengkap"
+                    android:id="@+id/txtLabelNIk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/frDataPribadi"
+                    android:layout_margin="7dp"
+                    android:layout_marginTop="10dp"
+                    android:text="NIK (Nomor Induk Kependudukan)"
+                    android:textColor="@color/color_text_form"/>
+
+                <EditText
+                    android:id="@+id/edtNikEmp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelNIk"
+                    android:layout_margin="5dp"
+                    android:inputType="number"/>
+
+                <TextView
+                    android:id="@+id/txtLabelNmLengkap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/edtNikEmp"
                     android:layout_margin="7dp"
                     android:layout_marginTop="10dp"
                     android:text="Nama Lengkap"
@@ -262,19 +280,19 @@
                     android:background="@color/colorPrimary" />
 
                 <TextView
-                    android:id="@+id/txtLabelNik"
+                    android:id="@+id/txtLabelNip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/frDataKaryawan"
                     android:layout_margin="7dp"
                     android:textColor="@color/color_text_form"
-                    android:text="NIK (Nomor Induk Kependudukan)" />
+                    android:text="NIP (Nomor Induk Pegawai)" />
 
                 <EditText
-                    android:id="@+id/edtNik"
+                    android:id="@+id/edtNip"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/txtLabelNik"
+                    android:layout_below="@id/txtLabelNip"
                     android:layout_margin="5dp"
                     android:inputType="number"/>
 
@@ -282,7 +300,7 @@
                     android:id="@+id/txtLabelPosition"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/edtNik"
+                    android:layout_below="@id/edtNip"
                     android:layout_margin="7dp"
                     android:textColor="@color/color_text_form"
                     android:text="Jabatan" />

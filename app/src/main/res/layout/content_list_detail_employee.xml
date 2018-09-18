@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".features.list_data.detail.ListDetailEmployeeActivity"
+    tools:showIn="@layout/activity_list_detail_employee">
+
+
+    <RelativeLayout
+        android:id="@+id/layDataPribadi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardDataPribadi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="7dp"
+            app:cardMaxElevation="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/txtLabelDataPribadi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Data Pribadi"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="22sp" />
+
+                <FrameLayout
+                    android:id="@+id/frDataPribadi"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_below="@id/txtLabelDataPribadi"
+                    android:layout_margin="5dp"
+                    android:background="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/txtLabelNIK"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/frDataPribadi"
+                    android:layout_margin="3dp"
+                    android:text="NIK (Nomor Induk Kependudukan)"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtNikEmp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelNIK"
+                    android:layout_margin="3dp"
+                    android:text="0123456789"
+                    android:textColor="@color/color_text_form"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtLabelNama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtNikEmp"
+                    android:layout_margin="3dp"
+                    android:text="Nama Lengkap"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtNameEmp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelNama"
+                    android:layout_margin="3dp"
+                    android:text="Tio Tamara"
+                    android:textColor="@color/color_text_form"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtLabelTmptLahir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtNameEmp"
+                    android:layout_margin="3dp"
+                    android:text="Tempat Lahir"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtTmptLahir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelTmptLahir"
+                    android:layout_margin="3dp"
+                    android:text="Sleman"
+                    android:textColor="@color/color_text_form"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtLabelTglLahir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtTmptLahir"
+                    android:layout_margin="3dp"
+                    android:text="Tanggal Lahir"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtTglLahir"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelTglLahir"
+                    android:layout_margin="3dp"
+                    android:text="30 Oktober 1996"
+                    android:textColor="@color/color_text_form"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtLabelAgama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtTglLahir"
+                    android:layout_margin="3dp"
+                    android:text="Agama"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtAgamaEmp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelAgama"
+                    android:layout_margin="3dp"
+                    android:text="Islam"
+                    android:textColor="@color/color_text_form"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtLabelStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtAgamaEmp"
+                    android:layout_margin="3dp"
+                    android:text="Status"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelStatus"
+                    android:layout_margin="3dp"
+                    android:text="Belum Kawin"
+                    android:textColor="@color/color_text_form"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtLabelJK"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtStatus"
+                    android:layout_margin="3dp"
+                    android:text="Jenis Kelamin"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtJenisKelaminEmp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelJK"
+                    android:layout_margin="3dp"
+                    android:text="Laki-laki"
+                    android:textColor="@color/color_text_form"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtLabelNoHp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtJenisKelaminEmp"
+                    android:layout_margin="3dp"
+                    android:text="No Telp/ Hp"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtNoHp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelNoHp"
+                    android:layout_margin="3dp"
+                    android:text="0812345678"
+                    android:textColor="@color/color_text_form"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtLabelEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtNoHp"
+                    android:layout_margin="3dp"
+                    android:text="Email"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelEmail"
+                    android:layout_margin="3dp"
+                    android:text="tiotamara@gmail.com"
+                    android:textColor="@color/color_text_form"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtLabelAlamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtEmail"
+                    android:layout_margin="3dp"
+                    android:text="Alamat"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtAlamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelAlamat"
+                    android:layout_margin="3dp"
+                    android:text="-"
+                    android:textColor="@color/color_text_form"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtLabelAlamatKtp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtAlamat"
+                    android:layout_margin="3dp"
+                    android:text="Alamat Domisili"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtAlamatKtp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelAlamatKtp"
+                    android:layout_margin="3dp"
+                    android:text="Somodaran Gamping Sleman"
+                    android:textColor="@color/color_text_form"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardDataKaryawan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardDataPribadi"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            app:cardMaxElevation="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/txtLabelDataKaryawan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Data Info Karyawan"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="22sp" />
+
+                <FrameLayout
+                    android:id="@+id/frDataKaryawan"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:layout_below="@id/txtLabelDataKaryawan"
+                    android:layout_margin="5dp"
+                    android:background="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/txtLabelNip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/frDataKaryawan"
+                    android:layout_margin="3dp"
+                    android:text="NIP (Nomor Induk Pegawai)"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtNip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelNip"
+                    android:layout_margin="3dp"
+                    android:text="12345678"
+                    android:textColor="@color/color_text_form"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtLabelJab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtNip"
+                    android:layout_margin="3dp"
+                    android:text="Jabatan"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtJabatan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelJab"
+                    android:layout_margin="3dp"
+                    android:text="Back End Programmer"
+                    android:textColor="@color/color_text_form"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtLabelStatusEmp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtJabatan"
+                    android:layout_margin="3dp"
+                    android:text="Status Karyawan"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtStatusEmp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelStatusEmp"
+                    android:layout_margin="3dp"
+                    android:text="Kontrak"
+                    android:textColor="@color/color_text_form"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtLabelTglMasuk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtStatusEmp"
+                    android:layout_marginTop="7dp"
+                    android:layout_toRightOf="@id/txtLabelTglMasuk"
+                    android:text="Tanggal Masuk" />
+
+                <TextView
+                    android:id="@+id/txtTglMasuk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelTglMasuk"
+                    android:layout_marginTop="7dp"
+                    android:drawableLeft="@drawable/ic_calendar_range"
+                    android:drawablePadding="5dp"
+                    android:text="01 Januari 2018"
+                    android:textColor="@color/color_text_form" />
+
+                <TextView
+                    android:id="@+id/txtLabelTglKeluar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtStatusEmp"
+                    android:layout_marginLeft="80dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_toRightOf="@id/txtLabelTglMasuk"
+                    android:text="Tanggal Keluar" />
+
+                <TextView
+                    android:id="@+id/txtTglKeluar"
+                    style="@style/WrapWrapLayout"
+                    android:layout_below="@id/txtLabelTglKeluar"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_toRightOf="@id/txtTglMasuk"
+                    android:clickable="true"
+                    android:drawableLeft="@drawable/ic_calendar_range"
+                    android:drawablePadding="5dp"
+                    android:text="01 Januari 2018"
+                    android:textColor="@color/color_text_form"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/txtLabelGajiEmp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtTglMasuk"
+                    android:layout_margin="3dp"
+                    android:text="Gaji"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/txtGajiEmp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelGajiEmp"
+                    android:layout_margin="3dp"
+                    android:text="Rp 1.950.000"
+                    android:textColor="@color/color_text_form"
+                    android:textSize="14sp" />
+
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardFile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardDataKaryawan"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            app:cardMaxElevation="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/txtLabelFotoData"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layFotoDiri"
+                    android:layout_margin="3dp"
+                    android:text="Upload Foto Diri"
+                    android:textSize="14sp" />
+
+                <RelativeLayout
+                    android:id="@+id/layFotoData"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelFotoData"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="5dp">
+
+                    <ImageView
+                        android:id="@+id/imgFotoData"
+                        android:layout_width="270dp"
+                        android:layout_height="80dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="#bdbdbd" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/txtLabelUploadFile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layFotoData"
+                    android:layout_margin="3dp"
+                    android:text="Upload File"
+                    android:textSize="14sp" />
+
+                <RelativeLayout
+                    android:id="@+id/layUploadFile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelUploadFile"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="5dp">
+
+                    <ImageView
+                        android:id="@+id/imgFile"
+                        android:layout_width="270dp"
+                        android:layout_height="80dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="#bdbdbd" />
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>
