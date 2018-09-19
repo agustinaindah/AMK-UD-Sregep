@@ -1,14 +1,12 @@
 package com.amkuds.app.features.main;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -16,7 +14,7 @@ import android.view.View;
 
 import com.amkuds.app.R;
 import com.amkuds.app.base.BaseActivity;
-import com.amkuds.app.features.input_data.FormInputDataActivity;
+import com.amkuds.app.features.form_data.FormInputDataActivity;
 import com.amkuds.app.features.list_data.ListDataEmployeeActivity;
 import com.amkuds.app.utils.Helper;
 

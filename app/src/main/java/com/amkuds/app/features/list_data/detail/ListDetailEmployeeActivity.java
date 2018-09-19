@@ -1,18 +1,17 @@
 package com.amkuds.app.features.list_data.detail;
 
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.ImageView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.amkuds.app.R;
 import com.amkuds.app.base.BaseActivity;
+import com.amkuds.app.features.form_data.FormInputDataActivity;
+import com.amkuds.app.features.form_data.edit_data.FormEditDataActivity;
 
 import butterknife.BindView;
 
@@ -43,7 +42,7 @@ public class ListDetailEmployeeActivity extends BaseActivity {
                     scrollRange = appBarLayout.getTotalScrollRange();
                 }
                 if (scrollRange + verticalOffset == 0) {
-                    collapsingToolbar.setTitle("Title");
+                    collapsingToolbar.setTitle(" ");
                     isShow = true;
                 } else if (isShow) {
                     collapsingToolbar.setTitle(" ");
@@ -57,5 +56,28 @@ public class ListDetailEmployeeActivity extends BaseActivity {
     @Override
     protected int setView() {
         return R.layout.activity_list_detail_employee;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_list_detail_employee, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent = null;
+        switch (item.getItemId()) {
+            case R.id.action_edit_profile:
+                intent = new Intent(this, FormEditDataActivity.class);
+                break;
+            default:
+                break;
+        }
+        if (intent != null) {
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -1,4 +1,4 @@
-package com.amkuds.app.features.input_data;
+package com.amkuds.app.features.form_data.edit_data;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -17,9 +17,10 @@ import android.widget.TextView;
 
 import com.amkuds.app.DateDialog;
 import com.amkuds.app.EndDateDialog;
-import com.amkuds.app.StartDateDialog;
 import com.amkuds.app.R;
+import com.amkuds.app.StartDateDialog;
 import com.amkuds.app.base.BaseActivity;
+import com.amkuds.app.features.form_data.FormInputDataActivity;
 import com.amkuds.app.utils.Consts;
 import com.amkuds.app.utils.Helper;
 import com.amkuds.app.utils.Utility;
@@ -29,7 +30,7 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class FormInputDataActivity extends BaseActivity implements StartDateDialog.StartOnDateDialog,
+public class FormEditDataActivity extends BaseActivity implements StartDateDialog.StartOnDateDialog,
         EndDateDialog.EndOnDateDialog, DateDialog.OnDateDialog{
 
     private static final int GALLERY_REQUEST = 565;
@@ -68,7 +69,7 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     @Override
     protected void onActivityCreated(Bundle savedInstanceState) {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Input Data Karyawan");
+        getSupportActionBar().setTitle("Edit Data Karyawan");
 
         galleryPhoto = new GalleryPhoto(this);
         displayData();
@@ -92,12 +93,12 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     public void clickUploadPhotoSelf(View view) {
         final CharSequence[] items = {strTakePhoto, strChooseGallery,
                 strCancel};
-        AlertDialog.Builder builder = new AlertDialog.Builder(FormInputDataActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(FormEditDataActivity.this);
         builder.setTitle(strAddPhoto);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                boolean result = Utility.checkPermission(FormInputDataActivity.this);
+                boolean result = Utility.checkPermission(FormEditDataActivity.this);
                 if (items[item].equals(strTakePhoto)) {
                     userChoosenTask = strTakePhoto;
                     if (result)
@@ -118,12 +119,12 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     public void clickUploadPhotoData(View view) {
         final CharSequence[] items = {strTakePhoto, strChooseGallery,
                 strCancel};
-        AlertDialog.Builder builder = new AlertDialog.Builder(FormInputDataActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(FormEditDataActivity.this);
         builder.setTitle(strAddPhoto);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                boolean result = Utility.checkPermission(FormInputDataActivity.this);
+                boolean result = Utility.checkPermission(FormEditDataActivity.this);
                 if (items[item].equals(strTakePhoto)) {
                     userChoosenTask = strTakePhoto;
                     if (result)
@@ -144,12 +145,12 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     public void clickUploadFile(View view) {
         final CharSequence[] items = {strTakePhoto, strChooseGallery,
                 strCancel};
-        AlertDialog.Builder builder = new AlertDialog.Builder(FormInputDataActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(FormEditDataActivity.this);
         builder.setTitle(strAddPhoto);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                boolean result = Utility.checkPermission(FormInputDataActivity.this);
+                boolean result = Utility.checkPermission(FormEditDataActivity.this);
                 if (items[item].equals(strTakePhoto)) {
                     userChoosenTask = strTakePhoto;
                     if (result)
@@ -164,6 +165,11 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
             }
         });
         builder.show();
+    }
+
+    @Override
+    protected int setView() {
+        return R.layout.activity_edit_form_karyawan;
     }
 
     private void galleryIntent() {
@@ -190,11 +196,6 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
         mTglKeluar = Helper.getDateNow();
     }
 
-    @Override
-    protected int setView() {
-        return R.layout.activity_form_input_data_karyawan;
-    }
-
     @OnClick(R.id.txtTglLahir)
     public void tglLahir(View view){
         DialogFragment dialogFragment = DateDialog.newInstance(mTglLahir, this);
@@ -214,9 +215,9 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     }
 
     @Override
-    public void onStartSelectedDate(String startDate) {
-        mTglMasuk = startDate;
-        txtTglMasuk.setText(Helper.parseToDateString(mTglMasuk, Consts.TYPE_DATE));
+    public void onSelectedDate(String onDate) {
+        mTglLahir = onDate;
+        txtTglLahir.setText(Helper.parseToDateString(mTglLahir, Consts.TYPE_DATE));
     }
 
     @Override
@@ -226,9 +227,9 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     }
 
     @Override
-    public void onSelectedDate(String onDate) {
-        mTglLahir = onDate;
-        txtTglLahir.setText(Helper.parseToDateString(mTglLahir, Consts.TYPE_DATE));
+    public void onStartSelectedDate(String startDate) {
+        mTglMasuk = startDate;
+        txtTglMasuk.setText(Helper.parseToDateString(mTglMasuk, Consts.TYPE_DATE));
     }
 
     @Override

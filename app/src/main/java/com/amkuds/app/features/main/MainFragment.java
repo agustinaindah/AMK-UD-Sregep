@@ -2,12 +2,11 @@ package com.amkuds.app.features.main;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.CardView;
 
 import com.amkuds.app.R;
 import com.amkuds.app.base.BaseFragment;
-import com.amkuds.app.features.input_data.FormInputDataActivity;
+import com.amkuds.app.features.form_data.FormInputDataActivity;
 import com.amkuds.app.features.list_data.ListDataEmployeeActivity;
 
 import butterknife.BindView;

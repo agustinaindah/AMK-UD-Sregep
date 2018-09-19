@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="48dp"
             app:cardMaxElevation="8dp">
 
             <RelativeLayout
@@ -356,16 +356,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtStatusEmp"
-                    android:layout_marginTop="7dp"
-                    android:layout_toRightOf="@id/txtLabelTglMasuk"
-                    android:text="Tanggal Masuk" />
+                    android:layout_margin="3dp"
+                    android:text="Tanggal Masuk"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/txtTglMasuk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelTglMasuk"
-                    android:layout_marginTop="7dp"
                     android:drawableLeft="@drawable/ic_calendar_range"
                     android:drawablePadding="5dp"
                     android:text="01 Januari 2018"
@@ -373,27 +372,40 @@
 
                 <TextView
                     android:id="@+id/txtLabelTglKeluar"
+                    android:layout_toRightOf="@id/txtLabelTglMasuk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtStatusEmp"
-                    android:layout_marginLeft="80dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_toRightOf="@id/txtLabelTglMasuk"
-                    android:text="Tanggal Keluar" />
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="60dp"
+                    android:text="Tanggal Keluar"
+                    android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/txtTglKeluar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelTglKeluar"
+                    android:layout_toRightOf="@id/txtTglMasuk"
+                    android:drawableLeft="@drawable/ic_calendar_range"
+                    android:drawablePadding="5dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="30dp"
+                    android:text="01 Januari 2018"
+                    android:textColor="@color/color_text_form" />
+
+               <!-- <TextView
                     android:id="@+id/txtTglKeluar"
                     style="@style/WrapWrapLayout"
                     android:layout_below="@id/txtLabelTglKeluar"
                     android:layout_marginLeft="35dp"
-                    android:layout_marginTop="7dp"
                     android:layout_toRightOf="@id/txtTglMasuk"
                     android:clickable="true"
                     android:drawableLeft="@drawable/ic_calendar_range"
                     android:drawablePadding="5dp"
                     android:text="01 Januari 2018"
                     android:textColor="@color/color_text_form"
-                    android:textSize="13sp" />
+                    android:textSize="13sp" />&ndash;&gt;-->
 
                 <TextView
                     android:id="@+id/txtLabelGajiEmp"
