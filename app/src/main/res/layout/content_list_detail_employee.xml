@@ -8,7 +8,6 @@
     tools:context=".features.list_data.detail.ListDetailEmployeeActivity"
     tools:showIn="@layout/activity_list_detail_employee">
 
-
     <RelativeLayout
         android:id="@+id/layDataPribadi"
         android:layout_width="match_parent"

@@ -3,6 +3,7 @@ package com.amkuds.app.features.auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.amkuds.app.R;
 import com.amkuds.app.base.BaseActivity;
@@ -13,6 +14,10 @@ import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity {
 
+    @BindView(R.id.edtEmail)
+    EditText edtEmail;
+    @BindView(R.id.edtPassword)
+    EditText edtPassword;
     @BindView(R.id.btnLogin)
     Button btnLogin;
 
@@ -20,7 +25,6 @@ public class LoginActivity extends BaseActivity {
     protected void onActivityCreated(Bundle savedInstanceState) {
 
     }
-
 
     @Override
     protected int setView() {

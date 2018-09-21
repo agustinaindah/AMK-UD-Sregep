@@ -13,6 +13,10 @@ import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.amkuds.app.DateDialog;
@@ -36,8 +40,41 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     private static final int GALLERY_REQUEST = 565;
     private static final int REQUEST_CAMERA = 456;
 
+    @BindView(R.id.edtNikEmp)
+    EditText edtNikEmp;
+    @BindView(R.id.edtNamaLengkap)
+    EditText edtNamaLengkap;
+    @BindView(R.id.rgGender)
+    RadioGroup rgGender;
+    @BindView(R.id.rbGenderMale)
+    RadioButton rbGenderMale;
+    @BindView(R.id.rbGenderFemale)
+    RadioButton rbGenderFemale;
+    @BindView(R.id.edtTmptLahir)
+    EditText edtTmptLahir;
     @BindView(R.id.txtTglLahir)
     TextView txtTglLahir;
+    @BindView(R.id.spinReligion)
+    Spinner spinReligion;
+    @BindView(R.id.edtAlamat)
+    EditText edtAlamat;
+    @BindView(R.id.edtAlamatKtp)
+    EditText edtAlamatKtp;
+    @BindView(R.id.edtNoHp)
+    EditText edtNoHp;
+    @BindView(R.id.edtEmail)
+    EditText edtEmail;
+    @BindView(R.id.spinStatus)
+    Spinner spinStatus;
+
+    @BindView(R.id.edtNip)
+    EditText edtNip;
+    @BindView(R.id.edtPosition)
+    EditText edtPosition;
+    @BindView(R.id.spinStatusKary)
+    Spinner spinStatusKary;
+    @BindView(R.id.edtSalary)
+    EditText edtSalary;
     @BindView(R.id.txtTglMasuk)
     TextView txtTglMasuk;
     @BindView(R.id.txtTglKeluar)
@@ -50,6 +87,9 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     Button btnUploadFotoData;
     @BindView(R.id.btnUploadFile)
     Button btnUploadFile;
+
+    @BindView(R.id.btnSubmit)
+    Button btnSubmit;
 
     @BindString(R.string.label_take_photo)
     String strTakePhoto;

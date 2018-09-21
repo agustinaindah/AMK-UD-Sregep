@@ -7,6 +7,8 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.amkuds.app.R;
 import com.amkuds.app.base.BaseActivity;
@@ -23,6 +25,49 @@ public class ListDetailEmployeeActivity extends BaseActivity {
     Toolbar toolbar;
     @BindView(R.id.appBarLayout)
     AppBarLayout appBarLayout;
+
+    @BindView(R.id.txtNikEmp)
+    TextView txtNikEmp;
+    @BindView(R.id.txtNameEmp)
+    TextView txtNameEmp;
+    @BindView(R.id.txtTmptLahir)
+    TextView txtTmptLahir;
+    @BindView(R.id.txtTglLahir)
+    TextView txtTglLahir;
+    @BindView(R.id.txtAgamaEmp)
+    TextView txtAgamaEmp;
+    @BindView(R.id.txtStatus)
+    TextView txtStatus;
+    @BindView(R.id.txtJenisKelaminEmp)
+    TextView txtJenisKelaminEmp;
+    @BindView(R.id.txtNoHp)
+    TextView txtNoHp;
+    @BindView(R.id.txtEmail)
+    TextView txtEmail;
+    @BindView(R.id.txtAlamat)
+    TextView txtAlamat;
+    @BindView(R.id.txtAlamatKtp)
+    TextView txtAlamatKtp;
+
+    @BindView(R.id.txtNip)
+    TextView txtNip;
+    @BindView(R.id.txtJabatan)
+    TextView txtJabatan;
+    @BindView(R.id.txtStatusEmp)
+    TextView txtStatusEmp;
+    @BindView(R.id.txtTglMasuk)
+    TextView txtTglMasuk;
+    @BindView(R.id.txtTglKeluar)
+    TextView txtTglKeluar;
+    @BindView(R.id.txtGajiEmp)
+    TextView txtGajiEmp;
+
+    @BindView(R.id.imgFotoData)
+    ImageView imgFotoData;
+    @BindView(R.id.imgFile)
+    ImageView imgFile;
+    @BindView(R.id.textfile)
+    TextView textfile;
 
     @Override
     protected void onActivityCreated(Bundle savedInstanceState) {
