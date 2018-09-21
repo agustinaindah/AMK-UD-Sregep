@@ -19,8 +19,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:layout_marginBottom="5dp">
+                android:layout_marginBottom="5dp"
+                android:padding="5dp">
 
                 <TextView
                     android:id="@+id/txtTitleDataPribadi"
@@ -47,7 +47,7 @@
                     android:layout_margin="7dp"
                     android:layout_marginTop="10dp"
                     android:text="NIK (Nomor Induk Kependudukan)"
-                    android:textColor="@color/color_text_form"/>
+                    android:textColor="@color/color_text_form" />
 
                 <EditText
                     android:id="@+id/edtNikEmp"
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelNIk"
                     android:layout_margin="5dp"
-                    android:inputType="number"/>
+                    android:inputType="number" />
 
                 <TextView
                     android:id="@+id/txtLabelNmLengkap"
@@ -65,7 +65,7 @@
                     android:layout_margin="7dp"
                     android:layout_marginTop="10dp"
                     android:text="Nama Lengkap"
-                    android:textColor="@color/color_text_form"/>
+                    android:textColor="@color/color_text_form" />
 
                 <EditText
                     android:id="@+id/edtNamaLengkap"
@@ -80,8 +80,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtNamaLengkap"
                     android:layout_margin="7dp"
-                    android:textColor="@color/color_text_form"
-                    android:text="Jenis Kelamin" />
+                    android:text="Jenis Kelamin"
+                    android:textColor="@color/color_text_form" />
 
                 <RadioGroup
                     android:id="@+id/rgGender"
@@ -109,8 +109,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/rgGender"
                     android:layout_margin="7dp"
-                    android:textColor="@color/color_text_form"
-                    android:text="Tempat Lahir" />
+                    android:text="Tempat Lahir"
+                    android:textColor="@color/color_text_form" />
 
                 <EditText
                     android:id="@+id/edtTmptLahir"
@@ -125,8 +125,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtTmptLahir"
                     android:layout_margin="7dp"
-                    android:textColor="@color/color_text_form"
-                    android:text="Tanggal Lahir" />
+                    android:text="Tanggal Lahir"
+                    android:textColor="@color/color_text_form" />
 
                 <TextView
                     android:id="@+id/txtTglLahir"
@@ -135,8 +135,8 @@
                     android:layout_margin="5dp"
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
-                    android:drawablePadding="5dp"
                     android:drawableLeft="@drawable/ic_calendar"
+                    android:drawablePadding="5dp"
                     android:text="01 Januari 2018"
                     android:textSize="16sp" />
 
@@ -146,8 +146,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtTglLahir"
                     android:layout_margin="7dp"
-                    android:textColor="@color/color_text_form"
-                    android:text="Agama" />
+                    android:text="Agama"
+                    android:textColor="@color/color_text_form" />
 
                 <Spinner
                     android:id="@+id/spinReligion"
@@ -166,8 +166,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/spinReligion"
                     android:layout_margin="7dp"
-                    android:textColor="@color/color_text_form"
-                    android:text="Alamat" />
+                    android:text="Alamat"
+                    android:textColor="@color/color_text_form" />
 
                 <EditText
                     android:id="@+id/edtAlamat"
@@ -182,8 +182,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtAlamat"
                     android:layout_margin="7dp"
-                    android:textColor="@color/color_text_form"
-                    android:text="Alamat Domisili" />
+                    android:text="Alamat Domisili"
+                    android:textColor="@color/color_text_form" />
 
                 <EditText
                     android:id="@+id/edtAlamatKtp"
@@ -198,8 +198,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtAlamatKtp"
                     android:layout_margin="7dp"
-                    android:textColor="@color/color_text_form"
-                    android:text="No Telepon/ Hp" />
+                    android:text="No Telepon/ Hp"
+                    android:textColor="@color/color_text_form" />
 
                 <EditText
                     android:id="@+id/edtNoHp"
@@ -207,7 +207,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelNoHp"
                     android:layout_margin="5dp"
-                    android:inputType="number"/>
+                    android:inputType="number" />
 
                 <TextView
                     android:id="@+id/txtLabelEmail"
@@ -215,8 +215,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtNoHp"
                     android:layout_margin="7dp"
-                    android:textColor="@color/color_text_form"
-                    android:text="Email" />
+                    android:text="Email"
+                    android:textColor="@color/color_text_form" />
 
                 <EditText
                     android:id="@+id/edtEmail"
@@ -232,8 +232,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtEmail"
                     android:layout_margin="7dp"
-                    android:textColor="@color/color_text_form"
-                    android:text="Status" />
+                    android:text="Status"
+                    android:textColor="@color/color_text_form" />
 
                 <Spinner
                     android:id="@+id/spinStatus"
@@ -285,8 +285,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/frDataKaryawan"
                     android:layout_margin="7dp"
-                    android:textColor="@color/color_text_form"
-                    android:text="NIP (Nomor Induk Pegawai)" />
+                    android:text="NIP (Nomor Induk Pegawai)"
+                    android:textColor="@color/color_text_form" />
 
                 <EditText
                     android:id="@+id/edtNip"
@@ -294,7 +294,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelNip"
                     android:layout_margin="5dp"
-                    android:inputType="number"/>
+                    android:inputType="number" />
 
                 <TextView
                     android:id="@+id/txtLabelPosition"
@@ -302,8 +302,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtNip"
                     android:layout_margin="7dp"
-                    android:textColor="@color/color_text_form"
-                    android:text="Jabatan" />
+                    android:text="Jabatan"
+                    android:textColor="@color/color_text_form" />
 
                 <EditText
                     android:id="@+id/edtPosition"
@@ -318,8 +318,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtPosition"
                     android:layout_margin="7dp"
-                    android:textColor="@color/color_text_form"
-                    android:text="Status Karyawan" />
+                    android:text="Status Karyawan"
+                    android:textColor="@color/color_text_form" />
 
                 <Spinner
                     android:id="@+id/spinStatusKary"
@@ -339,8 +339,8 @@
                     android:layout_below="@id/spinStatusKary"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="7dp"
-                    android:textColor="@color/color_text_form"
-                    android:text="Tanggal Masuk" />
+                    android:text="Tanggal Masuk"
+                    android:textColor="@color/color_text_form" />
 
                 <TextView
                     android:id="@+id/txtTglMasuk"
@@ -363,8 +363,8 @@
                     android:layout_marginLeft="80dp"
                     android:layout_marginTop="7dp"
                     android:layout_toRightOf="@id/txtLabelTglMasuk"
-                    android:textColor="@color/color_text_form"
-                    android:text="Tanggal Keluar" />
+                    android:text="Tanggal Keluar"
+                    android:textColor="@color/color_text_form" />
 
                 <TextView
                     android:id="@+id/txtTglKeluar"
@@ -375,8 +375,8 @@
                     android:layout_toRightOf="@id/txtTglMasuk"
                     android:background="?android:attr/selectableItemBackground"
                     android:clickable="true"
-                    android:drawablePadding="5dp"
                     android:drawableLeft="@drawable/ic_calendar_range"
+                    android:drawablePadding="5dp"
                     android:text="01 Januari 2018"
                     android:textSize="13sp" />
 
@@ -386,8 +386,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtTglMasuk"
                     android:layout_margin="7dp"
-                    android:textColor="@color/color_text_form"
-                    android:text="Gaji" />
+                    android:text="Gaji"
+                    android:textColor="@color/color_text_form" />
 
                 <EditText
                     android:id="@+id/edtSalary"
@@ -402,8 +402,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtSalary"
                     android:layout_margin="7dp"
-                    android:textColor="@color/color_text_form"
-                    android:text="Upload Foto Diri" />
+                    android:text="Upload Foto Diri"
+                    android:textColor="@color/color_text_form" />
 
                 <RelativeLayout
                     android:id="@+id/layFotoDiri"
@@ -450,8 +450,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/layFotoDiri"
                     android:layout_margin="7dp"
-                    android:textColor="@color/color_text_form"
-                    android:text="Upload Foto Diri" />
+                    android:text="Upload Foto Dokumen"
+                    android:textColor="@color/color_text_form" />
 
                 <RelativeLayout
                     android:id="@+id/layFotoData"
@@ -498,47 +498,63 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/layFotoData"
                     android:layout_margin="7dp"
-                    android:textColor="@color/color_text_form"
-                    android:text="Upload File" />
+                    android:text="Upload File"
+                    android:textColor="@color/color_text_form" />
 
                 <RelativeLayout
                     android:id="@+id/layUploadFile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelUploadFile"
                     android:layout_marginBottom="15dp"
-                    android:layout_marginTop="5dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:id="@+id/imgFile"
-                        android:layout_width="270dp"
-                        android:layout_height="80dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:background="#bdbdbd" />
+                    <TextView
+                        android:id="@+id/textfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="50dp"
+                        android:textColor="#616161"
+                        android:text="No File chosen"/>
 
                     <Button
                         android:id="@+id/btnUploadFile"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:layout_centerInParent="true"
-                        android:background="@drawable/ic_circle_add" />
-
-                    <!--  <Button
-                          android:id="@+id/btnUploadFile"
-                          android:layout_width="60dp"
-                          android:layout_height="30dp"
-                          android:layout_alignEnd="@+id/imgFile"
-                          android:layout_alignRight="@+id/imgFile"
-                          android:layout_alignTop="@+id/imgFile"
-                          android:layout_marginTop="1dp"
-                          android:background="@color/colorPrimary"
-                          android:text="Browse"
-                          android:textColor="@android:color/white"
-                          android:textSize="9sp"
-                          android:textStyle="bold" />-->
+                        android:layout_toRightOf="@id/textfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="75dp"
+                        android:background="#bdbdbd"
+                        android:text="Choose File"
+                        android:textColor="#212121"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
+
+                <!-- <RelativeLayout
+                     android:id="@+id/layUploadFile"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_below="@id/txtLabelUploadFile"
+                     android:layout_marginBottom="15dp"
+                     android:layout_marginTop="5dp">
+
+                     <ImageView
+                         android:id="@+id/imgFile"
+                         android:layout_width="270dp"
+                         android:layout_height="80dp"
+                         android:layout_alignParentTop="true"
+                         android:layout_centerHorizontal="true"
+                         android:background="#bdbdbd" />
+
+                     <Button
+                         android:id="@+id/btnUploadFile"
+                         android:layout_width="60dp"
+                         android:layout_height="60dp"
+                         android:layout_centerInParent="true"
+                         android:background="@drawable/ic_circle_add" />
+
+                 </RelativeLayout>-->
 
             </RelativeLayout>
 
@@ -547,8 +563,8 @@
         <Button
             android:id="@+id/btnSubmit"
             style="@style/MatchWrapLayout"
-            android:layout_marginTop="5dp"
             android:layout_below="@id/cardInfoKaryawan"
+            android:layout_marginTop="5dp"
             android:text="Submit"
             android:theme="@style/ButtonColoredPrimary" />
 

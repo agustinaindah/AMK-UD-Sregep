@@ -462,7 +462,7 @@
                     android:layout_below="@id/layFotoDiri"
                     android:layout_margin="7dp"
                     android:textColor="@color/color_text_form"
-                    android:text="Upload Foto Diri" />
+                    android:text="Upload Foto Dokumen" />
 
                 <RelativeLayout
                     android:id="@+id/layFotoData"
@@ -514,6 +514,35 @@
 
                 <RelativeLayout
                     android:id="@+id/layUploadFile"
+                    android:layout_below="@id/txtLabelUploadFile"
+                    android:layout_marginBottom="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/textfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="50dp"
+                        android:textColor="#616161"
+                        android:text="No File chosen"/>
+
+                    <Button
+                        android:id="@+id/btnUploadFile"
+                        android:layout_toRightOf="@id/textfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="75dp"
+                        android:background="#bdbdbd"
+                        android:text="Choose File"
+                        android:textColor="#212121"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <!--<RelativeLayout
+                    android:id="@+id/layUploadFile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelUploadFile"
@@ -533,7 +562,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_centerInParent="true"
-                        android:background="@drawable/ic_circle_add" />
+                        android:background="@drawable/ic_circle_add" />-->
 
                     <!--  <Button
                           android:id="@+id/btnUploadFile"
@@ -548,8 +577,6 @@
                           android:textColor="@android:color/white"
                           android:textSize="9sp"
                           android:textStyle="bold" />-->
-
-                </RelativeLayout>
 
             </RelativeLayout>
 

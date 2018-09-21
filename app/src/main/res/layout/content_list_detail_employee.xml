@@ -474,19 +474,19 @@
                 </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/txtLabelUploadFile"
+                    android:id="@+id/txtLabelUploadFotoDok"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/layFotoData"
                     android:layout_margin="3dp"
-                    android:text="Upload File"
+                    android:text="Upload Foto Dokumen"
                     android:textSize="14sp" />
 
                 <RelativeLayout
-                    android:id="@+id/layUploadFile"
+                    android:id="@+id/layUploadFotoDok"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/txtLabelUploadFile"
+                    android:layout_below="@id/txtLabelUploadFotoDok"
                     android:layout_marginBottom="15dp"
                     android:layout_marginTop="5dp">
 
@@ -497,6 +497,42 @@
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
                         android:background="#bdbdbd" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/txtLabelUploadFile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layUploadFotoDok"
+                    android:layout_margin="7dp"
+                    android:text="Upload File" />
+
+                <RelativeLayout
+                    android:id="@+id/layUploadFile"
+                    android:layout_below="@id/txtLabelUploadFile"
+                    android:layout_marginBottom="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                   <!-- <Button
+                        android:id="@+id/btnUploadFile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="50dp"
+                        android:background="#bdbdbd"
+                        android:text="Choose File"
+                        android:textColor="#212121"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />-->
+
+                    <TextView
+                        android:id="@+id/textfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:textColor="#616161"
+                        android:text="No File chosen"/>
 
                 </RelativeLayout>
             </RelativeLayout>

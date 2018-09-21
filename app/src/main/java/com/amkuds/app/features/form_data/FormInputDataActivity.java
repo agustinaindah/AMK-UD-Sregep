@@ -30,8 +30,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class FormInputDataActivity extends BaseActivity implements StartDateDialog.StartOnDateDialog,
-        EndDateDialog.EndOnDateDialog, DateDialog.OnDateDialog{
+        EndDateDialog.EndOnDateDialog, DateDialog.OnDateDialog {
 
+    private static final int PICKFILE_RESULT_CODE = 1;
     private static final int GALLERY_REQUEST = 565;
     private static final int REQUEST_CAMERA = 456;
 
@@ -41,6 +42,8 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     TextView txtTglMasuk;
     @BindView(R.id.txtTglKeluar)
     TextView txtTglKeluar;
+    @BindView(R.id.textfile)
+    TextView textfile;
     @BindView(R.id.btnUploadFotoDiri)
     Button btnUploadFotoDiri;
     @BindView(R.id.btnUploadFotoData)
@@ -142,28 +145,9 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
 
     @OnClick(R.id.btnUploadFile)
     public void clickUploadFile(View view) {
-        final CharSequence[] items = {strTakePhoto, strChooseGallery,
-                strCancel};
-        AlertDialog.Builder builder = new AlertDialog.Builder(FormInputDataActivity.this);
-        builder.setTitle(strAddPhoto);
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                boolean result = Utility.checkPermission(FormInputDataActivity.this);
-                if (items[item].equals(strTakePhoto)) {
-                    userChoosenTask = strTakePhoto;
-                    if (result)
-                        cameraIntent();
-                } else if (items[item].equals(strChooseGallery)) {
-                    userChoosenTask = strChooseGallery;
-                    if (result)
-                        galleryIntent();
-                } else if (items[item].equals(strCancel)) {
-                    dialog.dismiss();
-                }
-            }
-        });
-        builder.show();
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("file/*");
+        startActivityForResult(intent, PICKFILE_RESULT_CODE);
     }
 
     private void galleryIntent() {
@@ -196,19 +180,19 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     }
 
     @OnClick(R.id.txtTglLahir)
-    public void tglLahir(View view){
+    public void tglLahir(View view) {
         DialogFragment dialogFragment = DateDialog.newInstance(mTglLahir, this);
         dialogFragment.show(getSupportFragmentManager(), Consts.DIALOG);
     }
 
     @OnClick(R.id.txtTglMasuk)
-    public void tglMasuk(View view){
+    public void tglMasuk(View view) {
         DialogFragment dialogFragment = StartDateDialog.newInstance(mTglMasuk, this);
         dialogFragment.show(getSupportFragmentManager(), Consts.DIALOG);
     }
 
     @OnClick(R.id.txtTglKeluar)
-    public void tglKeluar(View view){
+    public void tglKeluar(View view) {
         DialogFragment dialogFragment = EndDateDialog.newInstance(mTglKeluar, this);
         dialogFragment.show(getSupportFragmentManager(), Consts.DIALOG);
     }
@@ -233,11 +217,29 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
+        /*if (resultCode == RESULT_OK) {
             if (requestCode == GALLERY_REQUEST)
                 onSelectFromGalleryResult(data);
             else if (requestCode == REQUEST_CAMERA)
                 onCaptureImageResult(data);
+        }*/
+        switch (requestCode) {
+            case GALLERY_REQUEST:
+                if (requestCode == RESULT_OK) {
+                    onSelectFromGalleryResult(data);
+                }
+                break;
+            case REQUEST_CAMERA:
+                if (requestCode == RESULT_OK) {
+                    onCaptureImageResult(data);
+                }
+                break;
+            case PICKFILE_RESULT_CODE:
+                if (resultCode == RESULT_OK) {
+                    String FilePath = data.getData().getPath();
+                    textfile.setText(FilePath);
+                }
+                break;
         }
     }
 
