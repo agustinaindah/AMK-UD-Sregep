@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:id="@+id/nav_menu_after_login">
+    <group android:id="@+id/nav_menu_owner">
         <item
             android:id="@+id/nav_data_karyawan"
+            android:icon="@drawable/ic_person"
+            android:title="@string/label_data_karyawan"/>
+    </group>
+
+    <group android:id="@+id/nav_menu_admin">
+        <item
+            android:id="@+id/nav_data_karyawann"
             android:icon="@drawable/ic_person"
             android:title="@string/label_data_karyawan"/>
         <item
             android:id="@+id/nav_input_data_karyawan"
             android:icon="@drawable/ic_add_circle"
             android:title="@string/label_input_karyawan"/>
-        <item
-            android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_exit_to_app"
-            android:title="@string/label_logout" />
     </group>
+
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_exit_to_app"
+        android:title="@string/label_logout" />
 </menu>

@@ -118,18 +118,15 @@ public class AmkUdsApp extends Application {
      * logout | remove token
      */
     public void logout() {
-        //save banner again
-        /*String banner = Prefs().getString(Consts.BANNER, "");
         SharedPreferences.Editor edit = Prefs().edit();
         edit.clear().commit();
         edit.putBoolean(Consts.FIRST_RUN, false).commit();
-        edit.putString(Consts.BANNER, banner).commit();*/
     }
 
     public Retrofit retrofit() {
         return new Retrofit.Builder()
                 .baseUrl(AmkUdsApp.getInstance().getBaseUrl())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(new OkHttpClient.Builder()
                         .addInterceptor(new HttpLoggingInterceptor()
                                 .setLevel(HttpLoggingInterceptor.Level.BODY))
@@ -140,12 +137,13 @@ public class AmkUdsApp extends Application {
                                 Request ori = chain.request();
 
                                 Request.Builder reqBuilder = ori.newBuilder()
-                                        .addHeader("Content-Type","application/json");
+                                        .addHeader("Content-Type","application/json")
+                                        .addHeader("Accept","application/x-www-form-urlencoded");
 
                                 String token = AmkUdsApp.getInstance().getToken();
 
                                 if (token != null) {
-                                    reqBuilder.addHeader("token", token);
+                                    reqBuilder.addHeader("Authorization", "Bearer " + token);
                                 }
 
                                 Request req = reqBuilder.build();

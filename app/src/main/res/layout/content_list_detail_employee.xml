@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelNIK"
                     android:layout_margin="3dp"
-                    android:text="0123456789"
+                    android:text=""
                     android:textColor="@color/color_text_form"
                     android:textSize="14sp" />
 
@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelNama"
                     android:layout_margin="3dp"
-                    android:text="Tio Tamara"
+                    android:text=""
                     android:textColor="@color/color_text_form"
                     android:textSize="14sp" />
 
@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelTmptLahir"
                     android:layout_margin="3dp"
-                    android:text="Sleman"
+                    android:text=""
                     android:textColor="@color/color_text_form"
                     android:textSize="14sp" />
 
@@ -118,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelTglLahir"
                     android:layout_margin="3dp"
-                    android:text="30 Oktober 1996"
+                    android:text=""
                     android:textColor="@color/color_text_form"
                     android:textSize="14sp" />
 
@@ -137,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelAgama"
                     android:layout_margin="3dp"
-                    android:text="Islam"
+                    android:text=""
                     android:textColor="@color/color_text_form"
                     android:textSize="14sp" />
 
@@ -156,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelStatus"
                     android:layout_margin="3dp"
-                    android:text="Belum Kawin"
+                    android:text=""
                     android:textColor="@color/color_text_form"
                     android:textSize="14sp" />
 
@@ -175,7 +175,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelJK"
                     android:layout_margin="3dp"
-                    android:text="Laki-laki"
+                    android:text=""
                     android:textColor="@color/color_text_form"
                     android:textSize="14sp" />
 
@@ -194,7 +194,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelNoHp"
                     android:layout_margin="3dp"
-                    android:text="0812345678"
+                    android:text=""
                     android:textColor="@color/color_text_form"
                     android:textSize="14sp" />
 
@@ -213,7 +213,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelEmail"
                     android:layout_margin="3dp"
-                    android:text="tiotamara@gmail.com"
+                    android:text=""
                     android:textColor="@color/color_text_form"
                     android:textSize="14sp" />
 
@@ -232,7 +232,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelAlamat"
                     android:layout_margin="3dp"
-                    android:text="-"
+                    android:text=""
                     android:textColor="@color/color_text_form"
                     android:textSize="14sp" />
 
@@ -251,7 +251,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelAlamatKtp"
                     android:layout_margin="3dp"
-                    android:text="Somodaran Gamping Sleman"
+                    android:text=""
                     android:textColor="@color/color_text_form"
                     android:textSize="14sp" />
 
@@ -308,7 +308,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelNip"
                     android:layout_margin="3dp"
-                    android:text="12345678"
+                    android:text=""
                     android:textColor="@color/color_text_form"
                     android:textSize="14sp" />
 
@@ -327,7 +327,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelJab"
                     android:layout_margin="3dp"
-                    android:text="Back End Programmer"
+                    android:text=""
                     android:textColor="@color/color_text_form"
                     android:textSize="14sp" />
 
@@ -346,7 +346,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelStatusEmp"
                     android:layout_margin="3dp"
-                    android:text="Kontrak"
+                    android:text=""
                     android:textColor="@color/color_text_form"
                     android:textSize="14sp" />
 
@@ -366,7 +366,7 @@
                     android:layout_below="@id/txtLabelTglMasuk"
                     android:drawableLeft="@drawable/ic_calendar_range"
                     android:drawablePadding="5dp"
-                    android:text="01 Januari 2018"
+                    android:text=""
                     android:textColor="@color/color_text_form" />
 
                 <TextView
@@ -376,7 +376,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtStatusEmp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginLeft="60dp"
+                    android:layout_marginLeft="80dp"
                     android:text="Tanggal Keluar"
                     android:textSize="14sp" />
 
@@ -390,7 +390,7 @@
                     android:drawablePadding="5dp"
                     android:layout_marginTop="3dp"
                     android:layout_marginLeft="30dp"
-                    android:text="01 Januari 2018"
+                    android:text=""
                     android:textColor="@color/color_text_form" />
 
                <!-- <TextView
@@ -421,7 +421,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelGajiEmp"
                     android:layout_margin="3dp"
-                    android:text="Rp 1.950.000"
+                    android:text=""
                     android:textColor="@color/color_text_form"
                     android:textSize="14sp" />
 
@@ -499,7 +499,7 @@
 
                 </RelativeLayout>
 
-                <TextView
+               <!-- <TextView
                     android:id="@+id/txtLabelUploadFile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -513,7 +513,7 @@
                     android:layout_marginBottom="15dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                   <!-- <Button
+                    <Button
                         android:id="@+id/btnUploadFile"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
@@ -522,7 +522,7 @@
                         android:text="Choose File"
                         android:textColor="#212121"
                         android:textSize="10sp"
-                        android:textStyle="bold" />-->
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/textfile"
@@ -533,7 +533,7 @@
                         android:textColor="#616161"
                         android:text="No File chosen"/>
 
-                </RelativeLayout>
+                </RelativeLayout>-->
             </RelativeLayout>
 
         </android.support.v7.widget.CardView>

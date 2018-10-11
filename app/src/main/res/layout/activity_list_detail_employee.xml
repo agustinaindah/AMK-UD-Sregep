@@ -49,5 +49,9 @@
         android:id="@+id/include"
         layout="@layout/content_list_detail_employee" />
 
+    <include layout="@layout/progress_layout"/>
+
+    <include layout="@layout/view_error"/>
+
 
 </android.support.design.widget.CoordinatorLayout>

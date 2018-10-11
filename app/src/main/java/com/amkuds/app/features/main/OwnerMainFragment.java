@@ -1,33 +1,25 @@
 package com.amkuds.app.features.main;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
-import android.util.Log;
-import android.view.View;
 
-import com.amkuds.app.AmkUdsApp;
 import com.amkuds.app.R;
 import com.amkuds.app.base.BaseFragment;
-import com.amkuds.app.features.form_data.FormInputDataActivity;
 import com.amkuds.app.features.list_data.ListDataEmployeeActivity;
-import com.amkuds.app.utils.Consts;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class MainFragment extends BaseFragment {
+public class OwnerMainFragment extends BaseFragment {
 
     @BindView(R.id.cardDataKaryawan)
     CardView cardDataKaryawan;
-    @BindView(R.id.cardInputKaryawan)
-    CardView cardInputKaryawan;
 
-    public static MainFragment newInstance() {
+    public static OwnerMainFragment newInstance() {
         Bundle args = new Bundle();
-        MainFragment fragment = new MainFragment();
+        OwnerMainFragment fragment = new OwnerMainFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -42,18 +34,12 @@ public class MainFragment extends BaseFragment {
 
     @Override
     protected int setView() {
-        return R.layout.fragment_main;
+        return R.layout.fragment_owner_main;
     }
 
     @OnClick(R.id.cardDataKaryawan)
     public void listData(){
         Intent intent = new Intent(getActivity(), ListDataEmployeeActivity.class);
-        startActivity(intent);
-    }
-
-    @OnClick(R.id.cardInputKaryawan)
-    public void inputData(){
-        Intent intent = new Intent(getActivity(), FormInputDataActivity.class);
         startActivity(intent);
     }
 }

@@ -2,9 +2,7 @@ package com.amkuds.app.features.list_data;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -12,57 +10,51 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.amkuds.app.R;
+import com.amkuds.app.base.BaseRecyclerViewAdapter;
 import com.amkuds.app.features.list_data.detail.ListDetailEmployeeActivity;
-import com.amkuds.app.model.Employee;
+import com.amkuds.app.model.ItemKaryawan;
+import com.amkuds.app.utils.Consts;
 import com.amkuds.app.utils.Helper;
+import com.amkuds.app.utils.ViewHelper;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-public class ListDataEmployeeAdapter extends RecyclerView.Adapter<ListDataEmployeeAdapter.ViewHolder> {
+public class ListDataEmployeeAdapter extends BaseRecyclerViewAdapter<ItemKaryawan> {
 
-    /*data dummy*/
-
-    private Context context;
-    private List<Employee> employees;
-
-    public ListDataEmployeeAdapter(Context context, List<Employee> employees) {
-        this.context = context;
-        this.employees = employees;
+    public ListDataEmployeeAdapter(List<ItemKaryawan> mData, Context mContext) {
+        super(mData, mContext);
     }
 
     @Override
-    public ListDataEmployeeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.item_list_karyawan,parent, false);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = ViewHelper.inflateView(parent, R.layout.item_list_karyawan);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(ListDataEmployeeAdapter.ViewHolder holder, int position) {
-        final Employee employee = (Employee) employees.get(position);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        renderData(get(position),(ViewHolder) holder);
+    }
 
-        Helper.displayImage(context, employee.getEmployeeImage(), holder.imgItemEmployee);
-        holder.txtNameEmp.setText(employee.getEmployeeName());
-        holder.txtJabatanEmp.setText(employee.getEmployeePosition());
-        holder.txtSttsEmp.setText(employee.getEmployeeStatus());
-        holder.txtDateEndEmp.setText(employee.getEmployeeEndContract());
+    private void renderData(final ItemKaryawan itemKaryawan, ViewHolder holder) {
+        Helper.displayImage(mContext, itemKaryawan.getFoto(), holder.imgItemEmployee, true);
+        holder.txtNameEmp.setText(Helper.capitalize(itemKaryawan.getNama()));
+        holder.txtJabatanEmp.setText(Helper.capitalize(itemKaryawan.getJabatan()));
+        holder.txtSttsEmp.setText(Helper.capitalize(itemKaryawan.getStatusKaryawan()));
+        holder.txtDateEndEmp.setText(itemKaryawan.getTglResign());
 
         holder.layItemEmployee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ListDetailEmployeeActivity.class);
-                context.startActivity(intent);
+                Intent intent = new Intent(mContext, ListDetailEmployeeActivity.class);
+                intent.putExtra(Consts.ARG_ID, itemKaryawan.getId());
+                intent.putExtra(Consts.ARG_DATA, itemKaryawan);
+                mContext.startActivity(intent);
             }
         });
-    }
-
-    @Override
-    public int getItemCount() {
-        return employees.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

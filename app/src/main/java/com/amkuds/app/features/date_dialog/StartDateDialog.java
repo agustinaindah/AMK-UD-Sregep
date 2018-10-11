@@ -1,4 +1,4 @@
-package com.amkuds.app;
+package com.amkuds.app.features.date_dialog;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

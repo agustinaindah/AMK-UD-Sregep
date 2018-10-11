@@ -72,6 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelNmLengkap"
+                    android:inputType="textCapWords|textCapSentences"
                     android:layout_margin="5dp" />
 
                 <TextView
@@ -89,18 +90,17 @@
                     android:layout_below="@id/txtLabelJK"
                     android:layout_margin="7dp"
                     android:orientation="horizontal">
+                    <RadioButton
+                        android:id="@+id/rbGenderFemale"
+                        style="@style/MatchWrapLayout"
+                        android:layout_weight="1"
+                        android:text="@string/female" />
 
                     <RadioButton
                         android:id="@+id/rbGenderMale"
                         style="@style/MatchWrapLayout"
                         android:layout_weight="1"
                         android:text="@string/male" />
-
-                    <RadioButton
-                        android:id="@+id/rbGenderFemale"
-                        style="@style/MatchWrapLayout"
-                        android:layout_weight="1"
-                        android:text="@string/female" />
                 </RadioGroup>
 
                 <TextView
@@ -149,6 +149,13 @@
                     android:text="Agama"
                     android:textColor="@color/color_text_form" />
 
+              <!--  <EditText
+                    android:id="@+id/edtAgama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelAgama"
+                    android:layout_margin="5dp" />-->
+
                 <Spinner
                     android:id="@+id/spinReligion"
                     style="@style/Widget.AppCompat.Spinner.Underlined"
@@ -166,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/spinReligion"
                     android:layout_margin="7dp"
-                    android:text="Alamat"
+                    android:text="Alamat KTP"
                     android:textColor="@color/color_text_form" />
 
                 <EditText
@@ -235,7 +242,27 @@
                     android:text="Status"
                     android:textColor="@color/color_text_form" />
 
-                <Spinner
+                <RadioGroup
+                    android:id="@+id/rgStatus"
+                    style="@style/MatchWrapLayout"
+                    android:layout_below="@id/txtLabelStatus"
+                    android:layout_margin="7dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbStatusBlmKawin"
+                        style="@style/MatchWrapLayout"
+                        android:layout_weight="1"
+                        android:text="Belum Menikah" />
+
+                    <RadioButton
+                        android:id="@+id/rbStatusKawin"
+                        style="@style/MatchWrapLayout"
+                        android:layout_weight="1"
+                        android:text="Menikah" />
+                </RadioGroup>
+
+                <!--<Spinner
                     android:id="@+id/spinStatus"
                     style="@style/Widget.AppCompat.Spinner.Underlined"
                     android:layout_width="match_parent"
@@ -244,7 +271,7 @@
                     android:layout_margin="5dp"
                     android:entries="@array/data_status"
                     android:prompt="@string/status"
-                    android:spinnerMode="dropdown" />
+                    android:spinnerMode="dropdown" />-->
 
             </RelativeLayout>
 
@@ -355,7 +382,7 @@
                     android:text="01 Januari 2018"
                     android:textSize="13sp" />
 
-                <TextView
+              <!--  <TextView
                     android:id="@+id/txtLabelTglKeluar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -378,7 +405,7 @@
                     android:drawableLeft="@drawable/ic_calendar_range"
                     android:drawablePadding="5dp"
                     android:text="01 Januari 2018"
-                    android:textSize="13sp" />
+                    android:textSize="13sp" />-->
 
                 <TextView
                     android:id="@+id/txtLabelSalary"
@@ -394,7 +421,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelSalary"
-                    android:layout_margin="5dp" />
+                    android:layout_margin="5dp"
+                    android:inputType="number"
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/txtLabelFotoDiri"
@@ -492,7 +521,7 @@
 
                 </RelativeLayout>
 
-                <TextView
+                <!--<TextView
                     android:id="@+id/txtLabelUploadFile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -503,33 +532,44 @@
 
                 <RelativeLayout
                     android:id="@+id/layUploadFile"
-                    android:layout_below="@id/txtLabelUploadFile"
-                    android:layout_marginBottom="15dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLabelUploadFile"
+                    android:layout_marginBottom="15dp">
 
                     <TextView
                         android:id="@+id/textfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginLeft="50dp"
-                        android:textColor="#616161"
-                        android:text="No File chosen"/>
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@id/btnUploadFile"
+                        android:text="No File chosen"
+                        android:textColor="#616161" />
 
                     <Button
                         android:id="@+id/btnUploadFile"
-                        android:layout_toRightOf="@id/textfile"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
-                        android:layout_marginLeft="75dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="15dp"
                         android:background="#bdbdbd"
                         android:text="Choose File"
                         android:textColor="#212121"
                         android:textSize="10sp"
                         android:textStyle="bold" />
 
-                </RelativeLayout>
+                    <TextView
+                        android:id="@+id/txtKet"
+                        android:layout_below="@id/btnUploadFile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:textSize="12sp"
+                        android:textStyle="italic"
+                        android:text="*docx, rar, zip"/>
+
+                </RelativeLayout>-->
 
                 <!-- <RelativeLayout
                      android:id="@+id/layUploadFile"

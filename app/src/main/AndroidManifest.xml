@@ -40,6 +40,7 @@
         <activity
             android:name=".features.list_data.ListDataEmployeeActivity"
             android:theme="@style/AppTheme"
+            android:label="@string/label_list_data"
             android:windowSoftInputMode="stateHidden"/>
         <activity
             android:name=".features.list_data.detail.ListDetailEmployeeActivity"

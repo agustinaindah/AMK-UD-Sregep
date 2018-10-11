@@ -1,9 +1,8 @@
-package com.amkuds.app;
+package com.amkuds.app.features.date_dialog;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
 
@@ -14,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class DateDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener{
+public class DateDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
     public static final String TAG = "DateDialog";
 
@@ -43,7 +42,7 @@ public class DateDialog extends DialogFragment implements DatePickerDialog.OnDat
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-        return new DatePickerDialog(getActivity(), this, year, month, day );
+        return new DatePickerDialog(getActivity(), this, year, month, day);
     }
 
     @Override

@@ -7,10 +7,10 @@ public class BaseResponse {
 
     @SerializedName("status")
     @Expose
-    private Integer status;
-    @SerializedName("msg")
+    private Boolean status;
+    @SerializedName("message")
     @Expose
-    private String msg;
+    private String message;
     @SerializedName("data")
     @Expose
     private Object data;
@@ -18,29 +18,29 @@ public class BaseResponse {
     /**
      * @return The status
      */
-    public Integer getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
     /**
      * @param status The status
      */
-    public void setStatus(Integer status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 
     /**
-     * @return The msg
+     * @return The message
      */
-    public String getMsg() {
-        return msg;
+    public String getMessage() {
+        return message;
     }
 
     /**
-     * @param msg The msg
+     * @param message The message
      */
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMsg(String message) {
+        this.message = message;
     }
 
     /**

@@ -1,9 +1,8 @@
-package com.amkuds.app;
+package com.amkuds.app.features.date_dialog;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
 
@@ -43,7 +42,7 @@ public class EndDateDialog extends DialogFragment implements DatePickerDialog.On
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
 
-        return new DatePickerDialog(getActivity(), this, year, month, day+1 );
+        return new DatePickerDialog(getActivity(), this, year, month, day );
     }
 
     @Override
