@@ -38,50 +38,6 @@ public class AmkUdsApp extends Application {
         return ourInstance;
     }
 
-    public void getLogout(){
-        AmkUdsApp.getInstance().service(new ServiceInterface() {
-            @Override
-            public Call<BaseResponse> callBackResponse(ApiService apiService) {
-                return apiService.getLogout();
-            }
-
-            @Override
-            public void showProgress() {
-
-            }
-
-            @Override
-            public void hideProgress() {
-
-            }
-
-            @Override
-            public void responseSuccess(Response<BaseResponse> response) {
-                try {
-                   String data = Helper.getGsonInstance().toJson(response.body().getData());
-                   AmkUdsApp
-                           .getInstance()
-                           .Prefs()
-                           .edit()
-                           .putString(Consts.LOGOUT, data)
-                           .commit();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void responseFailed(Response<BaseResponse> response) {
-
-            }
-
-            @Override
-            public void failed(Throwable t) {
-                t.printStackTrace();
-            }
-        });
-    }
-
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);

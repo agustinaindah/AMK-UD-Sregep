@@ -4,7 +4,7 @@ import com.amkuds.app.base.BaseView;
 
 public interface LogoutPresenter {
 
-    void getLogour();
+    void getLogout();
 
     interface View extends BaseView{
         void showLogout();

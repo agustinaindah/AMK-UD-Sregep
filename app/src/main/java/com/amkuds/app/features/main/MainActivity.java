@@ -32,7 +32,7 @@ import butterknife.BindString;
 import butterknife.BindView;
 
 public class MainActivity extends BaseActivity implements
-        NavigationView.OnNavigationItemSelectedListener{
+        NavigationView.OnNavigationItemSelectedListener, LogoutPresenter.View {
     /*, LogoutPresenter.View*/
 
     @BindView(R.id.toolbar)
@@ -46,6 +46,8 @@ public class MainActivity extends BaseActivity implements
     String strBackPressed;
     @BindString(R.string.msg_not_connect)
     String strInfoNotConnect;
+    @BindString(R.string.info)
+    String strInfo;
 
     private long backPressedTime = 0;
     private Fragment mFragment = null;
@@ -58,37 +60,42 @@ public class MainActivity extends BaseActivity implements
     @Override
     protected void onActivityCreated(Bundle savedInstanceState) {
         fm = getSupportFragmentManager();
-//        mPresenter = new LogoutPresenterImpl(this);
+        mPresenter = new LogoutPresenterImpl(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("UD Sregep");
         setupActionDrawer();
         setupNavigationView();
         navigationView.setNavigationItemSelectedListener(this);
         gotoHome();
-
+        initProgress();
     }
 
     private void gotoHome() {
-        role = sPref.getString(Consts.ROLE,"");
-        if (role.equalsIgnoreCase("owner")){
+        role = sPref.getString(Consts.ROLE, "");
+        if (role.equalsIgnoreCase("owner")) {
             gotoFragment(fm, OwnerMainFragment.newInstance());
-        } else{
+        } else {
             gotoFragment(fm, MainFragment.newInstance());
         }
     }
 
+    private void initProgress() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading...");
+    }
+
     private void setupNavigationView() {
         View header = navigationView.getHeaderView(0);
-        TextView txtName = (TextView)header.findViewById(R.id.txtName);
+        TextView txtName = (TextView) header.findViewById(R.id.txtName);
 
         txtName.setText(sPref.getString(Consts.FIRSTNAME, ""));
 
         Menu navMenu = navigationView.getMenu();
-        if (role.equalsIgnoreCase("owner")){
-            navMenu.setGroupVisible(R.id.nav_menu_owner,true);
+        if (role.equalsIgnoreCase("owner")) {
+            navMenu.setGroupVisible(R.id.nav_menu_owner, true);
             navMenu.setGroupVisible(R.id.nav_menu_admin, false);
-        }else {
-            navMenu.setGroupVisible(R.id.nav_menu_owner,false);
+        } else {
+            navMenu.setGroupVisible(R.id.nav_menu_owner, false);
             navMenu.setGroupVisible(R.id.nav_menu_admin, true);
         }
     }
@@ -126,7 +133,6 @@ public class MainActivity extends BaseActivity implements
         toggle.syncState();
     }
 
-
     @Override
     protected int setView() {
         return R.layout.activity_main;
@@ -136,7 +142,7 @@ public class MainActivity extends BaseActivity implements
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         Intent intent = null;
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.nav_data_karyawan:
                 intent = new Intent(this, ListDataEmployeeActivity.class);
                 break;
@@ -147,21 +153,15 @@ public class MainActivity extends BaseActivity implements
                 intent = new Intent(this, FormInputDataActivity.class);
                 break;
             case R.id.nav_logout:
-                AmkUdsApp.getInstance().logout();
-                AmkUdsApp.getInstance().getLogout();
-                AmkUdsApp.getInstance().getRequest().cancel();
-                intent = new Intent(this, LoginActivity.class);
-                intent.setFlags(
-                        Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                                Intent.FLAG_ACTIVITY_CLEAR_TASK |
-                                Intent.FLAG_ACTIVITY_NEW_TASK
-                );
+                mPresenter.getLogout();
+                /*AmkUdsApp.getInstance().logout();
+                AmkUdsApp.getInstance().getRequest().cancel();*/
                 break;
         }
-        if (intent != null){
+        if (intent != null) {
             startActivity(intent);
         }
-        if (mFragment != null){
+        if (mFragment != null) {
             gotoFragment(fm, mFragment);
         }
         drawer.closeDrawer(GravityCompat.START);
@@ -172,9 +172,9 @@ public class MainActivity extends BaseActivity implements
 
     }
 
-    /*@Override
+    @Override
     public void showLogout() {
-
+        goToLogin();
     }
 
     @Override
@@ -189,11 +189,15 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void showMessage(String msg) {
-        Helper.createAlert(this, Consts.STR_INFO, msg);
+        Helper.createAlert(this, strInfo, msg);
     }
 
     @Override
     public void notConnect(String msg) {
-        Helper.createAlert(this, Consts.STR_INFO, strInfoNotConnect);
-    }*/
+        Helper.createAlert(this, strInfo, "Tidak ada jaringan");
+    }
+    private void goToLogin() {
+        gotoActivity(LoginActivity.class, true);
+    }
+
 }

@@ -23,7 +23,7 @@ public class LogoutPresenterImpl implements LogoutPresenter {
     }
 
     @Override
-    public void getLogour() {
+    public void getLogout() {
         AmkUdsApp.getInstance().service(new ServiceInterface() {
             @Override
             public Call<BaseResponse> callBackResponse(ApiService apiService) {
@@ -42,7 +42,11 @@ public class LogoutPresenterImpl implements LogoutPresenter {
 
             @Override
             public void responseSuccess(Response<BaseResponse> response) {
-                mView.showLogout();
+                try {
+                    mView.showLogout();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
 
             @Override
