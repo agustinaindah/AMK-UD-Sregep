@@ -2,6 +2,7 @@ package com.amkuds.app.features.form_data;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,6 +31,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amkuds.app.AmkUdsApp;
 import com.amkuds.app.features.date_dialog.DateDialog;
@@ -63,7 +65,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class FormInputDataActivity extends BaseActivity implements StartDateDialog.StartOnDateDialog,
-         DateDialog.OnDateDialog, FormInputDataPresenter.View {
+        DateDialog.OnDateDialog, EndDateDialog.EndOnDateDialog, FormInputDataPresenter.View {
 
     private static final int PICKFILE_RESULT_CODE = 1;
     private static final int GALLERY_REQUEST = 565;
@@ -87,8 +89,8 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     TextView txtTglLahir;
     /*@BindView(R.id.edtAgama)
     EditText edtAgama;*/
-     @BindView(R.id.spinReligion)
-     Spinner spinReligion;
+    @BindView(R.id.spinReligion)
+    Spinner spinReligion;
     @BindView(R.id.edtAlamat)
     EditText edtAlamat;
     @BindView(R.id.edtAlamatKtp)
@@ -114,8 +116,8 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     EditText edtSalary;
     @BindView(R.id.txtTglMasuk)
     TextView txtTglMasuk;
-   /* @BindView(R.id.txtTglKeluar)
-    TextView txtTglKeluar;*/
+     @BindView(R.id.txtTglKeluar)
+     TextView txtTglKeluar;
    /* @BindView(R.id.textfile)
     TextView textfile;*/
     @BindView(R.id.imgFotoDiri)
@@ -150,14 +152,14 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
 
     private String mTglLahir;
     private String mTglMasuk;
-//    private String mTglKeluar;
+    private String mTglKeluar;
 
     private String fileEvidence;
     private String fileEvidence2;
     private String newPhoto = null;
     private String newPhoto2 = null;
     private GalleryPhoto galleryPhoto;
-    private GalleryPhoto galleryPhoto2;
+//    private GalleryPhoto galleryPhoto2;
     private String userChoosenTask;
     private String FileData = null;
 
@@ -171,7 +173,7 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
 
         mPresenter = new FormInputDataPresenterImpl(this);
         galleryPhoto = new GalleryPhoto(this);
-        galleryPhoto2 = new GalleryPhoto(this);
+//        galleryPhoto2 = new GalleryPhoto(this);
         displayData();
         initProgress();
 
@@ -313,11 +315,11 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
         dialogFragment.show(getSupportFragmentManager(), Consts.DIALOG);
     }
 
-    /*@OnClick(R.id.txtTglKeluar)
+    @OnClick(R.id.txtTglKeluar)
     public void tglKeluar(View view) {
         DialogFragment dialogFragment = EndDateDialog.newInstance(mTglKeluar, this);
         dialogFragment.show(getSupportFragmentManager(), Consts.DIALOG);
-    }*/
+    }
 
     @Override
     public void onSelectedDate(String onDate) {
@@ -331,11 +333,11 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
         txtTglMasuk.setText(Helper.parseToDateString(mTglMasuk, Consts.TYPE_DATE));
     }
 
-   /* @Override
+    @Override
     public void onEndSelectedDate(String EndDate) {
         mTglKeluar = EndDate;
         txtTglKeluar.setText(Helper.parseToDateString(mTglKeluar, Consts.TYPE_DATE));
-    }*/
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -410,16 +412,20 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
 
     @OnClick(R.id.btnSubmit)
     public void submit(View view) {
-        mPresenter.postInputEmployee(getInput());
+        if (!validate()) {
+        } if (fileEvidence == null || fileEvidence2 == null) {
+            Toast.makeText(this, "Foto diri dan foto data harus diisi", Toast.LENGTH_SHORT).show();
+        } else {
+            mPresenter.postInputEmployee(getInput());
+        }
     }
 
     private JsonObject getInput() {
         JsonObject jsonInput = new JsonObject();
         try {
             SharedPreferences mPref = AmkUdsApp.getInstance().Prefs();
-            Log.d("id user", String.valueOf(mPref.getInt(Consts.ID,0)));
+            Log.d("id user", String.valueOf(mPref.getInt(Consts.ID, 0)));
             String gender = (rgGender.getCheckedRadioButtonId() == R.id.rbGenderFemale) ? "0" : "1";
-
             String status = (rgStatus.getCheckedRadioButtonId() == R.id.rbStatusBlmKawin) ? "0" : "1";
 
             jsonInput.addProperty("id_user", mPref.getInt(Consts.ID, 0));
@@ -441,7 +447,7 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
             jsonInput.addProperty("status", status);
             jsonInput.addProperty("status_karyawan", spinStatusKary.getSelectedItem().toString().toLowerCase());
             jsonInput.addProperty("agama", spinReligion.getSelectedItem().toString().toLowerCase());
-            jsonInput.addProperty("tgl_selesai", mTglMasuk);
+            jsonInput.addProperty("tgl_selesai", mTglKeluar);
             jsonInput.addProperty("salary", edtSalary.getText().toString());
 
         } catch (Exception e) {
@@ -450,7 +456,6 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
         return jsonInput;
     }
 
-    @Override
     public boolean validate() {
         edtNamaLengkap.setError(null);
         edtNip.setError(null);
@@ -539,7 +544,7 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
                     ImageLoader imgLoader = ImageLoader
                             .init()
                             .from(newPhoto);
-                    Bitmap newPhoto = imgLoader.requestSize(130, 130).getBitmap();
+                    Bitmap newPhoto = imgLoader.requestSize(1024, 1024).getBitmap();
                     fileEvidence = ImageBase64.encode(newPhoto);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -552,8 +557,8 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     }
 
     private void onSelectFromGalleryResult2(Intent data) {
-        galleryPhoto2.setPhotoUri(data.getData());
-        String photoPath = galleryPhoto2.getPath();
+        galleryPhoto.setPhotoUri(data.getData());
+        String photoPath = galleryPhoto.getPath();
         try {
             Bitmap bitmap = ImageLoader
                     .init()
@@ -567,7 +572,7 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
                     ImageLoader imgLoader = ImageLoader
                             .init()
                             .from(newPhoto);
-                    Bitmap newPhoto2 = imgLoader.requestSize(130, 130).getBitmap();
+                    Bitmap newPhoto2 = imgLoader.requestSize(1024, 1024).getBitmap();
                     fileEvidence2 = ImageBase64.encode(newPhoto2);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -614,7 +619,7 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
                     if (userChoosenTask.equals(strTakePhoto)) {
                         cameraIntent();
                         cameraIntent2();
-                    } else if (userChoosenTask.equals(strChooseGallery)){
+                    } else if (userChoosenTask.equals(strChooseGallery)) {
                         galleryIntent();
                         galleryIntent2();
                     }
@@ -656,3 +661,11 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
         Helper.createAlert(this, strInfo, "Tidak ada jaringan");
     }
 }
+//        Log.d("fotoah", "validate: "+getInput().get("foto"));
+        /*if (getInput().get("foto") != null || !getInput().get("foto").isJsonNull() || !getInput().get("foto").equals("null") ||
+                getInput().get("foto_ktp") != null || !getInput().get("foto_ktp").isJsonNull() || !getInput().get("foto_ktp").equals("null")){
+            Toast.makeText(this, "Foto Diri dan Foto KTP harus diisi", Toast.LENGTH_SHORT).show();
+            focus = imgFotoDiri;
+            focus = imgFotoData;
+            cancel = true;
+        }*/

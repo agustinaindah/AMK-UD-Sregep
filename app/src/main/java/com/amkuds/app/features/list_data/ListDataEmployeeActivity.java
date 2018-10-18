@@ -74,8 +74,8 @@ public class ListDataEmployeeActivity extends BaseActivity implements
             @Override
             public void onLoadMore(int nextPage) {
                 if (lastCount == Consts.LIMIT) {
-                    mPresenter.getListEmployee(Consts.FIRST_PAGE);
-                    mPresenter.getSearch(getQueryRequest(Consts.FIRST_PAGE));
+                    mPresenter.getListEmployee(nextPage);
+                    //mPresenter.getSearch(getQueryRequest(nextPage));
                 }
             }
         });
@@ -93,7 +93,7 @@ public class ListDataEmployeeActivity extends BaseActivity implements
         mBuilder.setSingleChoiceItems(listItems, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                mSearch = listItems[i].toLowerCase().replace(" ","_");
+                mSearch = listItems[i].toLowerCase().replace(" ", "_");
                 dialogInterface.dismiss();
                 showToast("Pencarian berdasarkan : " + Helper.capitalize(mSearch));
             }
@@ -103,7 +103,7 @@ public class ListDataEmployeeActivity extends BaseActivity implements
     }
 
     @OnClick(R.id.btnSearch)
-    public void search(View view){
+    public void search(View view) {
         if (mSearch == null || edtSearch.getText() == null) {
             Toast.makeText(this, "Pilih dan isi untuk melakukan pencarian", Toast.LENGTH_SHORT).show();
         } else {
@@ -113,13 +113,13 @@ public class ListDataEmployeeActivity extends BaseActivity implements
 
     private Map<String, String> getQueryRequest(int page) {
         HashMap<String, String> requestMap = new HashMap<>();
-        requestMap.put("key", mSearch);
-        requestMap.put("value", edtSearch.getText().toString());
-        requestMap.put("pagenum", String.valueOf(page));
+            requestMap.put("key", mSearch);
+            requestMap.put("value", edtSearch.getText().toString());
+            requestMap.put("page", String.valueOf(page));
         return requestMap;
     }
 
-    private void showToast(String message){
+    private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
@@ -127,8 +127,8 @@ public class ListDataEmployeeActivity extends BaseActivity implements
     public void successListEmployee(List<ItemKaryawan> itemKaryawans, int page) {
         lastCount = itemKaryawans.size();
 
-        if (page == Consts.FIRST_PAGE){
-            txtNoData.setVisibility((itemKaryawans.size()==0)? View.VISIBLE : View.GONE);
+        if (page == Consts.FIRST_PAGE) {
+            txtNoData.setVisibility((itemKaryawans.size() == 0) ? View.VISIBLE : View.GONE);
 
             mAdapter = new ListDataEmployeeAdapter(itemKaryawans, this);
 
@@ -170,11 +170,11 @@ public class ListDataEmployeeActivity extends BaseActivity implements
 
     @Override
     public void notConnect(String msg) {
-      layError.setVisibility(View.VISIBLE);
+        layError.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R.id.btnError)
-    public void reload(){
+    public void reload() {
         layError.setVisibility(View.GONE);
         mPresenter.getListEmployee(Consts.FIRST_PAGE);
         mPresenter.getSearch(getQueryRequest(Consts.FIRST_PAGE));

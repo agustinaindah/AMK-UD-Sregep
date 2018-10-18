@@ -95,7 +95,7 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
 
     @Override
     public void successLogin(JsonObject user) {
-         Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
@@ -113,13 +113,13 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
 
     @Override
     public void showMessage(String msg) {
-        Helper.createAlert(this, Consts.STR_INFO, "Cek Kembali Email/Password Anda");
+        Helper.createAlert(this, Consts.STR_INFO, msg);
         setLoading(true);
     }
 
     @Override
     public void notConnect(String msg) {
-        Helper.createAlert(this, Consts.STR_INFO, strInfoNotConnect);
+        Helper.createAlert(this, Consts.STR_INFO, msg);
     }
     private void setLoading(boolean isDisabled) {
         btnLogin.setText((isDisabled) ? strLogin : strLoading);

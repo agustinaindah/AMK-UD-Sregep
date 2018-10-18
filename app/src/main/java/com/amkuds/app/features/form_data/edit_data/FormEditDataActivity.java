@@ -18,6 +18,8 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,6 +33,7 @@ import com.amkuds.app.AmkUdsApp;
 import com.amkuds.app.features.date_dialog.DateDialog;
 import com.amkuds.app.features.date_dialog.EndDateDialog;
 import com.amkuds.app.R;
+import com.amkuds.app.features.date_dialog.ResignDateDialog;
 import com.amkuds.app.features.date_dialog.StartDateDialog;
 import com.amkuds.app.base.BaseActivity;
 import com.amkuds.app.model.ItemKaryawan;
@@ -58,8 +61,9 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import retrofit2.http.HEAD;
 
-public class FormEditDataActivity extends BaseActivity implements StartDateDialog.StartOnDateDialog,
-        EndDateDialog.EndOnDateDialog, DateDialog.OnDateDialog, FormEditDataPresenter.View {
+public class FormEditDataActivity extends BaseActivity implements EndDateDialog.EndOnDateDialog,
+        DateDialog.OnDateDialog, ResignDateDialog.ResignOnDateDialog,
+        FormEditDataPresenter.View {
 
     private static final int PICKFILE_RESULT_CODE = 1;
     private static final int GALLERY_REQUEST = 565;
@@ -104,16 +108,20 @@ public class FormEditDataActivity extends BaseActivity implements StartDateDialo
     EditText edtPosition;
     @BindView(R.id.spinStatusKary)
     Spinner spinStatusKary;
-    @BindView(R.id.rgTipeKontrak)
+    /*@BindView(R.id.rgTipeKontrak)
     RadioGroup rgTipeKontrak;
     @BindView(R.id.rbTipeKontrakTidak)
     RadioButton rbTipeKontrakTidak;
     @BindView(R.id.rbTipeKontrakPjg)
-    RadioButton rbTipeKontrakPjg;
+    RadioButton rbTipeKontrakPjg;*/
     @BindView(R.id.edtSalary)
     EditText edtSalary;
-    @BindView(R.id.txtTglMasuk)
-    TextView txtTglMasuk;
+    /* @BindView(R.id.txtTglMasuk)
+     TextView txtTglMasuk;*/
+    @BindView(R.id.txtLabelTglResign)
+    TextView txtLabelTglResign;
+    @BindView(R.id.txtTglResign)
+    TextView txtTglResign;
     @BindView(R.id.txtTglKeluar)
     TextView txtTglKeluar;
     /* @BindView(R.id.textfile)
@@ -149,21 +157,23 @@ public class FormEditDataActivity extends BaseActivity implements StartDateDialo
     String strMsgEmpty;
 
     private String mTglLahir;
-    private String mTglMasuk;
+    //    private String mTglMasuk;
     private String mTglKeluar;
+    private String mTglResign;
 
     private String fileEvidence;
     private String fileEvidence2;
     private String newPhoto = null;
     private String newPhoto2 = null;
     private GalleryPhoto galleryPhoto;
-    private GalleryPhoto galleryPhoto2;
+//    private GalleryPhoto galleryPhoto2;
     private String userChoosenTask;
     private String gender;
     private String status;
     private String FileData = null;
     private String oldPhoto;
     private String oldPhoto2;
+    private String sttsKaryawan;
 
     private int id;
     private ItemKaryawan mItemKaryawan;
@@ -177,11 +187,12 @@ public class FormEditDataActivity extends BaseActivity implements StartDateDialo
 
         mPresenter = new FormEditDataPresenterImpl(this);
         galleryPhoto = new GalleryPhoto(this);
-        galleryPhoto2 = new GalleryPhoto(this);
+//        galleryPhoto2 = new GalleryPhoto(this);
         initData();
         displayData();
         editData();
         initProgress();
+        spinnerStatusKaryawan();
 
         int permission = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.READ_EXTERNAL_STORAGE);
@@ -223,11 +234,11 @@ public class FormEditDataActivity extends BaseActivity implements StartDateDialo
         edtNoHp.setText(mItemKaryawan.getNoHp());
         edtEmail.setText(mItemKaryawan.getEmail());
 
-        if (mItemKaryawan.getTglMasuk() == null) {
+       /* if (mItemKaryawan.getTglMasuk() == null) {
             txtTglMasuk.setText("Pilih Tanggal");
         } else {
             txtTglMasuk.setText(Helper.parseToDateString(mItemKaryawan.getTglMasuk(), Consts.TYPE_DATE));
-        }
+        }*/
 
         edtAlamat.setText(Helper.capitalize(mItemKaryawan.getAlamat()));
         txtTglLahir.setText(Helper.parseToDateString(mItemKaryawan.getTglLahir(), Consts.TYPE_DATE));
@@ -242,8 +253,34 @@ public class FormEditDataActivity extends BaseActivity implements StartDateDialo
         status = mItemKaryawan.getStatus();
         rgStatus.check((status.equals("0") ? R.id.rbStatusBlmKawin : R.id.rbStatusKawin));
 
-        spinStatusKary.getSelectedItem().toString().toLowerCase();
-        spinReligion.getSelectedItem().toString().toLowerCase();
+        String agama = mItemKaryawan.getAgama();
+        if (agama.equals("islam")){
+            spinReligion.setSelection(0);
+        } else if (agama.equals("kristen")) {
+            spinReligion.setSelection(1);
+        } else if (agama.equals("katolik")) {
+            spinReligion.setSelection(2);
+        } else if (agama.equals("hindu")) {
+            spinReligion.setSelection(3);
+        } else if (agama.equals("buddha")) {
+            spinReligion.setSelection(4);
+        } else if (agama.equals("konghucu")) {
+            spinReligion.setSelection(5);
+        } else if (agama.equals("ateisme")) {
+            spinReligion.setSelection(6);
+        }
+
+        String emp = mItemKaryawan.getStatusKaryawan().toString();
+        if (emp.equals("training")){
+            spinStatusKary.setSelection(0);
+        } else if (emp.equals("kontrak")) {
+            spinStatusKary.setSelection(1);
+        } else if (emp.equals("tetap")) {
+            spinStatusKary.setSelection(2);
+        } else if (emp.equals("resign")) {
+            spinStatusKary.setSelection(3);
+        }
+
         if (mItemKaryawan.getTglResign() == null) {
             txtTglKeluar.setText("Pilih Tanggal");
         } else {
@@ -251,6 +288,30 @@ public class FormEditDataActivity extends BaseActivity implements StartDateDialo
         }
         edtSalary.setText(mItemKaryawan.getLogSalary());
         //textfile.setText(mItemKaryawan.getDoc());
+
+        if (txtTglResign == null){
+            txtTglResign.setText("Pilih Tanggal");
+        }
+    }
+
+    private void spinnerStatusKaryawan() {
+        spinStatusKary.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                sttsKaryawan = spinStatusKary.getItemAtPosition(i).toString().toLowerCase();
+                Log.d("int", sttsKaryawan);
+                if (sttsKaryawan.equals("training") || sttsKaryawan.equals("tetap") || sttsKaryawan.equals("kontrak")){
+                    txtLabelTglResign.setVisibility(View.GONE);
+                    txtTglResign.setVisibility(View.GONE);
+                } else {
+                    txtLabelTglResign.setVisibility(View.VISIBLE);
+                    txtTglResign.setVisibility(View.VISIBLE);
+                }
+            }
+
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     private void galleryIntent() {
@@ -284,6 +345,7 @@ public class FormEditDataActivity extends BaseActivity implements StartDateDialo
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI.getPath());
         startActivityForResult(intent, REQUEST_CAMERA2);
     }
+
     @OnClick(R.id.btnUploadFotoDiri)
     public void clickUploadPhotoSelf(View view) {
         final CharSequence[] items = {strTakePhoto, strChooseGallery,
@@ -349,9 +411,11 @@ public class FormEditDataActivity extends BaseActivity implements StartDateDialo
     }
 
     private void displayData() {
+        mTglResign = Helper.getDateNow();
         mTglLahir = Helper.getDateNow();
-        mTglMasuk = Helper.getDateNow();
         mTglKeluar = Helper.getDateNow();
+        //mTglMasuk = Helper.getDateNow();
+        Log.d("Tgl", mTglResign);
     }
 
     @OnClick(R.id.txtTglLahir)
@@ -360,17 +424,23 @@ public class FormEditDataActivity extends BaseActivity implements StartDateDialo
         dialogFragment.show(getSupportFragmentManager(), Consts.DIALOG);
     }
 
-    @OnClick(R.id.txtTglMasuk)
-    public void tglMasuk(View view) {
-        DialogFragment dialogFragment = StartDateDialog.newInstance(mTglMasuk, this);
-        dialogFragment.show(getSupportFragmentManager(), Consts.DIALOG);
-    }
-
     @OnClick(R.id.txtTglKeluar)
     public void tglKeluar(View view) {
         DialogFragment dialogFragment = EndDateDialog.newInstance(mTglKeluar, this);
         dialogFragment.show(getSupportFragmentManager(), Consts.DIALOG);
     }
+
+    @OnClick(R.id.txtTglResign)
+    public void tglResign(View view) {
+        DialogFragment dialogFragment = ResignDateDialog.newInstance(mTglResign, this);
+        dialogFragment.show(getSupportFragmentManager(), Consts.DIALOG);
+    }
+
+     /*@OnClick(R.id.txtTglMasuk)
+    public void tglMasuk(View view) {
+        DialogFragment dialogFragment = StartDateDialog.newInstance(mTglMasuk, this);
+        dialogFragment.show(getSupportFragmentManager(), Consts.DIALOG);
+    }*/
 
     @Override
     public void onSelectedDate(String onDate) {
@@ -385,10 +455,16 @@ public class FormEditDataActivity extends BaseActivity implements StartDateDialo
     }
 
     @Override
-    public void onStartSelectedDate(String startDate) {
-        mTglMasuk = startDate;
-        txtTglMasuk.setText(Helper.parseToDateString(mTglMasuk, Consts.TYPE_DATE));
+    public void onResignSelectedDate(String resignDate) {
+        mTglResign = resignDate;
+        txtTglResign.setText(Helper.parseToDateString(mTglResign, Consts.TYPE_DATE));
     }
+
+     /* @Override
+     public void onStartSelectedDate(String startDate) {
+         mTglMasuk = startDate;
+         txtTglMasuk.setText(Helper.parseToDateString(mTglMasuk, Consts.TYPE_DATE));
+     }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -452,7 +528,6 @@ public class FormEditDataActivity extends BaseActivity implements StartDateDialo
             jsonInput.addProperty("no_ktp", edtNikEmp.getText().toString());
             jsonInput.addProperty("no_hp", edtNoHp.getText().toString());
             jsonInput.addProperty("email", edtEmail.getText().toString());
-            jsonInput.addProperty("tgl_masuk", mTglMasuk);
             jsonInput.addProperty("alamat", edtAlamat.getText().toString());
             jsonInput.addProperty("tgl_lahir", mTglLahir);
             jsonInput.addProperty("tempat_kelahiran", edtTmptLahir.getText().toString());
@@ -460,19 +535,27 @@ public class FormEditDataActivity extends BaseActivity implements StartDateDialo
             jsonInput.addProperty("jabatan", edtPosition.getText().toString());
             jsonInput.addProperty("doc", "UEsDBBQACAAIAJmmKU0AAAAAAAAAAAAAAAATABAAZW1haWxkZW50YWxjYXJlLnNxbFVYDAAIJ5VbsiWVW/UBFAC1Wltz27YSfvevwOmLkh5KAUDwlkxmLMdKqsaWXVluJudFBknQYiWRGpKK6/76swDvlGRbrRs7CQHsLj7sLhaLJft9tFlsLh+H/jqM0M1vF+h8u96c9Pvoh0jSMI4QG9gDPCCya5Flm/T9u3cPDw8D4Fo/csk1iET2DoYlxS9xmr1Hq9jjqwU8yq4vIhIJz6SoWbgW79GN2CDsaIhiYiOeIay/Nyi6vpTENyKBecu53yMCMw902r/kScjPzyTJ9S/X6Pdy3BrQgXFycjOaSezzy6vzEfqIfppczYe3s6v578OL29H8ajL/32h69dMHRScHPl1dXo5nQImhbzacztBsOpzcDD/NxleTnCwDrPO/4khIef/F+D3GIODk5N3P/2GYYIIk0enVxfn80y/DKXCOpnPomn+6GI8ms4+np/u60c/vPjwrYTq6ub2Y3eyIKPoPybi6uBhK+PA0mYzUSqSIPd27EibDy9EN2maBvXaZGi7sec4z7vIUrHYn1jxc+SLK+MrjibiTFJKk/zf/lFPMuLsSKM2SrZdtE4GCOEGZ6rvz42UmknymT9PRcDZCs+HZxagaQW9OELoL/TsURtkbQt6iyRWs5vbiQpMDEV/zO/SDJ96CJ28Ixp3x7H41X/FFCIJ8non24B/LOySi7fpNb9XTeptezYvOR5+HYAokRyQpX8FE2R3KxJ9ZB0E8X2waEPQOgnQj0pCvwvQpmNAbzjcJhyUvazq7pjp5i0aTL+PJ6OM4iuLzswqgdCCw78cV7L+I1FaFLR5G93LR/JC+x5ObEeyL8WR21VC31LVWKFZrKlBTCtMqXWjl2rXmIrXOYt4itUNvTt7oGuqdJ/cD9J0vHjkaR34SPvIoC3swQBwb97HeJ45sbeQ/v8I8EK8EuAz8P+XAE8UDpqNPHLrQbBvd3/MVOhebeIluVuC8kWTDtmNRalJTN6lsnwmfL9DldrXNZJP13monb6wSyxjU840nPo9KGFafEPjtwPgSP8AsML+po3sOil2JGN3ESfzA/4DhM1jHdpVPr9u2YzuOhZlsfwnvQ7Rdb9dgighdJVksN1iYyjFdYbFLLN/CJYfFLRpKcUApdh/TDpqvfMk3lUpMA12GUbzmSQbLaKuCWcyEv1YF5RagKNlqbqecexZyNBVpFqLhGuzIC2U4UhmN6a9Fsl3zhYLgh2m8VAAwQ9MZJu+m3wwDfRP+XiiU2tjE1GJKLV/jKIWDgKchkrBkl6EQEVxCAjggfvi4RV/DqOEnllQJxTsqcbcb2OFRYaRf+dqF86iJwDApoCCE7GqD9t5++LdDnYqu+yJdPvBMoAv9eSIKlb0oFprdGJNmsG/SOezyZZiE6zL0lW2IgFno8yWqOvaFww7Ja4Wlhm5aUalUTRGUWkpoBKnu0uqgY2jIBPuOVuAjPnjTfQLBCU1U4xpyFhAg7V+vGVwQGGR8GK5+hOBY43USRzs0QCD37a/bVbhN0U3oL/bLAiK5x75v/UWYZo+7BDCqXP4zxJEE8EFU26GRBIRInxXJIxzY0XaXBIYJhd4bnkEehc4fQvR1m0Th7oySjMhgfAZbhO+bDgYJg95vkA2ABpbb3fXLcQLK7fFVILX0ECZ8FfsJRxD41xBIFnsmBnpiHskD9MQ6kgfoiX0kD9AT50geleEexyPpKTmSB+gpPZIH6Kl+JA/QU3YkD9DTY/zgXw+zdYDYE2obIfTZcFtmRIfGt+nBUZk0Nabak3mKKEybJHks3oi1SMJlyuWRBa2EP0BYifZG4hatksnXdfQ3Oog8kAOS8gS2zFvhUIVYER1YRB5US2hw3sqcYQ8Q3EPysiXvPj0CV6lNEnsiTYWvIQxNV6xk8hNCdyrSVzsxOmZunRpNK9cnR2FPrTae1rWUtmsZLVesVqtQa+muOn0ah05+gMgIJC/AKl3JU6imyUBZ1gDLNEZpHMmggBtni9Nkt45gt9Xs6lCp+J0j+B01vTpvKn58BL+c2SlOo1KATo4RQHIBRiXA6WPjGAE0X786bKo1HAVBLyRYeySUuzLnp0bFT2t+livxJUbcL8DIAVDcVAJ7Ygk9uUPUaU6q9F6dni+VonAUCV4li9ayrCNkMaOFSK+l2C+WYnfXxWopzhFS9q7LqGRJGS+WxfbJMmtZ5MWynO7qrFoKPUIKbWvarqXoR0jp2MuppbAnpDQ2AsU7XohrIbvOfHg/sno76Pl2+NdThsxdqQMh3Zcy1IN5yiCf5wfzBjkKtxLxxD1MXlrmKxHdwx3+CbJu5ao8Jzs5xFKs+DqMXlzIeq5cVdy4DsLibrzN5nKBVSaRhRtRzp9uwS2kEgCHKh1LPHCOigNJTD6kxMBz+hAnfj05NbppTEkzl5N3qnHPZhay+PlsXtHxhVZe0XSFyg+0htG1jnV36mctkzULaLnatYZ+tUKxWkMzWlcDdc4hg35D+XARlA10W7TyXWf1iUpEikqVJWtVtm6Zaj9X3Kf3EszAi9e7clpTYJcLTgPMBYg3sO9admDYnu9zjzHKnTaDigRabXPUu66e8vKf1cd13U3CMw1mMN3sVVxtaDV/LTMwPGpwjG0qXGwxO+DC9zgRnu8FLinykMIhAZC67uR+Cjf+8qHSFmtqy6p+eyVXG0/FX0mkhOo0oI7FDfjlFtNth3EsGLcxCTy9Ji6rklkYy0JCoq5NszCGuFW2ysiJ7RqVY+mmDibUe03eFqw8ljZUZHiBHlAX+5SbACKwBGcGuILnEds3LL8lqipRiryEIgefq6YQx9FlMbcJVDobgLVsnJszpy6EPo3XppbnuVgIbnMLmx7zdMaJaTsksJmwXDUl1ZlRlTRl4SYs6zbdOg6gYwqd00BnmEzXsW6z3CSrSoJpPgPO0qVv2Z5hUZ8J0/Y5sSzieLZBLcKVPiphgLIucua1ozT0Fz1tfyUp12O5KwqkIEOnDmWG0uMfim2QlmxPg7U8bgc4IIFlOpbHTJ8KQ3cC06bUd4Qt1AEu1iHc3+/jqErGy/JVT+tUsgAgkaqkTYAGeDkxILCozfNY0j8DDQcG5zwgzHc49XWL2IYumEmIw12X57kz7Cb4qVL8XiBrZoBU5EWsTgkt157T9kLgd3THpLZKVgoBwMCTxxfojxq+YXCf2jrnDGMeMJN5lulbRPewxf3KE03Lru4RvWn41/JRDl3GcKytuY9UD/osXHmFTB/5osALYGk76BiUMqLrMCTbieQLajbCnsbrmS7DoELLxxaFH1tw1wE9u7ZOXY+UO9EPl1m51VXh72zLf4RZLId/L/7Pdw0tXtBUpgZPBBvl9pcsUSjfyiTPqBFTzwUjcM9wsGXAI4NYTQzqg+5cCxdqrC5Cqu7pF2XPVg00t7HZp3ZLZ5bNINrkUO8L3tNV+EO8nmFl0p/XWnvagaqr2h2Ets9cw3QYYw51FOJU8flLhzytMWFjK5Cx2qY+gRPFcV04DDxuWrrNiRM08Tm4uq/1QpmiRypCNqq9AIzWeXwBjFJqyJcjREXAgjHnGYTRs7uXc1N3bNN1ScADw7AN2zUM35Wu51OlP576wf0ClFHeA+XG4Gp29eDHaJiAV4OxSvU56hBuelz7FCHgMzo2zNM028rXaulgG4YD7g1C/58fJOrynpfAl1vU07r18Nz3WFFcqbVIqG07eXQGyvlCPJ7CVo3jg0EZBx5sSN0Rlg1OqAfMc5kFZnVF4JiGQvWgZoaZyhtrbxPmN6an664lRh23dCgXCccIqwVU/KdJ7C1F9nrnsap2h2u+lkErjyVjaEEMLJu5oSGvMRsgHZ2YFpN+pNYfJ8vTWsgrIVM19cRfqOCsHhD/Cy4eBShDgmpHY53aFNA6tOKQ9K+Zvqii/XIRr5QL95blQ5n8kbYlm7sh5xoAoMc4ik9faytUV6Zx5Is/RapuSz5cn4SfX5rSk/qW3aTZ/eRgeDEbTTsfeMC1bnh+jq6n48vh9Dv6OvqeF233z7vzvrAlsuj+OxLb9eSW1MbQ35HcvlG2JDeG9kkur5hvtWL4djL+7XakRutXo/lDDUF9FjWefJqOVE3+KWvtIX2x0S6vzsefv+9/hdIRrHXaHwl5Cu0LbfxPAFDjBQBe6hL/CIj5AiAv9aASyMES1bNo2IeT/MO5D53P4PZ/AXfo27jdz88OfP928NO4PRL2fv126Ls4xf9/UEsHCOxoXlAxDAAA+igAAFBLAwQKAAAAAABgpylNAAAAAAAAAAAAAAAACQAQAF9fTUFDT1NYL1VYDAAkJ5VbJCeVW/UBFABQSwMEFAAIAAgAmaYpTQAAAAAAAAAAAAAAAB4AEABfX01BQ09TWC8uX2VtYWlsZGVudGFsY2FyZS5zcWxVWAwACCeVW7IllVv1ARQAjU5NS8NAFHyJiIoXL3rORW9J1k22Js2pTTfFQ1G0YA+CbNLVBLPZbbKF+mc8+Gv8Wd1qQOjJgXkfw7zHwOHFEdgAM1Y4d4/Owumx0+DEEANYoelmt17hXxjN5w+/08/Ft+HnnsXu9QXAZSGFx5SquSe4Zkum2fB9NrnVXDyVvOVZK0W3++WYkgGc//lXa9ayRlcNh1zVVacR+rLsl7OrUms19P1aFqwuZad9VSrxwZaiany+UbLVnlHuj0/DPqfV5zrYy0lWPkLoOiF5TDDJcTKV8q3mzxuM0tIE4wkJRnFIx4GLB2nkhukkdCNKiRtgOo4JvYkGaQZbUEsHCAGHOLD5AAAAZgEAAFBLAQIVAxQACAAIAJmmKU3saF5QMQwAAPooAAATAAwAAAAAAAAAAECkgQAAAABlbWFpbGRlbnRhbGNhcmUuc3FsVVgIAAgnlVuyJZVbUEsBAhUDCgAAAAAAYKcpTQAAAAAAAAAAAAAAAAkADAAAAAAAAAAAQP1BggwAAF9fTUFDT1NYL1VYCAAkJ5VbJCeVW1BLAQIVAxQACAAIAJmmKU0Bhziw+QAAAGYBAAAeAAwAAAAAAAAAAECkgbkMAABfX01BQ09TWC8uX2VtYWlsZGVudGFsY2FyZS5zcWxVWAgACCeVW7IllVtQSwUGAAAAAAMAAwDoAAAADg4AAAAA");
             jsonInput.addProperty("status", status);
-            jsonInput.addProperty("status_karyawan", spinStatusKary.getSelectedItem().toString().toLowerCase());
+            jsonInput.addProperty("status_karyawan", sttsKaryawan);
             jsonInput.addProperty("agama", spinReligion.getSelectedItem().toString().toLowerCase());
             jsonInput.addProperty("tgl_selesai", mTglKeluar);
             jsonInput.addProperty("salary", edtSalary.getText().toString());
-            jsonInput.addProperty("tipe_kontrak", (rgTipeKontrak.getCheckedRadioButtonId() == R.id.rbTipeKontrakTidak) ? Consts.TIDAK : Consts.PANJANG);
+            jsonInput.addProperty("tgl_resign", mTglResign);
+            /*jsonInput.addProperty("tipe_kontrak", (rgTipeKontrak.getCheckedRadioButtonId() == R.id.rbTipeKontrakTidak) ? Consts.TIDAK : Consts.PANJANG);*/
+            /*jsonInput.addProperty("tgl_masuk", mTglMasuk);*/
 
-            if (mItemKaryawan.getFoto() == null) {
+            if (sttsKaryawan.equals("training") || sttsKaryawan.equals("tetap") || sttsKaryawan.equals("kontrak")){
+                jsonInput.addProperty("status_karyawan", "kosong");
+            } else {
+                jsonInput.addProperty("status_karyawan", sttsKaryawan);
+            }
+
+            if (fileEvidence == null) {
                 jsonInput.addProperty("foto", foto);
             } else {
                 jsonInput.addProperty("foto", fileEvidence);
             }
 
-            if (mItemKaryawan.getFotoKtp() == null) {
+            if (fileEvidence2 == null) {
                 jsonInput.addProperty("foto_ktp", fotoKtp);
             } else {
                 jsonInput.addProperty("foto_ktp", fileEvidence2);
@@ -605,8 +688,8 @@ public class FormEditDataActivity extends BaseActivity implements StartDateDialo
     }
 
     private void onSelectFromGalleryResult2(Intent data) {
-        galleryPhoto2.setPhotoUri(data.getData());
-        String photoPath = galleryPhoto2.getPath();
+        galleryPhoto.setPhotoUri(data.getData());
+        String photoPath = galleryPhoto.getPath();
         try {
             Bitmap bitmap = ImageLoader
                     .init()
@@ -708,4 +791,5 @@ public class FormEditDataActivity extends BaseActivity implements StartDateDialo
     public void notConnect(String msg) {
         Helper.createAlert(this, strInfo, "Tidak ada jaringan");
     }
+
 }

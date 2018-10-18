@@ -29,7 +29,7 @@ public class ListDataEmployeePresenterImpl implements ListDataEmployeePresenter 
         AmkUdsApp.getInstance().service(new ServiceInterface() {
             @Override
             public Call<BaseResponse> callBackResponse(ApiService apiService) {
-                return apiService.getListEmployee();
+                return apiService.getListEmployee(page);
             }
 
             @Override
@@ -109,7 +109,7 @@ public class ListDataEmployeePresenterImpl implements ListDataEmployeePresenter 
                                 Helper.getGsonInstance().fromJson(element, ItemKaryawan.class);
                         itemKaryawans.add(itemKaryawan);
                     }
-                    mView.successListEmployee(itemKaryawans,Integer.valueOf(mapRequest.get("pagenum")));
+                    mView.successListEmployee(itemKaryawans,Integer.valueOf(mapRequest.get("page")));
                 }catch (Exception e){
                     e.printStackTrace();
                 }

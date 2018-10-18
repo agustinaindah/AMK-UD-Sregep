@@ -20,8 +20,6 @@ public class FormInputDataPresenterImpl implements FormInputDataPresenter {
 
     @Override
     public void postInputEmployee(final JsonObject jsonData) {
-        boolean cancel = mView.validate();
-        if (!cancel) {
             AmkUdsApp.getInstance().service(new ServiceInterface() {
                 @Override
                 public Call<BaseResponse> callBackResponse(ApiService apiService) {
@@ -64,6 +62,4 @@ public class FormInputDataPresenterImpl implements FormInputDataPresenter {
                 }
             });
         }
-
-    }
 }

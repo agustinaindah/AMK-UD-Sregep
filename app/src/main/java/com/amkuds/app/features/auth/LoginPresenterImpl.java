@@ -51,6 +51,8 @@ public class LoginPresenterImpl implements LoginPresenter {
 
                 }catch (Exception e){
                     e.printStackTrace();
+                    String message = Helper.getGsonInstance().toJson(response.body().getMessage());
+                    mView.showMessage(message);
                 }
             }
 
@@ -58,7 +60,7 @@ public class LoginPresenterImpl implements LoginPresenter {
             public void responseFailed(Response<BaseResponse> response) {
                 try {
                     JsonObject jsonRes = Helper.parseToJsonObject(response.errorBody().string());
-                    mView.showMessage(jsonRes.get("Terjadi Kesalahan").getAsString());
+                    mView.showMessage(jsonRes.get("message").getAsString());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -19,11 +19,11 @@ public interface ApiService {
     @POST("user/login")
     Call<BaseResponse> postLogin(@Body JsonObject jsonRequest);
 
-    @GET("logout")
+    @GET("user/logout")
     Call<BaseResponse> getLogout();
 
     @GET("karyawan/all")
-    Call<BaseResponse> getListEmployee();
+    Call<BaseResponse> getListEmployee(@Query("page") int page);
 
     @GET("karyawan/search")
     Call<BaseResponse> getSearch(@QueryMap Map<String, String> mapRequest);

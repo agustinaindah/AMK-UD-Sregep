@@ -9,6 +9,7 @@ public class Consts {
     public static final String FIRSTNAME        = "first_name";
     public static final String LASTNAME         = "last_name";
     public static final String ROLE             = "role";
+    public static final String LOGOUT           = "logout";
 
     public static final int LIMIT = 10;
     public static final int FIRST_PAGE = 1;

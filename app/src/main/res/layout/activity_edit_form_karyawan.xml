@@ -46,7 +46,7 @@
                     android:layout_below="@id/frDataPribadi"
                     android:layout_margin="7dp"
                     android:layout_marginTop="10dp"
-                    android:text="NIK (Nomor Induk Kependudukan)"
+                    android:text="NIK (Nomor Induk Kependudukan)*"
                     android:textColor="@color/color_text_form" />
 
                 <EditText
@@ -65,7 +65,7 @@
                     android:layout_below="@id/edtNikEmp"
                     android:layout_margin="7dp"
                     android:layout_marginTop="10dp"
-                    android:text="Nama Lengkap"
+                    android:text="Nama Lengkap*"
                     android:textColor="@color/color_text_form" />
 
                 <EditText
@@ -74,6 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelNmLengkap"
                     android:layout_margin="5dp"
+                    android:inputType="textCapWords|textCapSentences"
                     android:text="" />
 
                 <TextView
@@ -82,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtNamaLengkap"
                     android:layout_margin="7dp"
-                    android:text="Jenis Kelamin"
+                    android:text="Jenis Kelamin*"
                     android:textColor="@color/color_text_form" />
 
                 <RadioGroup
@@ -91,6 +92,7 @@
                     android:layout_below="@id/txtLabelJK"
                     android:layout_margin="7dp"
                     android:orientation="horizontal">
+
                     <RadioButton
                         android:id="@+id/rbGenderFemale"
                         style="@style/MatchWrapLayout"
@@ -110,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/rgGender"
                     android:layout_margin="7dp"
-                    android:text="Tempat Lahir"
+                    android:text="Tempat Lahir*"
                     android:textColor="@color/color_text_form" />
 
                 <EditText
@@ -119,6 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelTmptLahir"
                     android:layout_margin="5dp"
+                    android:inputType="textCapWords|textCapSentences"
                     android:text="" />
 
                 <TextView
@@ -127,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtTmptLahir"
                     android:layout_margin="7dp"
-                    android:text="Tanggal Lahir"
+                    android:text="Tanggal Lahir*"
                     android:textColor="@color/color_text_form" />
 
                 <TextView
@@ -148,7 +151,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtTglLahir"
                     android:layout_margin="7dp"
-                    android:text="Agama"
+                    android:text="Agama*"
                     android:textColor="@color/color_text_form" />
 
                 <Spinner
@@ -168,7 +171,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/spinReligion"
                     android:layout_margin="7dp"
-                    android:text="Alamat KTP"
+                    android:text="Alamat KTP*"
                     android:textColor="@color/color_text_form" />
 
                 <EditText
@@ -177,6 +180,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelAlamat"
                     android:layout_margin="5dp"
+                    android:inputType="textCapWords|textCapSentences"
                     android:text="" />
 
                 <TextView
@@ -185,7 +189,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtAlamat"
                     android:layout_margin="7dp"
-                    android:text="Alamat Domisili"
+                    android:text="Alamat Domisili*"
                     android:textColor="@color/color_text_form" />
 
                 <EditText
@@ -194,6 +198,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelAlamatKtp"
                     android:layout_margin="5dp"
+                    android:inputType="textCapWords|textCapSentences"
                     android:text="" />
 
                 <TextView
@@ -202,7 +207,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtAlamatKtp"
                     android:layout_margin="7dp"
-                    android:text="No Telepon/ Hp"
+                    android:text="No Telepon/ Hp*"
                     android:textColor="@color/color_text_form" />
 
                 <EditText
@@ -220,7 +225,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtNoHp"
                     android:layout_margin="7dp"
-                    android:text="Email"
+                    android:text="Email*"
                     android:textColor="@color/color_text_form" />
 
                 <EditText
@@ -238,7 +243,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtEmail"
                     android:layout_margin="7dp"
-                    android:text="Status"
+                    android:text="Status*"
                     android:textColor="@color/color_text_form" />
 
                 <RadioGroup
@@ -300,7 +305,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/frDataKaryawan"
                     android:layout_margin="7dp"
-                    android:text="NIP (Nomor Induk Pegawai)"
+                    android:text="NIP (Nomor Induk Pegawai)*"
                     android:textColor="@color/color_text_form" />
 
                 <EditText
@@ -318,7 +323,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtNip"
                     android:layout_margin="7dp"
-                    android:text="Jabatan"
+                    android:text="Jabatan*"
                     android:textColor="@color/color_text_form" />
 
                 <EditText
@@ -327,6 +332,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelPosition"
                     android:layout_margin="5dp"
+                    android:inputType="textCapWords|textCapSentences"
                     android:text="" />
 
                 <TextView
@@ -335,7 +341,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/edtPosition"
                     android:layout_margin="7dp"
-                    android:text="Status Karyawan"
+                    android:text="Status Karyawan*"
                     android:textColor="@color/color_text_form" />
 
                 <Spinner
@@ -345,17 +351,43 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtLabelStatusKar"
                     android:layout_margin="5dp"
-                    android:entries="@array/data_status_karyawan"
+                    android:entries="@array/data_status_karyawan_edit"
                     android:prompt="@string/status_kar"
                     android:spinnerMode="dropdown" />
 
                 <TextView
+                    android:id="@+id/txtLabelTglResign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/spinStatusKary"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_toRightOf="@id/txtLabelTglMasuk"
+                    android:text="Tanggal Resign*"
+                    android:visibility="gone"
+                    android:textColor="@color/color_text_form" />
+
+                <TextView
+                    android:id="@+id/txtTglResign"
+                    style="@style/WrapWrapLayout"
+                    android:layout_below="@id/txtLabelTglResign"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="7dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:drawableLeft="@drawable/ic_calendar_range"
+                    android:drawablePadding="5dp"
+                    android:visibility="gone"
+                    android:text="Pilih Tanggal"
+                    android:textSize="13sp" />
+
+                <!--<TextView
                     android:id="@+id/txtLabelTipeKontrak"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/spinStatusKary"
                     android:layout_margin="7dp"
-                    android:text="Tipe Kontrak"
+                    android:text="Tipe Kontrak*"
                     android:textColor="@color/color_text_form" />
 
                 <RadioGroup
@@ -377,16 +409,16 @@
                         style="@style/MatchWrapLayout"
                         android:layout_weight="1"
                         android:text="Perpanjang" />
-                </RadioGroup>
+                </RadioGroup>-->
 
-                <TextView
+                <!--<TextView
                     android:id="@+id/txtLabelTglMasuk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/rgTipeKontrak"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="7dp"
-                    android:text="Tanggal Masuk"
+                    android:text="Tanggal Masuk*"
                     android:textColor="@color/color_text_form" />
 
                 <TextView
@@ -400,24 +432,24 @@
                     android:drawableLeft="@drawable/ic_calendar_range"
                     android:drawablePadding="5dp"
                     android:text=""
-                    android:textSize="13sp" />
+                    android:textSize="13sp" />-->
 
                 <TextView
                     android:id="@+id/txtLabelTglKeluar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/rgTipeKontrak"
-                    android:layout_marginLeft="80dp"
+                    android:layout_below="@id/txtTglResign"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="7dp"
                     android:layout_toRightOf="@id/txtLabelTglMasuk"
-                    android:text="Tanggal Keluar"
+                    android:text="Update Habis Tanggal Kontrak*"
                     android:textColor="@color/color_text_form" />
 
                 <TextView
                     android:id="@+id/txtTglKeluar"
                     style="@style/WrapWrapLayout"
                     android:layout_below="@id/txtLabelTglKeluar"
-                    android:layout_marginLeft="35dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="7dp"
                     android:layout_toRightOf="@id/txtTglMasuk"
                     android:background="?android:attr/selectableItemBackground"
@@ -431,9 +463,9 @@
                     android:id="@+id/txtLabelSalary"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/txtTglMasuk"
+                    android:layout_below="@id/txtTglKeluar"
                     android:layout_margin="7dp"
-                    android:text="Gaji"
+                    android:text="Gaji*"
                     android:textColor="@color/color_text_form" />
 
                 <EditText

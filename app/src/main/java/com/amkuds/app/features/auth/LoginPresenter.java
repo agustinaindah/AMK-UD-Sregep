@@ -9,5 +9,6 @@ public interface LoginPresenter {
 
     interface View extends BaseView {
         void successLogin(JsonObject user);
+
     }
 }

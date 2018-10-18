@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.multidex.MultiDex;
 
+import com.amkuds.app.utils.Helper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.amkuds.app.model.BaseResponse;
@@ -27,7 +28,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class AmkUdsApp extends Application {
 
     private static AmkUdsApp ourInstance;
-
     private Call<BaseResponse> mRequest = null;
 
     private Gson gson = new GsonBuilder()
@@ -36,6 +36,50 @@ public class AmkUdsApp extends Application {
 
     public static AmkUdsApp getInstance() {
         return ourInstance;
+    }
+
+    public void getLogout(){
+        AmkUdsApp.getInstance().service(new ServiceInterface() {
+            @Override
+            public Call<BaseResponse> callBackResponse(ApiService apiService) {
+                return apiService.getLogout();
+            }
+
+            @Override
+            public void showProgress() {
+
+            }
+
+            @Override
+            public void hideProgress() {
+
+            }
+
+            @Override
+            public void responseSuccess(Response<BaseResponse> response) {
+                try {
+                   String data = Helper.getGsonInstance().toJson(response.body().getData());
+                   AmkUdsApp
+                           .getInstance()
+                           .Prefs()
+                           .edit()
+                           .putString(Consts.LOGOUT, data)
+                           .commit();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void responseFailed(Response<BaseResponse> response) {
+
+            }
+
+            @Override
+            public void failed(Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     @Override
@@ -96,9 +140,9 @@ public class AmkUdsApp extends Application {
     /**
      * @return String email from preferences
      */
-   /* public String getEmail() {
+    public String getEmail() {
         return Prefs().getString(Consts.EMAIL, null);
-    }*/
+    }
 
     /**
      * @return String token from preferences

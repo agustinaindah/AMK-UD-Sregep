@@ -44,7 +44,11 @@ public class ListDataEmployeeAdapter extends BaseRecyclerViewAdapter<ItemKaryawa
         holder.txtNameEmp.setText(Helper.capitalize(itemKaryawan.getNama()));
         holder.txtJabatanEmp.setText(Helper.capitalize(itemKaryawan.getJabatan()));
         holder.txtSttsEmp.setText(Helper.capitalize(itemKaryawan.getStatusKaryawan()));
-        holder.txtDateEndEmp.setText(itemKaryawan.getTglResign());
+        if (itemKaryawan.getLogKontrak() == null){
+            holder.txtDateEndEmp.setText("Kosong");
+        } else {
+            holder.txtDateEndEmp.setText(Helper.parseToDateString(itemKaryawan.getLogKontrak(), Consts.TYPE_DATE));
+        }
 
         holder.layItemEmployee.setOnClickListener(new View.OnClickListener() {
             @Override

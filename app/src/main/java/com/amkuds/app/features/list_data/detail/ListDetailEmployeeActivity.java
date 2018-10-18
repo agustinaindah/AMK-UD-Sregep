@@ -3,6 +3,7 @@ package com.amkuds.app.features.list_data.detail;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -28,6 +29,7 @@ import com.amkuds.app.model.ItemKaryawan;
 import com.amkuds.app.utils.CallbackInterface;
 import com.amkuds.app.utils.Consts;
 import com.amkuds.app.utils.Helper;
+import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
 import java.util.regex.Matcher;
@@ -136,6 +138,9 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
         });
 
         displayData();
+        popupFotoCircular();
+        popupFotoDiri();
+        popupFotoData();
     }
 
     private void displayData() {
@@ -182,10 +187,10 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
             txtTglMasuk.setText(Helper.parseToDateString(mItemKaryawan.getTglMasuk(),Consts.TYPE_DATE));
         }
 
-        if (mItemKaryawan.getTglResign() == null){
+        if (mItemKaryawan.getLogKontrak() == null){
             txtTglKeluar.setText("-");
         } else {
-            txtTglKeluar.setText(Helper.parseToDateString(mItemKaryawan.getTglResign(),Consts.TYPE_DATE));
+            txtTglKeluar.setText(Helper.parseToDateString(mItemKaryawan.getLogKontrak(),Consts.TYPE_DATE));
         }
 
         txtGajiEmp.setText("Rp " + Helper.numberFormat(Integer.valueOf(mItemKaryawan.getLogSalary())));
@@ -196,6 +201,63 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
         id = getIntent().getIntExtra(Consts.ARG_ID, 0);
         mItemKaryawan = (ItemKaryawan) getIntent().getSerializableExtra(Consts.ARG_DATA);
         mPresenter.getSingleList(id);
+    }
+
+    private void popupFotoCircular() {
+        final ImagePopup imagePopup = new ImagePopup(this);
+        imagePopup.setWindowHeight(800); // Optional
+        imagePopup.setWindowWidth(800); // Optional
+        imagePopup.setBackgroundColor(Color.BLACK);  // Optional
+        imagePopup.setFullScreen(true); // Optional
+        imagePopup.setHideCloseIcon(true);  // Optional
+        imagePopup.setImageOnClickClose(true);  // Optional
+
+        imagePopup.initiatePopupWithPicasso(mItemKaryawan.getFoto());
+        imgDetailEmployee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /** Initiate Popup view **/
+                imagePopup.viewPopup();
+            }
+        });
+    }
+
+    private void popupFotoDiri() {
+        final ImagePopup imagePopup2 = new ImagePopup(this);
+        imagePopup2.setWindowHeight(800); // Optional
+        imagePopup2.setWindowWidth(800); // Optional
+        imagePopup2.setBackgroundColor(Color.BLACK);  // Optional
+        imagePopup2.setFullScreen(true); // Optional
+        imagePopup2.setHideCloseIcon(true);  // Optional
+        imagePopup2.setImageOnClickClose(true);  // Optional
+
+        imagePopup2.initiatePopupWithPicasso(mItemKaryawan.getFoto());
+        imgFotoData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /** Initiate Popup view **/
+                imagePopup2.viewPopup();
+            }
+        });
+    }
+
+    private void popupFotoData() {
+        final ImagePopup imagePopup3 = new ImagePopup(this);
+        imagePopup3.setWindowHeight(800); // Optional
+        imagePopup3.setWindowWidth(800); // Optional
+        imagePopup3.setBackgroundColor(Color.BLACK);  // Optional
+        imagePopup3.setFullScreen(true); // Optional
+        imagePopup3.setHideCloseIcon(true);  // Optional
+        imagePopup3.setImageOnClickClose(true);  // Optional
+
+        imagePopup3.initiatePopupWithPicasso(mItemKaryawan.getFotoKtp());
+        imgFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /** Initiate Popup view **/
+                imagePopup3.viewPopup();
+            }
+        });
     }
 
     @Override

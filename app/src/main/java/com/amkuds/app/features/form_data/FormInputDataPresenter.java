@@ -8,7 +8,6 @@ public interface FormInputDataPresenter {
     void postInputEmployee(JsonObject jsonData);
 
     interface View extends BaseView{
-        boolean validate();
         void success();
     }
 }

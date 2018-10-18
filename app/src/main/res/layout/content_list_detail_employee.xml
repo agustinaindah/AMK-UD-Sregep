@@ -376,8 +376,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtStatusEmp"
                     android:layout_marginTop="5dp"
-                    android:layout_marginLeft="80dp"
-                    android:text="Tanggal Keluar"
+                    android:layout_marginLeft="70dp"
+                    android:text="Tanggal Habis Kontrak"
                     android:textSize="14sp" />
 
                 <TextView

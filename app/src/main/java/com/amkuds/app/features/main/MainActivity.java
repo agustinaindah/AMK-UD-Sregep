@@ -148,6 +148,8 @@ public class MainActivity extends BaseActivity implements
                 break;
             case R.id.nav_logout:
                 AmkUdsApp.getInstance().logout();
+                AmkUdsApp.getInstance().getLogout();
+                AmkUdsApp.getInstance().getRequest().cancel();
                 intent = new Intent(this, LoginActivity.class);
                 intent.setFlags(
                         Intent.FLAG_ACTIVITY_CLEAR_TOP |
