@@ -143,6 +143,7 @@ public class AmkUdsApp extends Application {
                                 String token = AmkUdsApp.getInstance().getToken();
 
                                 if (token != null) {
+                                    /*reqBuilder.addHeader(Consts.TOKEN, token);*/
                                     reqBuilder.addHeader("Authorization", "Bearer " + token);
                                 }
 

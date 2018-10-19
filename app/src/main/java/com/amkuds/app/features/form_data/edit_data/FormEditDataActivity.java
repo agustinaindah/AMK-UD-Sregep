@@ -166,7 +166,7 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
     private String newPhoto = null;
     private String newPhoto2 = null;
     private GalleryPhoto galleryPhoto;
-//    private GalleryPhoto galleryPhoto2;
+    //    private GalleryPhoto galleryPhoto2;
     private String userChoosenTask;
     private String gender;
     private String status;
@@ -254,7 +254,7 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
         rgStatus.check((status.equals("0") ? R.id.rbStatusBlmKawin : R.id.rbStatusKawin));
 
         String agama = mItemKaryawan.getAgama();
-        if (agama.equals("islam")){
+        if (agama.equals("islam")) {
             spinReligion.setSelection(0);
         } else if (agama.equals("kristen")) {
             spinReligion.setSelection(1);
@@ -271,7 +271,7 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
         }
 
         String emp = mItemKaryawan.getStatusKaryawan().toString();
-        if (emp.equals("training")){
+        if (emp.equals("training")) {
             spinStatusKary.setSelection(0);
         } else if (emp.equals("kontrak")) {
             spinStatusKary.setSelection(1);
@@ -281,15 +281,15 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
             spinStatusKary.setSelection(3);
         }
 
-        if (mItemKaryawan.getTglResign() == null) {
+        if (mItemKaryawan.getLogKontrak() == null) {
             txtTglKeluar.setText("Pilih Tanggal");
         } else {
-            txtTglKeluar.setText(Helper.parseToDateString(mItemKaryawan.getTglResign(), Consts.TYPE_DATE));
+            txtTglKeluar.setText(Helper.parseToDateString(mItemKaryawan.getLogKontrak(), Consts.TYPE_DATE));
         }
         edtSalary.setText(mItemKaryawan.getLogSalary());
         //textfile.setText(mItemKaryawan.getDoc());
 
-        if (txtTglResign == null){
+        if (txtTglResign == null) {
             txtTglResign.setText("Pilih Tanggal");
         }
     }
@@ -299,7 +299,7 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 sttsKaryawan = spinStatusKary.getItemAtPosition(i).toString().toLowerCase();
                 Log.d("int", sttsKaryawan);
-                if (sttsKaryawan.equals("training") || sttsKaryawan.equals("tetap") || sttsKaryawan.equals("kontrak")){
+                if (sttsKaryawan.equals("training") || sttsKaryawan.equals("tetap") || sttsKaryawan.equals("kontrak")) {
                     txtLabelTglResign.setVisibility(View.GONE);
                     txtTglResign.setVisibility(View.GONE);
                 } else {
@@ -537,14 +537,24 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
             jsonInput.addProperty("status", status);
             jsonInput.addProperty("status_karyawan", sttsKaryawan);
             jsonInput.addProperty("agama", spinReligion.getSelectedItem().toString().toLowerCase());
-            jsonInput.addProperty("tgl_selesai", mTglKeluar);
             jsonInput.addProperty("salary", edtSalary.getText().toString());
             jsonInput.addProperty("tgl_resign", mTglResign);
+            jsonInput.addProperty("foto", foto);
+            jsonInput.addProperty("foto_ktp", fotoKtp);
+            jsonInput.addProperty("status_karyawan", mItemKaryawan.getStatusKaryawan());
             /*jsonInput.addProperty("tipe_kontrak", (rgTipeKontrak.getCheckedRadioButtonId() == R.id.rbTipeKontrakTidak) ? Consts.TIDAK : Consts.PANJANG);*/
             /*jsonInput.addProperty("tgl_masuk", mTglMasuk);*/
+            Log.d("tgl1",mItemKaryawan.getLogKontrak());
+            Log.d("tgl2",mItemKaryawan.getTglMasuk());
+            if (mItemKaryawan.getLogKontrak().equals(mItemKaryawan.getTglMasuk()))
+            {
+                jsonInput.addProperty("tgl_selesai", "");
+            } else {
+                jsonInput.addProperty("tgl_selesai", mItemKaryawan.getLogKontrak());
+            }
 
-            if (sttsKaryawan.equals("training") || sttsKaryawan.equals("tetap") || sttsKaryawan.equals("kontrak")){
-                jsonInput.addProperty("status_karyawan", "kosong");
+            if (sttsKaryawan.equals("training") || sttsKaryawan.equals("tetap") || sttsKaryawan.equals("kontrak")) {
+                jsonInput.addProperty("status_karyawan", mItemKaryawan.getStatusKaryawan());
             } else {
                 jsonInput.addProperty("status_karyawan", sttsKaryawan);
             }

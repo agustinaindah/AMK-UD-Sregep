@@ -3,10 +3,13 @@ package com.amkuds.app.features.auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.amkuds.app.AmkUdsApp;
 import com.amkuds.app.R;
 import com.amkuds.app.base.BaseActivity;
 import com.amkuds.app.features.main.MainActivity;

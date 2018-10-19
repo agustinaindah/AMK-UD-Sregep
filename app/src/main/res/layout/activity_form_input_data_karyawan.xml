@@ -402,7 +402,7 @@
                     android:id="@+id/txtTglKeluar"
                     style="@style/WrapWrapLayout"
                     android:layout_below="@id/txtLabelTglKeluar"
-                    android:layout_marginLeft="35dp"
+                    android:layout_marginLeft="50dp"
                     android:layout_marginTop="7dp"
                     android:layout_toRightOf="@id/txtTglMasuk"
                     android:background="?android:attr/selectableItemBackground"

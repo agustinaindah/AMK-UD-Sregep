@@ -448,6 +448,7 @@
                 <TextView
                     android:id="@+id/txtTglKeluar"
                     style="@style/WrapWrapLayout"
+                    android:layout_width="wrap_content"
                     android:layout_below="@id/txtLabelTglKeluar"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="7dp"

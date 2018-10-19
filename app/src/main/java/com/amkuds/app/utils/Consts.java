@@ -2,7 +2,7 @@ package com.amkuds.app.utils;
 
 public class Consts {
 
-    public static final String X_API_KEY = "X-api-key";
+    public static final String X_API_KEY        = "X-api-key";
     public static final String TOKEN            = "token";
     public static final String ID               = "id";
     public static final String EMAIL            = "email";
@@ -10,6 +10,7 @@ public class Consts {
     public static final String LASTNAME         = "last_name";
     public static final String ROLE             = "role";
     public static final String LOGOUT           = "logout";
+    public static final String AUTHORIZATION    = "authorization";
 
     public static final int LIMIT = 10;
     public static final int FIRST_PAGE = 1;

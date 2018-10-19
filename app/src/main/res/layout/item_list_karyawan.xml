@@ -67,23 +67,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="5dp"
                     android:layout_below="@id/txtJabatanEmp"
                     android:layout_toRightOf="@id/txtSttsEmp"
                     android:text="Habis Kontrak :"
-                    android:textSize="13sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/txtDateEndEmp"
                     style="@style/WrapWrapLayout"
                     android:layout_marginLeft="3dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginTop="4dp"
                     android:layout_below="@id/txtJabatanEmp"
                     android:layout_toRightOf="@id/txtHabisKontrak"
                     android:text=""
                     android:textColor="#616161"
-                    android:textSize="13sp"/>
+                    android:textSize="12sp"/>
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>

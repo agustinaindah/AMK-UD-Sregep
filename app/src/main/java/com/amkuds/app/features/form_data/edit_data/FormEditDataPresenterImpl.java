@@ -53,7 +53,7 @@ public class FormEditDataPresenterImpl implements FormEditDataPresenter {
                 public void responseFailed(Response<BaseResponse> response) {
                     try {
                         JsonObject jsonRes = Helper.parseToJsonObject(response.errorBody().string());
-                        mView.showMessage(jsonRes.get("msg").getAsString());
+                        mView.showMessage(jsonRes.get("data").getAsString());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

@@ -94,16 +94,5 @@ public class LoginPresenterImpl implements LoginPresenter {
         editor.putString(Consts.LASTNAME, lastName);
         editor.putString(Consts.ROLE, role);
         editor.commit();
-
-        /* "id": 2,
-            "email": "owneruds@owner.com",
-            "permissions": [],
-            "last_login": null,
-            "first_name": "Owner",
-            "last_name": "UDS",
-            "deleted_at": null,
-            "created_at": "2018-09-17 11:43:07",
-            "updated_at": "2018-09-17 11:43:07",
-            "role": "owner"*/
     }
 }

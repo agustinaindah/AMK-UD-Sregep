@@ -11,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -85,18 +86,22 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void setupNavigationView() {
+
         View header = navigationView.getHeaderView(0);
         TextView txtName = (TextView) header.findViewById(R.id.txtName);
-
         txtName.setText(sPref.getString(Consts.FIRSTNAME, ""));
 
-        Menu navMenu = navigationView.getMenu();
-        if (role.equalsIgnoreCase("owner")) {
-            navMenu.setGroupVisible(R.id.nav_menu_owner, true);
-            navMenu.setGroupVisible(R.id.nav_menu_admin, false);
-        } else {
-            navMenu.setGroupVisible(R.id.nav_menu_owner, false);
-            navMenu.setGroupVisible(R.id.nav_menu_admin, true);
+        boolean isLogin = AmkUdsApp.getInstance().isLogin();
+        Log.d("token", "tokeeen: "+ isLogin);
+        if (isLogin){
+            Menu navMenu = navigationView.getMenu();
+            if (role.equalsIgnoreCase("owner")) {
+                navMenu.setGroupVisible(R.id.nav_menu_owner, true);
+                navMenu.setGroupVisible(R.id.nav_menu_admin, false);
+            } else {
+                navMenu.setGroupVisible(R.id.nav_menu_owner, false);
+                navMenu.setGroupVisible(R.id.nav_menu_admin, true);
+            }
         }
     }
 
