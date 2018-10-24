@@ -116,8 +116,8 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     EditText edtSalary;
     @BindView(R.id.txtTglMasuk)
     TextView txtTglMasuk;
-     @BindView(R.id.txtTglKeluar)
-     TextView txtTglKeluar;
+     @BindView(R.id.txtTglHbsKontrak)
+     TextView txtTglHbsKontrak;
    /* @BindView(R.id.textfile)
     TextView textfile;*/
     @BindView(R.id.imgFotoDiri)
@@ -152,7 +152,7 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
 
     private String mTglLahir;
     private String mTglMasuk;
-    private String mTglKeluar;
+    private String mTglHbsKontrak;
 
     private String fileEvidence;
     private String fileEvidence2;
@@ -295,7 +295,7 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     private void displayData() {
         mTglLahir = Helper.getDateNow();
         mTglMasuk = Helper.getDateNow();
-        mTglKeluar = Helper.getDateNow();
+        mTglHbsKontrak = Helper.getDateNow();
     }
 
     @Override
@@ -315,9 +315,9 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
         dialogFragment.show(getSupportFragmentManager(), Consts.DIALOG);
     }
 
-    @OnClick(R.id.txtTglKeluar)
-    public void tglKeluar(View view) {
-        DialogFragment dialogFragment = EndDateDialog.newInstance(mTglKeluar, this);
+    @OnClick(R.id.txtTglHbsKontrak)
+    public void tglHabisKontrak(View view) {
+        DialogFragment dialogFragment = EndDateDialog.newInstance(mTglHbsKontrak, this);
         dialogFragment.show(getSupportFragmentManager(), Consts.DIALOG);
     }
 
@@ -335,8 +335,8 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
 
     @Override
     public void onEndSelectedDate(String EndDate) {
-        mTglKeluar = EndDate;
-        txtTglKeluar.setText(Helper.parseToDateString(mTglKeluar, Consts.TYPE_DATE));
+        mTglHbsKontrak = EndDate;
+        txtTglHbsKontrak.setText(Helper.parseToDateString(mTglHbsKontrak, Consts.TYPE_DATE));
     }
 
     @Override
@@ -447,7 +447,7 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
             jsonInput.addProperty("status", status);
             jsonInput.addProperty("status_karyawan", spinStatusKary.getSelectedItem().toString().toLowerCase());
             jsonInput.addProperty("agama", spinReligion.getSelectedItem().toString().toLowerCase());
-            jsonInput.addProperty("tgl_selesai", mTglKeluar);
+            jsonInput.addProperty("tgl_selesai", mTglHbsKontrak);
             jsonInput.addProperty("salary", edtSalary.getText().toString());
 
         } catch (Exception e) {
@@ -611,8 +611,7 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                           int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {

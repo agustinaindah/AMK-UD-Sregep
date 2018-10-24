@@ -48,9 +48,9 @@ public class ListDataEmployeeAdapter extends BaseRecyclerViewAdapter<ItemKaryawa
         holder.txtJabatanEmp.setText(Helper.capitalize(itemKaryawan.getJabatan()));
         holder.txtSttsEmp.setText(Helper.capitalize(itemKaryawan.getStatusKaryawan()));
         if (itemKaryawan.getLogKontrak() == null){
-            holder.txtDateEndEmp.setText("Kosong");
+            holder.txtDateEndContractEmp.setText("Kosong");
         } else {
-            holder.txtDateEndEmp.setText(Helper.parseToDateString(itemKaryawan.getLogKontrak(), Consts.TYPE_DATE));
+            holder.txtDateEndContractEmp.setText(Helper.parseToDateString(itemKaryawan.getLogKontrak(), Consts.TYPE_DATE));
         }
 
         holder.layItemEmployee.setOnClickListener(new View.OnClickListener() {
@@ -76,8 +76,8 @@ public class ListDataEmployeeAdapter extends BaseRecyclerViewAdapter<ItemKaryawa
         TextView txtJabatanEmp;
         @BindView(R.id.txtSttsEmp)
         TextView txtSttsEmp;
-        @BindView(R.id.txtDateEndEmp)
-        TextView txtDateEndEmp;
+        @BindView(R.id.txtDateEndContractEmp)
+        TextView txtDateEndContractEmp;
 
         public ViewHolder(View itemView) {
             super(itemView);

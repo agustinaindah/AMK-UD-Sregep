@@ -99,15 +99,15 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
     TextView txtStatusEmp;
     @BindView(R.id.txtTglMasuk)
     TextView txtTglMasuk;
-    @BindView(R.id.txtTglKeluar)
-    TextView txtTglKeluar;
+    @BindView(R.id.txtTglHabisKontrak)
+    TextView txtTglHabisKontrak;
     @BindView(R.id.txtGajiEmp)
     TextView txtGajiEmp;
 
+    @BindView(R.id.imgFotoDiri)
+    ImageView imgFotoDiri;
     @BindView(R.id.imgFotoData)
     ImageView imgFotoData;
-    @BindView(R.id.imgFile)
-    ImageView imgFile;
    /* @BindView(R.id.textfile)
     TextView textfile;*/
 
@@ -174,8 +174,8 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
 
     private void displayData() {
         Helper.displayImage(this, mItemKaryawan.getFoto(), imgDetailEmployee, true);
-        Helper.displayImage(this, mItemKaryawan.getFoto(), imgFotoData, true);
-        Helper.displayImage(this, mItemKaryawan.getFotoKtp(), imgFile, true);
+        Helper.displayImage(this, mItemKaryawan.getFoto(), imgFotoDiri, true);
+        Helper.displayImage(this, mItemKaryawan.getFotoKtp(), imgFotoData, true);
         txtNikEmp.setText(mItemKaryawan.getNoKtp());
         txtNameEmp.setText(Helper.capitalize(mItemKaryawan.getNama()));
 
@@ -217,9 +217,9 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
         }
 
         if (mItemKaryawan.getLogKontrak() == null) {
-            txtTglKeluar.setText("-");
+            txtTglHabisKontrak.setText("-");
         } else {
-            txtTglKeluar.setText(Helper.parseToDateString(mItemKaryawan.getLogKontrak(), Consts.TYPE_DATE));
+            txtTglHabisKontrak.setText(Helper.parseToDateString(mItemKaryawan.getLogKontrak(), Consts.TYPE_DATE));
         }
 
 
@@ -262,7 +262,7 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
         imagePopup2.setImageOnClickClose(true);  // Optional
 
         imagePopup2.initiatePopupWithPicasso(mItemKaryawan.getFoto());
-        imgFotoData.setOnClickListener(new View.OnClickListener() {
+        imgFotoDiri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 /** Initiate Popup view **/
@@ -281,7 +281,7 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
         imagePopup3.setImageOnClickClose(true);  // Optional
 
         imagePopup3.initiatePopupWithPicasso(mItemKaryawan.getFotoKtp());
-        imgFile.setOnClickListener(new View.OnClickListener() {
+        imgFotoData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 /** Initiate Popup view **/
@@ -388,20 +388,20 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
                 }
 
                 if (UItemKaryawan.getFoto() == null) {
-                    Helper.displayImage(this, mItemKaryawan.getFoto(), imgFotoData, true);
+                    Helper.displayImage(this, mItemKaryawan.getFoto(), imgFotoDiri, true);
                 } else {
                     Log.d("tes", UItemKaryawan.getFoto());
                     byte[] decodedString = Base64.decode(UItemKaryawan.getFoto(), Base64.DEFAULT);
                     Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                    imgFotoData.setImageBitmap(decodedByte);
+                    imgFotoDiri.setImageBitmap(decodedByte);
                 }
 
                 if (UItemKaryawan.getFotoKtp() == null) {
-                    Helper.displayImage(this, mItemKaryawan.getFotoKtp(), imgFile, true);
+                    Helper.displayImage(this, mItemKaryawan.getFotoKtp(), imgFotoData, true);
                 } else {
                     byte[] decodedString = Base64.decode(UItemKaryawan.getFotoKtp(), Base64.DEFAULT);
                     Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                    imgFile.setImageBitmap(decodedByte);
+                    imgFotoData.setImageBitmap(decodedByte);
                 }
 
                 txtNikEmp.setText(UItemKaryawan.getNoKtp());
@@ -438,9 +438,9 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
                 }
 
                 if (UItemKaryawan.getLogKontrak().equals("")) {
-                    txtTglKeluar.setText(Helper.parseToDateString(mItemKaryawan.getLogKontrak(), Consts.TYPE_DATE));
+                    txtTglHabisKontrak.setText(Helper.parseToDateString(mItemKaryawan.getLogKontrak(), Consts.TYPE_DATE));
                 } else {
-                    txtTglKeluar.setText(Helper.parseToDateString(UItemKaryawan.getLogKontrak(), Consts.TYPE_DATE));
+                    txtTglHabisKontrak.setText(Helper.parseToDateString(UItemKaryawan.getLogKontrak(), Consts.TYPE_DATE));
                 }
 
                 txtGajiEmp.setText("Rp " + Helper.numberFormat(Integer.valueOf(UItemKaryawan.getLogSalary())));

@@ -53,5 +53,4 @@
 
     <include layout="@layout/view_error"/>
 
-
 </android.support.design.widget.CoordinatorLayout>

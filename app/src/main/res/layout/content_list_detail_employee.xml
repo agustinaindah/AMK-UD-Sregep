@@ -350,48 +350,54 @@
                     android:textColor="@color/color_text_form"
                     android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/txtLabelTglMasuk"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <TableLayout
+                    android:id="@+id/tblTanggal"
                     android:layout_below="@id/txtStatusEmp"
-                    android:layout_margin="3dp"
-                    android:text="Tanggal Masuk"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/txtTglMasuk"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/txtLabelTglMasuk"
-                    android:drawableLeft="@drawable/ic_calendar_range"
-                    android:drawablePadding="5dp"
-                    android:text=""
-                    android:textColor="@color/color_text_form" />
+                    android:shrinkColumns="*"
+                    android:stretchColumns="*">
 
-                <TextView
-                    android:id="@+id/txtLabelTglKeluar"
-                    android:layout_toRightOf="@id/txtLabelTglMasuk"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/txtStatusEmp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginLeft="60dp"
-                    android:text="Tanggal Habis Kontrak"
-                    android:textSize="14sp" />
+                    <TableRow>
+                        <TextView
+                            android:id="@+id/txtLabelTglMasuk"
+                            android:layout_width="120dp"
+                            android:layout_margin="3dp"
+                            android:text="Tanggal Masuk"
+                            android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/txtTglKeluar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/txtLabelTglKeluar"
-                    android:layout_toRightOf="@id/txtTglMasuk"
-                    android:drawableLeft="@drawable/ic_calendar_range"
-                    android:drawablePadding="5dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginLeft="40dp"
-                    android:text=""
-                    android:textColor="@color/color_text_form" />
+                        <TextView
+                            android:id="@+id/txtLabelTglHbsKontrak"
+                            android:layout_margin="3dp"
+                            android:layout_width="120dp"
+                            android:text="Tanggal Habis Kontrak"
+                            android:textSize="14sp" />
+
+                    </TableRow>
+
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/txtTglMasuk"
+                            android:layout_width="120dp"
+                            android:layout_margin="3dp"
+                            android:drawableLeft="@drawable/ic_calendar_range"
+                            android:drawablePadding="5dp"
+                            android:text="14 September 2018"
+                            android:textColor="@color/color_text_form" />
+
+                        <TextView
+                            android:id="@+id/txtTglHabisKontrak"
+                            android:layout_width="120dp"
+                            android:layout_margin="3dp"
+                            android:drawableLeft="@drawable/ic_calendar_range"
+                            android:drawablePadding="5dp"
+                            android:text="14 November 2018"
+                            android:textColor="@color/color_text_form" />
+
+                    </TableRow>
+
+                </TableLayout>
 
                <!-- <TextView
                     android:id="@+id/txtTglKeluar"
@@ -410,7 +416,7 @@
                     android:id="@+id/txtLabelGajiEmp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/txtTglMasuk"
+                    android:layout_below="@+id/tblTanggal"
                     android:layout_margin="3dp"
                     android:text="Gaji"
                     android:textSize="14sp" />
@@ -424,7 +430,6 @@
                     android:text=""
                     android:textColor="@color/color_text_form"
                     android:textSize="14sp" />
-
 
             </RelativeLayout>
 
@@ -446,24 +451,23 @@
                 android:padding="5dp">
 
                 <TextView
-                    android:id="@+id/txtLabelFotoData"
+                    android:id="@+id/txtLabelFotoDiri"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/layFotoDiri"
                     android:layout_margin="3dp"
                     android:text="Upload Foto Diri"
                     android:textSize="14sp" />
 
                 <RelativeLayout
-                    android:id="@+id/layFotoData"
+                    android:id="@+id/layFotoDiri"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/txtLabelFotoData"
+                    android:layout_below="@id/txtLabelFotoDiri"
                     android:layout_marginBottom="15dp"
                     android:layout_marginTop="5dp">
 
                     <ImageView
-                        android:id="@+id/imgFotoData"
+                        android:id="@+id/imgFotoDiri"
                         android:layout_width="270dp"
                         android:layout_height="80dp"
                         android:layout_alignParentTop="true"
@@ -473,24 +477,24 @@
                 </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/txtLabelUploadFotoDok"
+                    android:id="@+id/txtLabelUploadFotoData"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/layFotoData"
+                    android:layout_below="@id/layFotoDiri"
                     android:layout_margin="3dp"
                     android:text="Upload Foto Dokumen"
                     android:textSize="14sp" />
 
                 <RelativeLayout
-                    android:id="@+id/layUploadFotoDok"
+                    android:id="@+id/layUploadFotoData"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/txtLabelUploadFotoDok"
+                    android:layout_below="@id/txtLabelUploadFotoData"
                     android:layout_marginBottom="15dp"
                     android:layout_marginTop="5dp">
 
                     <ImageView
-                        android:id="@+id/imgFile"
+                        android:id="@+id/imgFotoData"
                         android:layout_width="270dp"
                         android:layout_height="80dp"
                         android:layout_alignParentTop="true"

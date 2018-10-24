@@ -123,8 +123,8 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
     TextView txtLabelTglResign;
     @BindView(R.id.txtTglResign)
     TextView txtTglResign;
-    @BindView(R.id.txtTglKeluar)
-    TextView txtTglKeluar;
+    @BindView(R.id.txtTglHbsKontrak)
+    TextView txtTglHbsKontrak;
     /* @BindView(R.id.textfile)
      TextView textfile;*/
     @BindView(R.id.imgFotoDiri)
@@ -159,7 +159,7 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
 
     private String mTglLahir;
     //    private String mTglMasuk;
-    private String mTglKeluar;
+    private String mTglHabisKontrak;
     private String mTglResign;
 
     private String fileEvidence;
@@ -284,9 +284,9 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
         }
 
         if (mItemKaryawan.getLogKontrak() == null) {
-            txtTglKeluar.setText("Pilih Tanggal");
+            txtTglHbsKontrak.setText("Pilih Tanggal");
         } else {
-            txtTglKeluar.setText(Helper.parseToDateString(mItemKaryawan.getLogKontrak(), Consts.TYPE_DATE));
+            txtTglHbsKontrak.setText(Helper.parseToDateString(mItemKaryawan.getLogKontrak(), Consts.TYPE_DATE));
             tglHbsKontrak = mItemKaryawan.getLogKontrak();
         }
         edtSalary.setText(mItemKaryawan.getLogSalary());
@@ -418,7 +418,7 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
     private void displayData() {
         mTglResign = Helper.getDateNow();
         mTglLahir = Helper.getDateNow();
-        mTglKeluar = mItemKaryawan.getLogKontrak();
+        mTglHabisKontrak = mItemKaryawan.getLogKontrak();
 
         //mTglMasuk = Helper.getDateNow();
     }
@@ -429,9 +429,9 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
         dialogFragment.show(getSupportFragmentManager(), Consts.DIALOG);
     }
 
-    @OnClick(R.id.txtTglKeluar)
+    @OnClick(R.id.txtTglHbsKontrak)
     public void tglKeluar(View view) {
-        DialogFragment dialogFragment = EndDateDialog.newInstance(mTglKeluar, this);
+        DialogFragment dialogFragment = EndDateDialog.newInstance(mTglHabisKontrak, this);
         dialogFragment.show(getSupportFragmentManager(), Consts.DIALOG);
     }
 
@@ -455,8 +455,8 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
 
     @Override
     public void onEndSelectedDate(String EndDate) {
-        mTglKeluar = EndDate;
-        txtTglKeluar.setText(Helper.parseToDateString(mTglKeluar, Consts.TYPE_DATE));
+        mTglHabisKontrak = EndDate;
+        txtTglHbsKontrak.setText(Helper.parseToDateString(mTglHabisKontrak, Consts.TYPE_DATE));
     }
 
     @Override
@@ -552,10 +552,10 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
 
             String tanggal = mItemKaryawan.getLogKontrak();
 
-            if (mTglKeluar.equals(tanggal)){
+            if (mTglHabisKontrak.equals(tanggal)){
                 jsonInput.addProperty("tgl_selesai","");
             }else {
-                jsonInput.addProperty("tgl_selesai", mTglKeluar);
+                jsonInput.addProperty("tgl_selesai", mTglHabisKontrak);
             }
 
             if (sttsKaryawan.equals("training") || sttsKaryawan.equals("tetap") || sttsKaryawan.equals("kontrak")) {
@@ -812,10 +812,10 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
 
                 String tglHbsKontrak = mItemKaryawan.getLogKontrak();
 
-                if (mTglKeluar.equals(tglHbsKontrak)){
+                if (mTglHabisKontrak.equals(tglHbsKontrak)){
                     mItemKaryawan.setLogKontrak("");
                 } else {
-                    mItemKaryawan.setLogKontrak(mTglKeluar);
+                    mItemKaryawan.setLogKontrak(mTglHabisKontrak);
                 }
 
                 if (fileEvidence == null){

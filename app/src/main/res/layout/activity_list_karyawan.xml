@@ -9,57 +9,6 @@
         android:id="@+id/laySearch"
         style="@style/MatchWrapLayout">
 
-        <!--<RelativeLayout
-            android:id="@+id/laySpinSearch"
-            android:background="@drawable/spinner_border"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp">
-
-            <Spinner
-                android:id="@+id/spinSearchBy"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:entries="@array/data_status_karyawan"
-                android:prompt="@string/status_kar"
-                android:spinnerMode="dropdown"/>
-
-           &lt;!&ndash; <ImageView
-                android:id="@+id/imgDrop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="70dp"
-                android:src="@drawable/ic_keyboard_arrow_down" />&ndash;&gt;
-
-        </RelativeLayout>-->
-
-        <!--<android.support.v7.widget.CardView
-            android:id="@+id/cardFilter"
-            android:layout_width="45dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            app:cardBackgroundColor="@android:color/white">
-
-            <Button
-                android:id="@+id/btnFilter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="7dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="7dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/ic_filter" />
-
-        </android.support.v7.widget.CardView>-->
-
         <ImageButton
             android:id="@+id/imgBtnFilter"
             android:layout_width="45dp"
@@ -116,6 +65,7 @@
                 android:background="@drawable/ic_search" />
 
         </android.support.v7.widget.CardView>
+
     </RelativeLayout>
 
     <include layout="@layout/progress_bar" />
