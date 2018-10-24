@@ -1,5 +1,6 @@
 package com.amkuds.app.features.list_data;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +24,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ListDataEmployeeAdapter extends BaseRecyclerViewAdapter<ItemKaryawan> {
+
+    private final int REQUEST_CODE = 30;
 
     public ListDataEmployeeAdapter(List<ItemKaryawan> mData, Context mContext) {
         super(mData, mContext);
@@ -56,7 +59,7 @@ public class ListDataEmployeeAdapter extends BaseRecyclerViewAdapter<ItemKaryawa
                 Intent intent = new Intent(mContext, ListDetailEmployeeActivity.class);
                 intent.putExtra(Consts.ARG_ID, itemKaryawan.getId());
                 intent.putExtra(Consts.ARG_DATA, itemKaryawan);
-                mContext.startActivity(intent);
+                ((Activity) mContext).startActivityForResult(intent,REQUEST_CODE);
             }
         });
     }

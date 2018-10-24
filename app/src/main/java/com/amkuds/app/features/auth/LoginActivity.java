@@ -21,7 +21,7 @@ import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class LoginActivity extends BaseActivity implements LoginPresenter.View{
+public class LoginActivity extends BaseActivity implements LoginPresenter.View {
 
     @BindView(R.id.edtEmail)
     EditText edtEmail;
@@ -52,8 +52,8 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
     }
 
     @OnClick(R.id.btnLogin)
-    public void Login(){
-        if (!validate()){
+    public void Login() {
+        if (!validate()) {
             mPresenter.login(getInput());
         }
     }
@@ -124,6 +124,7 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View{
     public void notConnect(String msg) {
         Helper.createAlert(this, Consts.STR_INFO, msg);
     }
+
     private void setLoading(boolean isDisabled) {
         btnLogin.setText((isDisabled) ? strLogin : strLoading);
         btnLogin.setEnabled(isDisabled);

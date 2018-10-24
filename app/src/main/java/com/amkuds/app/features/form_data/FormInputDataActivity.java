@@ -295,7 +295,7 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     private void displayData() {
         mTglLahir = Helper.getDateNow();
         mTglMasuk = Helper.getDateNow();
-//        mTglKeluar = Helper.getDateNow();
+        mTglKeluar = Helper.getDateNow();
     }
 
     @Override

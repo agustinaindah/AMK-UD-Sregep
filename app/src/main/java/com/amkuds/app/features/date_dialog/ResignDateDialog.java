@@ -15,7 +15,7 @@ import java.util.Locale;
 
 public class ResignDateDialog extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
-    public static final String TAG = "EndDateDialog";
+    public static final String TAG = "ResignDateDialog";
 
     private static ResignOnDateDialog mCallback;
 

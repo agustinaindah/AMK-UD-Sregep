@@ -51,6 +51,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
@@ -174,6 +175,7 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
     private String oldPhoto;
     private String oldPhoto2;
     private String sttsKaryawan;
+    private String tglHbsKontrak;
 
     private int id;
     private ItemKaryawan mItemKaryawan;
@@ -285,12 +287,15 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
             txtTglKeluar.setText("Pilih Tanggal");
         } else {
             txtTglKeluar.setText(Helper.parseToDateString(mItemKaryawan.getLogKontrak(), Consts.TYPE_DATE));
+            tglHbsKontrak = mItemKaryawan.getLogKontrak();
         }
         edtSalary.setText(mItemKaryawan.getLogSalary());
         //textfile.setText(mItemKaryawan.getDoc());
 
-        if (txtTglResign == null) {
+        if (mItemKaryawan.getTglResign() == null) {
             txtTglResign.setText("Pilih Tanggal");
+        } else {
+            txtTglResign.setText(Helper.parseToDateString(mItemKaryawan.getTglResign(), Consts.TYPE_DATE));
         }
     }
 
@@ -413,9 +418,9 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
     private void displayData() {
         mTglResign = Helper.getDateNow();
         mTglLahir = Helper.getDateNow();
-        mTglKeluar = Helper.getDateNow();
+        mTglKeluar = mItemKaryawan.getLogKontrak();
+
         //mTglMasuk = Helper.getDateNow();
-        Log.d("Tgl", mTglResign);
     }
 
     @OnClick(R.id.txtTglLahir)
@@ -541,16 +546,16 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
             jsonInput.addProperty("tgl_resign", mTglResign);
             jsonInput.addProperty("foto", foto);
             jsonInput.addProperty("foto_ktp", fotoKtp);
-            jsonInput.addProperty("status_karyawan", mItemKaryawan.getStatusKaryawan());
+            /*jsonInput.addProperty("status_karyawan", mItemKaryawan.getStatusKaryawan());*/
             /*jsonInput.addProperty("tipe_kontrak", (rgTipeKontrak.getCheckedRadioButtonId() == R.id.rbTipeKontrakTidak) ? Consts.TIDAK : Consts.PANJANG);*/
             /*jsonInput.addProperty("tgl_masuk", mTglMasuk);*/
-            Log.d("tgl1",mItemKaryawan.getLogKontrak());
-            Log.d("tgl2",mItemKaryawan.getTglMasuk());
-            if (mItemKaryawan.getLogKontrak().equals(mItemKaryawan.getTglMasuk()))
-            {
-                jsonInput.addProperty("tgl_selesai", "");
-            } else {
-                jsonInput.addProperty("tgl_selesai", mItemKaryawan.getLogKontrak());
+
+            String tanggal = mItemKaryawan.getLogKontrak();
+
+            if (mTglKeluar.equals(tanggal)){
+                jsonInput.addProperty("tgl_selesai","");
+            }else {
+                jsonInput.addProperty("tgl_selesai", mTglKeluar);
             }
 
             if (sttsKaryawan.equals("training") || sttsKaryawan.equals("tetap") || sttsKaryawan.equals("kontrak")) {
@@ -686,7 +691,6 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
                             .from(newPhoto);
                     Bitmap newPhoto = imgLoader.requestSize(1024, 1024).getBitmap();
                     fileEvidence = ImageBase64.encode(newPhoto);
-
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -777,11 +781,75 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
         Helper.createAlert(this, strInfo, strSuccessConfirm, false, new CallbackInterface() {
             @Override
             public void callback() {
+                SharedPreferences mPref = AmkUdsApp.getInstance().Prefs();
+
+                String gender = (rgGender.getCheckedRadioButtonId() == R.id.rbGenderFemale) ? "0" : "1";
+
+                String status = (rgStatus.getCheckedRadioButtonId() == R.id.rbStatusBlmKawin) ? "0" : "1";
+                String foto = getByteArrayFromImageURL(oldPhoto);
+                String fotoKtp = getByteArrayFromImageURL(oldPhoto2);
+
+//                mItemKaryawan.setId(mPref.getInt(Consts.ID, 0));
+                mItemKaryawan.setId(id);
+                mItemKaryawan.setNama(edtNamaLengkap.getText().toString());
+                mItemKaryawan.setJk(gender);
+                mItemKaryawan.setNip(edtNip.getText().toString());
+                mItemKaryawan.setNoKtp(edtNikEmp.getText().toString());
+                mItemKaryawan.setNoHp(edtNoHp.getText().toString());
+                mItemKaryawan.setEmail(edtEmail.getText().toString());
+                mItemKaryawan.setAlamat(edtAlamat.getText().toString());
+                mItemKaryawan.setTglLahir(mTglLahir);
+                mItemKaryawan.setTempatKelahiran(edtTmptLahir.getText().toString());
+                mItemKaryawan.setDomisili(edtAlamatKtp.getText().toString());
+                mItemKaryawan.setJabatan(edtPosition.getText().toString());
+                mItemKaryawan.setDoc("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");
+                mItemKaryawan.setStatus(status);
+                mItemKaryawan.setStatusKaryawan(sttsKaryawan);
+                mItemKaryawan.setAgama(spinReligion.getSelectedItem().toString().toLowerCase());
+                mItemKaryawan.setLogSalary(edtSalary.getText().toString());
+               /* mItemKaryawan.setFoto(foto);
+                mItemKaryawan.setFotoKtp(fotoKtp);*/
+
+                String tglHbsKontrak = mItemKaryawan.getLogKontrak();
+
+                if (mTglKeluar.equals(tglHbsKontrak)){
+                    mItemKaryawan.setLogKontrak("");
+                } else {
+                    mItemKaryawan.setLogKontrak(mTglKeluar);
+                }
+
+                if (fileEvidence == null){
+                    mItemKaryawan.setFoto(foto);
+                } else {
+                    mItemKaryawan.setFoto(fileEvidence);
+                }
+
+                if (fileEvidence2 == null){
+                    mItemKaryawan.setFotoKtp(fotoKtp);
+                } else {
+                    mItemKaryawan.setFotoKtp(fileEvidence2);
+                }
+                /*if (fileEvidence == null) {
+                    mItemKaryawan.setFoto(foto);
+                } else {
+                    mItemKaryawan.setFoto(fileEvidence);
+                }
+
+                if (fileEvidence2 == null) {
+                    mItemKaryawan.setFotoKtp(fotoKtp);
+                } else {
+                    mItemKaryawan.setFotoKtp(fileEvidence2);
+                }*/
+
+                Intent data = new Intent();
+                data.putExtra(Consts.ARG_DATA, mItemKaryawan);
+                setResult(RESULT_OK, data);
                 finish();
             }
         });
     }
 
+    // mItemKaryawan.setTglResign(mTglResign);
     @Override
     public void showProgress() {
         progressDialog.show();

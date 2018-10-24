@@ -2,9 +2,11 @@ package com.amkuds.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.multidex.MultiDex;
 
+import com.amkuds.app.features.auth.LoginActivity;
 import com.amkuds.app.utils.Helper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,6 +16,7 @@ import com.amkuds.app.utils.Consts;
 import com.amkuds.app.utils.ServiceInterface;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -27,8 +30,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AmkUdsApp extends Application {
 
+    private static Context context;
     private static AmkUdsApp ourInstance;
     private Call<BaseResponse> mRequest = null;
+
+    public static synchronized Context getContext() {
+        return context;
+    }
 
     private Gson gson = new GsonBuilder()
             .setLenient()
@@ -47,6 +55,7 @@ public class AmkUdsApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        context = getApplicationContext();
         ourInstance = this;
     }
 
@@ -136,6 +145,10 @@ public class AmkUdsApp extends Application {
 
                                 Request ori = chain.request();
 
+                                /*if (AmkUdsApp.getInstance().isLogin() && isUnauthorized(ori)){
+                                    handleUnauthorized();
+                                }*/
+
                                 Request.Builder reqBuilder = ori.newBuilder()
                                         .addHeader("Content-Type","application/json")
                                         .addHeader("Accept","application/x-www-form-urlencoded");
@@ -182,6 +195,18 @@ public class AmkUdsApp extends Application {
             }
         });
 
+    }
+
+    private boolean isUnauthorized(Response response) {
+        return response.code() == HttpURLConnection.HTTP_UNAUTHORIZED;
+    }
+
+    private void handleUnauthorized() {
+        Context context = AmkUdsApp.getContext();
+
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 
     public Call<BaseResponse> getRequest() {

@@ -2,7 +2,7 @@
     <string name="app_name">AMK UD.Sregep</string>
 
     <string name="base_url">http://amk-uds.treva.id/api/v1/</string>
-   <!-- <string name="base_url">http://192.168.1.48/amk-ud-sregep/api/v1/</string>-->
+    <!--<string name="base_url">http://192.168.1.48/amk-ud-sregep/api/v1/</string>-->
     <string name="X_API_KEY"></string>
 
     <string name="action_back_pressed">If you click once again the app will be closed</string>

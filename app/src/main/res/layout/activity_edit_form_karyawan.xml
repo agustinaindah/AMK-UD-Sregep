@@ -364,7 +364,7 @@
                     android:layout_marginTop="7dp"
                     android:layout_toRightOf="@id/txtLabelTglMasuk"
                     android:text="Tanggal Resign*"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:textColor="@color/color_text_form" />
 
                 <TextView
@@ -377,7 +377,7 @@
                     android:clickable="true"
                     android:drawableLeft="@drawable/ic_calendar_range"
                     android:drawablePadding="5dp"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:text="Pilih Tanggal"
                     android:textSize="13sp" />
 

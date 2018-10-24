@@ -91,17 +91,13 @@ public class MainActivity extends BaseActivity implements
         TextView txtName = (TextView) header.findViewById(R.id.txtName);
         txtName.setText(sPref.getString(Consts.FIRSTNAME, ""));
 
-        boolean isLogin = AmkUdsApp.getInstance().isLogin();
-        Log.d("token", "tokeeen: "+ isLogin);
-        if (isLogin){
-            Menu navMenu = navigationView.getMenu();
-            if (role.equalsIgnoreCase("owner")) {
-                navMenu.setGroupVisible(R.id.nav_menu_owner, true);
-                navMenu.setGroupVisible(R.id.nav_menu_admin, false);
-            } else {
-                navMenu.setGroupVisible(R.id.nav_menu_owner, false);
-                navMenu.setGroupVisible(R.id.nav_menu_admin, true);
-            }
+        Menu navMenu = navigationView.getMenu();
+        if (role.equalsIgnoreCase("owner")) {
+            navMenu.setGroupVisible(R.id.nav_menu_owner, true);
+            navMenu.setGroupVisible(R.id.nav_menu_admin, false);
+        } else {
+            navMenu.setGroupVisible(R.id.nav_menu_owner, false);
+            navMenu.setGroupVisible(R.id.nav_menu_admin, true);
         }
     }
 
@@ -201,6 +197,7 @@ public class MainActivity extends BaseActivity implements
     public void notConnect(String msg) {
         Helper.createAlert(this, strInfo, "Tidak ada jaringan");
     }
+
     private void goToLogin() {
         gotoActivity(LoginActivity.class, true);
     }
