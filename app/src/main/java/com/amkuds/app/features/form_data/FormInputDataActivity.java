@@ -571,7 +571,7 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
                 try {
                     ImageLoader imgLoader = ImageLoader
                             .init()
-                            .from(newPhoto);
+                            .from(newPhoto2);
                     Bitmap newPhoto2 = imgLoader.requestSize(1024, 1024).getBitmap();
                     fileEvidence2 = ImageBase64.encode(newPhoto2);
                 } catch (FileNotFoundException e) {

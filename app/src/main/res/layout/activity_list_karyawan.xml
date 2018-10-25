@@ -68,8 +68,6 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/progress_bar" />
-
     <TextView
         android:id="@+id/txtNoData"
         android:layout_width="match_parent"
@@ -81,8 +79,10 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvListEmployee"
-        style="@style/MatchMatchLayout"
+        style="@style/MatchWrapLayout"
         android:layout_below="@id/laySearch" />
+
+    <include layout="@layout/progress_bar" />
 
     <include layout="@layout/view_error" />
 

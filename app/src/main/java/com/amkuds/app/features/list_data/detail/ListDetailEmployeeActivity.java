@@ -45,6 +45,7 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -385,6 +386,9 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
                     byte[] decodedString = Base64.decode(UItemKaryawan.getFoto(), Base64.DEFAULT);
                     Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                     imgDetailEmployee.setImageBitmap(decodedByte);
+                   /* String image_path = UItemKaryawan.getFoto();
+                    Bitmap bitmap = BitmapFactory.decodeFile(image_path);
+                    imgDetailEmployee.setImageBitmap(bitmap);*/
                 }
 
                 if (UItemKaryawan.getFoto() == null) {
@@ -394,6 +398,9 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
                     byte[] decodedString = Base64.decode(UItemKaryawan.getFoto(), Base64.DEFAULT);
                     Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                     imgFotoDiri.setImageBitmap(decodedByte);
+                    /*String image_path = UItemKaryawan.getFoto();
+                    Bitmap bitmap = BitmapFactory.decodeFile(image_path);
+                    imgFotoDiri.setImageBitmap(bitmap);*/
                 }
 
                 if (UItemKaryawan.getFotoKtp() == null) {
@@ -402,6 +409,9 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
                     byte[] decodedString = Base64.decode(UItemKaryawan.getFotoKtp(), Base64.DEFAULT);
                     Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                     imgFotoData.setImageBitmap(decodedByte);
+                    /*String image_path = UItemKaryawan.getFotoKtp();
+                    Bitmap bitmap = BitmapFactory.decodeFile(image_path);
+                    imgFotoData.setImageBitmap(bitmap);*/
                 }
 
                 txtNikEmp.setText(UItemKaryawan.getNoKtp());

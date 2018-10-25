@@ -689,7 +689,7 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
                     ImageLoader imgLoader = ImageLoader
                             .init()
                             .from(newPhoto);
-                    Bitmap newPhoto = imgLoader.requestSize(1024, 1024).getBitmap();
+                    Bitmap newPhoto = imgLoader.requestSize(512, 512).getBitmap();
                     fileEvidence = ImageBase64.encode(newPhoto);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -717,7 +717,7 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
                     ImageLoader imgLoader = ImageLoader
                             .init()
                             .from(newPhoto2);
-                    Bitmap newPhoto2 = imgLoader.requestSize(1024, 1024).getBitmap();
+                    Bitmap newPhoto2 = imgLoader.requestSize(512, 512).getBitmap();
                     fileEvidence2 = ImageBase64.encode(newPhoto2);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -734,7 +734,7 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
         MediaStore.Images.Media.insertImage(getContentResolver(), thumbnail, null, null);
 
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
         byte[] newImage = bytes.toByteArray();
 
         imgFotoDiri.setImageBitmap(thumbnail);
@@ -747,7 +747,7 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
         MediaStore.Images.Media.insertImage(getContentResolver(), thumbnail, null, null);
 
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        thumbnail.compress(Bitmap.CompressFormat.JPEG, 50, bytes);
         byte[] newImage = bytes.toByteArray();
 
         imgFotoData.setImageBitmap(thumbnail);
