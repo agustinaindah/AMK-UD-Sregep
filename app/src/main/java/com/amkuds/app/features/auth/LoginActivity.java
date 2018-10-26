@@ -2,12 +2,14 @@ package com.amkuds.app.features.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.amkuds.app.AmkUdsApp;
 import com.amkuds.app.R;
@@ -15,6 +17,10 @@ import com.amkuds.app.base.BaseActivity;
 import com.amkuds.app.features.main.MainActivity;
 import com.amkuds.app.utils.Consts;
 import com.amkuds.app.utils.Helper;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.gson.JsonObject;
 
 import butterknife.BindString;
@@ -29,6 +35,8 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View {
     EditText edtPassword;
     @BindView(R.id.btnLogin)
     Button btnLogin;
+   /* @BindView(R.id.btnToken)
+    Button btnToken;*/
 
     @BindString(R.string.label_login)
     String strLogin;
@@ -88,8 +96,10 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View {
     private JsonObject getInput() {
         JsonObject jsonInput = new JsonObject();
         try {
+            String refreshedToken = FirebaseInstanceId.getInstance().getToken();
             jsonInput.addProperty("email", edtEmail.getText().toString());
             jsonInput.addProperty("password", edtPassword.getText().toString());
+            Toast.makeText(LoginActivity.this, refreshedToken, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -132,4 +142,26 @@ public class LoginActivity extends BaseActivity implements LoginPresenter.View {
         edtEmail.setEnabled(isDisabled);
         edtPassword.setEnabled(isDisabled);
     }
+
+   /* @OnClick(R.id.btnToken)
+    public void token(){
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w("Token", "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        // Log and toast
+                        String msg = getString(R.string.msg_token_fmt, token);
+                        Log.d("Token", msg);
+                        Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }*/
 }

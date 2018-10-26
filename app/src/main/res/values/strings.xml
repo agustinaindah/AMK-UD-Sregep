@@ -173,4 +173,9 @@
     <string name="no_data">Tidak ada data</string>
     <string name="label_list_data">List Data Karyawan</string>
 
+    <!--fcm message-->
+    <string name="fcm_message">Amk UD Sregep</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+
 </resources>
