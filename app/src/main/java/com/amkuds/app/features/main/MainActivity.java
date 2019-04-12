@@ -1,25 +1,32 @@
 package com.amkuds.app.features.main;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amkuds.app.AmkUdsApp;
 import com.amkuds.app.R;
 import com.amkuds.app.base.BaseActivity;
+import com.amkuds.app.features.MyFirebaseMessagingService;
 import com.amkuds.app.features.auth.LoginActivity;
 import com.amkuds.app.features.auth.LogoutPresenter;
 import com.amkuds.app.features.auth.LogoutPresenterImpl;
@@ -28,13 +35,15 @@ import com.amkuds.app.features.list_data.ListDataEmployeeActivity;
 import com.amkuds.app.utils.CallbackInterface;
 import com.amkuds.app.utils.Consts;
 import com.amkuds.app.utils.Helper;
+import com.amkuds.app.utils.NotificationUtils;
+import com.amkuds.app.utils.SharedPref;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import butterknife.BindString;
 import butterknife.BindView;
 
 public class MainActivity extends BaseActivity implements
         NavigationView.OnNavigationItemSelectedListener, LogoutPresenter.View {
-    /*, LogoutPresenter.View*/
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -56,10 +65,13 @@ public class MainActivity extends BaseActivity implements
     private ProgressDialog progressDialog;
     private LogoutPresenter mPresenter;
     private String role = "";
-    private SharedPreferences sPref = AmkUdsApp.getInstance().Prefs();
 
     @Override
     protected void onActivityCreated(Bundle savedInstanceState) {
+        boolean is_login = AmkUdsApp.getInstance().isLogin();
+        if (!is_login){
+            goToLogin();
+        }
         fm = getSupportFragmentManager();
         mPresenter = new LogoutPresenterImpl(this);
         setSupportActionBar(toolbar);
@@ -69,10 +81,11 @@ public class MainActivity extends BaseActivity implements
         navigationView.setNavigationItemSelectedListener(this);
         gotoHome();
         initProgress();
+
     }
 
     private void gotoHome() {
-        role = sPref.getString(Consts.ROLE, "");
+        role = SharedPref.getString(Consts.ROLE);
         if (role.equalsIgnoreCase("owner")) {
             gotoFragment(fm, OwnerMainFragment.newInstance());
         } else {
@@ -86,10 +99,9 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void setupNavigationView() {
-
         View header = navigationView.getHeaderView(0);
         TextView txtName = (TextView) header.findViewById(R.id.txtName);
-        txtName.setText(sPref.getString(Consts.FIRSTNAME, ""));
+        txtName.setText(SharedPref.getString(Consts.FIRSTNAME));
 
         Menu navMenu = navigationView.getMenu();
         if (role.equalsIgnoreCase("owner")) {
@@ -99,6 +111,7 @@ public class MainActivity extends BaseActivity implements
             navMenu.setGroupVisible(R.id.nav_menu_owner, false);
             navMenu.setGroupVisible(R.id.nav_menu_admin, true);
         }
+
     }
 
     @Override
@@ -169,10 +182,6 @@ public class MainActivity extends BaseActivity implements
         return true;
     }
 
-    private void displayData() {
-
-    }
-
     @Override
     public void showLogout() {
         goToLogin();
@@ -199,6 +208,7 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void goToLogin() {
+        SharedPref.remove(Consts.TOKEN);
         gotoActivity(LoginActivity.class, true);
     }
 

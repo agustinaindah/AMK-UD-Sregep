@@ -26,9 +26,14 @@ import butterknife.ButterKnife;
 public class ListDataEmployeeAdapter extends BaseRecyclerViewAdapter<ItemKaryawan> {
 
     private final int REQUEST_CODE = 30;
+    private ListDataEmployeeActivity mActivity;
 
     public ListDataEmployeeAdapter(List<ItemKaryawan> mData, Context mContext) {
         super(mData, mContext);
+    }
+
+    public void setActivity(ListDataEmployeeActivity listDataEmployeeActivity){
+        this.mActivity = listDataEmployeeActivity;
     }
 
     @Override

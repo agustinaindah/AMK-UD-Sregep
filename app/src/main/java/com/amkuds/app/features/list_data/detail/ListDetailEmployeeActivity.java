@@ -33,12 +33,15 @@ import android.widget.Toast;
 import com.amkuds.app.AmkUdsApp;
 import com.amkuds.app.R;
 import com.amkuds.app.base.BaseActivity;
+import com.amkuds.app.features.MyFirebaseMessagingService;
 import com.amkuds.app.features.form_data.edit_data.FormEditDataActivity;
 import com.amkuds.app.features.list_data.ListDataEmployeeActivity;
 import com.amkuds.app.model.ItemKaryawan;
 import com.amkuds.app.utils.CallbackInterface;
 import com.amkuds.app.utils.Consts;
 import com.amkuds.app.utils.Helper;
+import com.amkuds.app.utils.NotificationUtils;
+import com.amkuds.app.utils.SharedPref;
 import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.mikhaellopez.circularimageview.CircularImageView;
 
@@ -129,7 +132,13 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
     @Override
     protected void onActivityCreated(Bundle savedInstanceState) {
         mPresenter = new ListDetailEmployeePresenterImpl(this);
-        initData();
+
+        Class service = MyFirebaseMessagingService.class;
+        int id = 0;
+        if (NotificationUtils.hasNotificationExtraKey(this, getIntent(), "id_karyawan", service)) {
+            id = Integer.valueOf(getIntent().getStringExtra("id_karyawan"));
+        }
+        initData(id);
         initLoading();
 
         setSupportActionBar(toolbar);
@@ -156,11 +165,6 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
                 }
             }
         });
-
-        displayData();
-        popupFotoCircular();
-        popupFotoDiri();
-        popupFotoData();
     }
 
     @Override
@@ -228,10 +232,18 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
 //        textfile.setText(mItemKaryawan.getDoc());
     }
 
-    private void initData() {
-        id = getIntent().getIntExtra(Consts.ARG_ID, 0);
-        mItemKaryawan = (ItemKaryawan) getIntent().getSerializableExtra(Consts.ARG_DATA);
-        mPresenter.getSingleList(id);
+    private void initData(int idd) {
+        if (idd != 0){
+            id = idd;
+            mPresenter.getSingleList(id);
+        }else{
+            id = getIntent().getIntExtra(Consts.ARG_ID, 0);
+            mItemKaryawan = (ItemKaryawan) getIntent().getSerializableExtra(Consts.ARG_DATA);
+            displayData();
+            popupFotoCircular();
+            popupFotoDiri();
+            popupFotoData();
+        }
     }
 
     private void popupFotoCircular() {
@@ -303,8 +315,7 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
         MenuItem shareItem = menu.findItem(R.id.action_edit_profile);
 
         // show the button when some condition is true
-        SharedPreferences sPref = AmkUdsApp.getInstance().Prefs();
-        String role = sPref.getString(Consts.ROLE, "");
+        String role = SharedPref.getString(Consts.ROLE);
         if (role.equalsIgnoreCase("owner")) {
             shareItem.setVisible(false);
         } else {
@@ -318,6 +329,9 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent = null;
         switch (item.getItemId()) {
+            case android.R.id.home:
+                intent = new Intent(this, ListDataEmployeeActivity.class);
+                break;
             case R.id.action_edit_profile:
                 intent = new Intent(this, FormEditDataActivity.class);
                 intent.putExtra(Consts.ARG_ID, id);
@@ -338,6 +352,10 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
     @Override
     public void success(ItemKaryawan itemKaryawan) {
         mItemKaryawan = itemKaryawan;
+        displayData();
+        popupFotoCircular();
+        popupFotoDiri();
+        popupFotoData();
     }
 
     @Override
@@ -379,39 +397,31 @@ public class ListDetailEmployeeActivity extends BaseActivity implements
                 // Extract name value from result extras
                 UItemKaryawan = (ItemKaryawan) data.getSerializableExtra(Consts.ARG_DATA);
 
-                if (UItemKaryawan.getFoto() == null) {
-                    Helper.displayImage(this, mItemKaryawan.getFoto(), imgDetailEmployee, true);
+                if (UItemKaryawan.getFoto().contains(getString(R.string.url_image))) {
+                    Helper.displayImage(this, UItemKaryawan.getFoto(), imgDetailEmployee, true);
                 } else {
                     Log.d("tes", UItemKaryawan.getFoto());
-                    byte[] decodedString = Base64.decode(UItemKaryawan.getFoto(), Base64.DEFAULT);
-                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                    imgDetailEmployee.setImageBitmap(decodedByte);
-                   /* String image_path = UItemKaryawan.getFoto();
-                    Bitmap bitmap = BitmapFactory.decodeFile(image_path);
-                    imgDetailEmployee.setImageBitmap(bitmap);*/
+                    byte[] imageAsBytes = Base64.decode( UItemKaryawan.getFoto().getBytes(), Base64.DEFAULT);
+                    imgDetailEmployee.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
                 }
 
-                if (UItemKaryawan.getFoto() == null) {
-                    Helper.displayImage(this, mItemKaryawan.getFoto(), imgFotoDiri, true);
+                if (UItemKaryawan.getFoto().contains(getString(R.string.url_image))) {
+                    Helper.displayImage(this, UItemKaryawan.getFoto(), imgFotoDiri, true);
                 } else {
                     Log.d("tes", UItemKaryawan.getFoto());
-                    byte[] decodedString = Base64.decode(UItemKaryawan.getFoto(), Base64.DEFAULT);
-                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                    imgFotoDiri.setImageBitmap(decodedByte);
-                    /*String image_path = UItemKaryawan.getFoto();
-                    Bitmap bitmap = BitmapFactory.decodeFile(image_path);
-                    imgFotoDiri.setImageBitmap(bitmap);*/
+                    byte[] imageAsBytes = Base64.decode( UItemKaryawan.getFoto().getBytes(), Base64.DEFAULT);
+                    imgFotoDiri.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
                 }
 
-                if (UItemKaryawan.getFotoKtp() == null) {
-                    Helper.displayImage(this, mItemKaryawan.getFotoKtp(), imgFotoData, true);
+                if (UItemKaryawan.getFotoKtp().contains(getString(R.string.url_image))) {
+                    Helper.displayImage(this, UItemKaryawan.getFotoKtp(), imgFotoData, true);
                 } else {
-                    byte[] decodedString = Base64.decode(UItemKaryawan.getFotoKtp(), Base64.DEFAULT);
+                    Log.d("tesktp", UItemKaryawan.getFotoKtp());
+                    byte[] imageAsBytes = Base64.decode( UItemKaryawan.getFotoKtp().getBytes(), Base64.DEFAULT);
+                    imgFotoData.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
+                      /*byte[] decodedString = Base64.decode("data:image/jpeg;base64," + UItemKaryawan.getFotoKtp(), Base64.DEFAULT);
                     Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-                    imgFotoData.setImageBitmap(decodedByte);
-                    /*String image_path = UItemKaryawan.getFotoKtp();
-                    Bitmap bitmap = BitmapFactory.decodeFile(image_path);
-                    imgFotoData.setImageBitmap(bitmap);*/
+                    imgFotoData.setImageBitmap(decodedByte);*/
                 }
 
                 txtNikEmp.setText(UItemKaryawan.getNoKtp());

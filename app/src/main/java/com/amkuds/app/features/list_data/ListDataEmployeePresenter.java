@@ -14,6 +14,6 @@ public interface ListDataEmployeePresenter {
     void getSearch(Map<String, String> mapRequest);
 
     interface View extends BaseView{
-        void successListEmployee(List<ItemKaryawan> itemKaryawans, int page);
+        void successListEmployee(List<ItemKaryawan> itemKaryawans, int totalData);
     }
 }

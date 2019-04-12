@@ -1,13 +1,12 @@
 package com.amkuds.app.features.auth;
 
-import android.content.SharedPreferences;
-
 import com.amkuds.app.AmkUdsApp;
 import com.amkuds.app.model.BaseResponse;
 import com.amkuds.app.utils.ApiService;
 import com.amkuds.app.utils.Consts;
 import com.amkuds.app.utils.Helper;
 import com.amkuds.app.utils.ServiceInterface;
+import com.amkuds.app.utils.SharedPref;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -82,17 +81,11 @@ public class LoginPresenterImpl implements LoginPresenter {
         String lastName = user.get("last_name").getAsString();
         String role = user.get("role").getAsString();
 
-        SharedPreferences.Editor editor = AmkUdsApp
-                .getInstance()
-                .Prefs()
-                .edit();
-
-        editor.putString(Consts.TOKEN, token);
-        editor.putInt(Consts.ID, iduser);
-        editor.putString(Consts.EMAIL, email);
-        editor.putString(Consts.FIRSTNAME, firstName);
-        editor.putString(Consts.LASTNAME, lastName);
-        editor.putString(Consts.ROLE, role);
-        editor.commit();
+        SharedPref.saveString(Consts.TOKEN, token);
+        SharedPref.saveInt(Consts.ID, iduser);
+        SharedPref.saveString(Consts.EMAIL, email);
+        SharedPref.saveString(Consts.FIRSTNAME, firstName);
+        SharedPref.saveString(Consts.LASTNAME, lastName);
+        SharedPref.saveString(Consts.ROLE, role);
     }
 }

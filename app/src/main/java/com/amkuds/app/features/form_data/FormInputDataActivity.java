@@ -40,9 +40,11 @@ import com.amkuds.app.features.date_dialog.StartDateDialog;
 import com.amkuds.app.R;
 import com.amkuds.app.base.BaseActivity;
 import com.amkuds.app.features.form_data.edit_data.FormEditDataActivity;
+import com.amkuds.app.features.list_data.ListDataEmployeeActivity;
 import com.amkuds.app.utils.CallbackInterface;
 import com.amkuds.app.utils.Consts;
 import com.amkuds.app.utils.Helper;
+import com.amkuds.app.utils.SharedPref;
 import com.amkuds.app.utils.Utility;
 import com.google.gson.JsonObject;
 import com.kosalgeek.android.photoutil.GalleryPhoto;
@@ -59,6 +61,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.io.RandomAccessFile;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 import butterknife.BindString;
 import butterknife.BindView;
@@ -184,6 +189,8 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
             // Log.i("Tes", "Permission to record denied");
             makeRequest();
         }
+
+        edtSalary.addTextChangedListener(onTextChangedListener());
     }
 
     private void initProgress() {
@@ -225,8 +232,6 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     }
 
     private void cameraIntent2() {
-       /* Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, REQUEST_CAMERA);*/
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI.getPath());
@@ -423,12 +428,11 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     private JsonObject getInput() {
         JsonObject jsonInput = new JsonObject();
         try {
-            SharedPreferences mPref = AmkUdsApp.getInstance().Prefs();
-            Log.d("id user", String.valueOf(mPref.getInt(Consts.ID, 0)));
+            Log.d("id user", String.valueOf(SharedPref.getInt(Consts.ID)));
             String gender = (rgGender.getCheckedRadioButtonId() == R.id.rbGenderFemale) ? "0" : "1";
             String status = (rgStatus.getCheckedRadioButtonId() == R.id.rbStatusBlmKawin) ? "0" : "1";
 
-            jsonInput.addProperty("id_user", mPref.getInt(Consts.ID, 0));
+            jsonInput.addProperty("id_user", SharedPref.getInt(Consts.ID));
             jsonInput.addProperty("nama", edtNamaLengkap.getText().toString());
             jsonInput.addProperty("jk", gender);
             jsonInput.addProperty("nip", edtNip.getText().toString());
@@ -448,7 +452,7 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
             jsonInput.addProperty("status_karyawan", spinStatusKary.getSelectedItem().toString().toLowerCase());
             jsonInput.addProperty("agama", spinReligion.getSelectedItem().toString().toLowerCase());
             jsonInput.addProperty("tgl_selesai", mTglHbsKontrak);
-            jsonInput.addProperty("salary", edtSalary.getText().toString());
+            jsonInput.addProperty("salary", edtSalary.getText().toString().replaceAll(",", ""));
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -521,6 +525,7 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
             focus = edtSalary;
             cancel = true;
         }
+
         if (cancel) {
             focus.requestFocus();
         }
@@ -544,7 +549,7 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
                     ImageLoader imgLoader = ImageLoader
                             .init()
                             .from(newPhoto);
-                    Bitmap newPhoto = imgLoader.requestSize(1024, 1024).getBitmap();
+                    Bitmap newPhoto = imgLoader.requestSize(512, 512).getBitmap();
                     fileEvidence = ImageBase64.encode(newPhoto);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -572,7 +577,7 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
                     ImageLoader imgLoader = ImageLoader
                             .init()
                             .from(newPhoto2);
-                    Bitmap newPhoto2 = imgLoader.requestSize(1024, 1024).getBitmap();
+                    Bitmap newPhoto2 = imgLoader.requestSize(512, 512).getBitmap();
                     fileEvidence2 = ImageBase64.encode(newPhoto2);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -635,9 +640,15 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
         Helper.createAlert(this, strInfo, strSuccessConfirm, false, new CallbackInterface() {
             @Override
             public void callback() {
-                finish();
+                moveToListEmployee();
             }
         });
+    }
+
+    private void  moveToListEmployee(){
+        Intent in = new Intent(getApplicationContext(), ListDataEmployeeActivity.class);
+        in.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(in);
     }
 
     @Override
@@ -659,12 +670,48 @@ public class FormInputDataActivity extends BaseActivity implements StartDateDial
     public void notConnect(String msg) {
         Helper.createAlert(this, strInfo, "Tidak ada jaringan");
     }
+
+    private TextWatcher onTextChangedListener() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                edtSalary.removeTextChangedListener(this);
+
+                try {
+                    String originalString = s.toString();
+
+                    Long longval;
+                    if (originalString.contains(",")) {
+                        originalString = originalString.replaceAll(",", "");
+                    }
+                    longval = Long.parseLong(originalString);
+
+                    DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+                    formatter.applyPattern("#,###,###,###");
+                    String formattedString = formatter.format(longval);
+
+                    //setting text after format to EditText
+                    edtSalary.setText(formattedString);
+                    edtSalary.setSelection(edtSalary.getText().length());
+
+                } catch (NumberFormatException nfe) {
+                    nfe.printStackTrace();
+                }
+
+                edtSalary.addTextChangedListener(this);
+
+            }
+        };
+    }
+
 }
-//        Log.d("fotoah", "validate: "+getInput().get("foto"));
-        /*if (getInput().get("foto") != null || !getInput().get("foto").isJsonNull() || !getInput().get("foto").equals("null") ||
-                getInput().get("foto_ktp") != null || !getInput().get("foto_ktp").isJsonNull() || !getInput().get("foto_ktp").equals("null")){
-            Toast.makeText(this, "Foto Diri dan Foto KTP harus diisi", Toast.LENGTH_SHORT).show();
-            focus = imgFotoDiri;
-            focus = imgFotoData;
-            cancel = true;
-        }*/

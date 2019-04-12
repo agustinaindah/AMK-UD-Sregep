@@ -102,6 +102,7 @@ public class ListDataEmployeePresenterImpl implements ListDataEmployeePresenter 
                 try {
                     String data = Helper.getGsonInstance().toJson(response.body().getData());
                     JsonObject jsonData = Helper.parseToJsonObject(data);
+                    String totalData = "0";
                     JsonArray jsonRes = jsonData.get("results").getAsJsonArray();
                     ArrayList<ItemKaryawan> itemKaryawans = new ArrayList<ItemKaryawan>();
                     for (JsonElement element : jsonRes){
@@ -109,7 +110,7 @@ public class ListDataEmployeePresenterImpl implements ListDataEmployeePresenter 
                                 Helper.getGsonInstance().fromJson(element, ItemKaryawan.class);
                         itemKaryawans.add(itemKaryawan);
                     }
-                    mView.successListEmployee(itemKaryawans,Integer.valueOf(mapRequest.get("page")));
+                    mView.successListEmployee(itemKaryawans,Integer.valueOf(totalData));
                 }catch (Exception e){
                     e.printStackTrace();
                 }

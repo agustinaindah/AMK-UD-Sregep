@@ -98,18 +98,6 @@
             android:textSize="14sp"
             android:theme="@style/ButtonColoredPrimary" />
 
-        <!--<Button
-            android:id="@+id/btnToken"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btnLogin"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:text="TOKEN"
-            android:textColor="@android:color/white"
-            android:textSize="14sp"
-            android:theme="@style/ButtonColoredPrimary" />-->
-
     </RelativeLayout>
 
 </ScrollView>

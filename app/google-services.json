@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "270407556257",
-    "firebase_url": "https://udsregep-apps.firebaseio.com",
-    "project_id": "udsregep-apps",
-    "storage_bucket": "udsregep-apps.appspot.com"
+    "project_number": "976222083202",
+    "firebase_url": "https://amk-ud-sregep.firebaseio.com",
+    "project_id": "amk-ud-sregep",
+    "storage_bucket": "amk-ud-sregep.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:270407556257:android:ed55849428848684",
+        "mobilesdk_app_id": "1:976222083202:android:ed55849428848684",
         "android_client_info": {
           "package_name": "com.amkuds.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "270407556257-p93f8fv2rire1eg2nj30nndgi7p85968.apps.googleusercontent.com",
+          "client_id": "976222083202-hf6iumnhhu9pfai6hi8n7fn3ukg4qt7j.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAz1MWkDJOsGwEWlTI0w7Xub9NZ07mUbFs"
+          "current_key": "AIzaSyA2GbL8onY-PY1on0DaHuhI6IRq-i7ou-I"
         }
       ],
       "services": {

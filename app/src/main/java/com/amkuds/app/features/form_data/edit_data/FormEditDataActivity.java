@@ -14,7 +14,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -40,6 +42,7 @@ import com.amkuds.app.model.ItemKaryawan;
 import com.amkuds.app.utils.CallbackInterface;
 import com.amkuds.app.utils.Consts;
 import com.amkuds.app.utils.Helper;
+import com.amkuds.app.utils.SharedPref;
 import com.amkuds.app.utils.Utility;
 import com.google.gson.JsonObject;
 import com.kosalgeek.android.photoutil.GalleryPhoto;
@@ -54,7 +57,10 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import butterknife.BindString;
@@ -203,6 +209,8 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
             // Log.i("Tes", "Permission to record denied");
             makeRequest();
         }
+
+        edtSalary.addTextChangedListener(onTextChangedListener());
     }
 
     private void initProgress() {
@@ -517,15 +525,10 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
     private JsonObject getInput() {
         JsonObject jsonInput = new JsonObject();
         try {
-            SharedPreferences mPref = AmkUdsApp.getInstance().Prefs();
-
             String gender = (rgGender.getCheckedRadioButtonId() == R.id.rbGenderFemale) ? "0" : "1";
-
             String status = (rgStatus.getCheckedRadioButtonId() == R.id.rbStatusBlmKawin) ? "0" : "1";
-            String foto = getByteArrayFromImageURL(oldPhoto);
-            String fotoKtp = getByteArrayFromImageURL(oldPhoto2);
 
-            jsonInput.addProperty("id_user", mPref.getInt(Consts.ID, 0));
+            jsonInput.addProperty("id_user", SharedPref.getInt(Consts.ID));
             jsonInput.addProperty("id_karyawan", id);
             jsonInput.addProperty("nama", edtNamaLengkap.getText().toString());
             jsonInput.addProperty("jk", gender);
@@ -544,8 +547,6 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
             jsonInput.addProperty("agama", spinReligion.getSelectedItem().toString().toLowerCase());
             jsonInput.addProperty("salary", edtSalary.getText().toString());
             jsonInput.addProperty("tgl_resign", mTglResign);
-            jsonInput.addProperty("foto", foto);
-            jsonInput.addProperty("foto_ktp", fotoKtp);
             /*jsonInput.addProperty("status_karyawan", mItemKaryawan.getStatusKaryawan());*/
             /*jsonInput.addProperty("tipe_kontrak", (rgTipeKontrak.getCheckedRadioButtonId() == R.id.rbTipeKontrakTidak) ? Consts.TIDAK : Consts.PANJANG);*/
             /*jsonInput.addProperty("tgl_masuk", mTglMasuk);*/
@@ -564,15 +565,11 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
                 jsonInput.addProperty("status_karyawan", sttsKaryawan);
             }
 
-            if (fileEvidence == null) {
-                jsonInput.addProperty("foto", foto);
-            } else {
+            if (fileEvidence != null) {
                 jsonInput.addProperty("foto", fileEvidence);
             }
 
-            if (fileEvidence2 == null) {
-                jsonInput.addProperty("foto_ktp", fotoKtp);
-            } else {
+            if (fileEvidence2 != null) {
                 jsonInput.addProperty("foto_ktp", fileEvidence2);
             }
 
@@ -652,25 +649,6 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
             focus.requestFocus();
         }
         return cancel;
-    }
-
-    private String getByteArrayFromImageURL(String url) {
-        try {
-            URL imageUrl = new URL(url);
-            URLConnection ucon = imageUrl.openConnection();
-            InputStream is = ucon.getInputStream();
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            byte[] buffer = new byte[1024];
-            int read = 0;
-            while ((read = is.read(buffer, 0, buffer.length)) != -1) {
-                baos.write(buffer, 0, read);
-            }
-            baos.flush();
-            return Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
-        } catch (Exception e) {
-            Log.d("Error", e.toString());
-        }
-        return null;
     }
 
     private void onSelectFromGalleryResult(Intent data) {
@@ -781,15 +759,10 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
         Helper.createAlert(this, strInfo, strSuccessConfirm, false, new CallbackInterface() {
             @Override
             public void callback() {
-                SharedPreferences mPref = AmkUdsApp.getInstance().Prefs();
-
                 String gender = (rgGender.getCheckedRadioButtonId() == R.id.rbGenderFemale) ? "0" : "1";
-
                 String status = (rgStatus.getCheckedRadioButtonId() == R.id.rbStatusBlmKawin) ? "0" : "1";
-                String foto = getByteArrayFromImageURL(oldPhoto);
-                String fotoKtp = getByteArrayFromImageURL(oldPhoto2);
 
-//                mItemKaryawan.setId(mPref.getInt(Consts.ID, 0));
+//                mItemKaryawan.setId(SharedPref.getInt(Consts.ID));
                 mItemKaryawan.setId(id);
                 mItemKaryawan.setNama(edtNamaLengkap.getText().toString());
                 mItemKaryawan.setJk(gender);
@@ -806,9 +779,7 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
                 mItemKaryawan.setStatus(status);
                 mItemKaryawan.setStatusKaryawan(sttsKaryawan);
                 mItemKaryawan.setAgama(spinReligion.getSelectedItem().toString().toLowerCase());
-                mItemKaryawan.setLogSalary(edtSalary.getText().toString());
-               /* mItemKaryawan.setFoto(foto);
-                mItemKaryawan.setFotoKtp(fotoKtp);*/
+                mItemKaryawan.setLogSalary(edtSalary.getText().toString().replaceAll(",", ""));
 
                 String tglHbsKontrak = mItemKaryawan.getLogKontrak();
 
@@ -819,27 +790,18 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
                 }
 
                 if (fileEvidence == null){
-                    mItemKaryawan.setFoto(foto);
+                    mItemKaryawan.setFoto(mItemKaryawan.getFoto());
                 } else {
                     mItemKaryawan.setFoto(fileEvidence);
                 }
 
                 if (fileEvidence2 == null){
-                    mItemKaryawan.setFotoKtp(fotoKtp);
+                    mItemKaryawan.setFotoKtp(mItemKaryawan.getFotoKtp());
                 } else {
                     mItemKaryawan.setFotoKtp(fileEvidence2);
-                }
-                /*if (fileEvidence == null) {
-                    mItemKaryawan.setFoto(foto);
-                } else {
-                    mItemKaryawan.setFoto(fileEvidence);
                 }
 
-                if (fileEvidence2 == null) {
-                    mItemKaryawan.setFotoKtp(fotoKtp);
-                } else {
-                    mItemKaryawan.setFotoKtp(fileEvidence2);
-                }*/
+                // mItemKaryawan.setTglResign(mTglResign);
 
                 Intent data = new Intent();
                 data.putExtra(Consts.ARG_DATA, mItemKaryawan);
@@ -849,7 +811,6 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
         });
     }
 
-    // mItemKaryawan.setTglResign(mTglResign);
     @Override
     public void showProgress() {
         progressDialog.show();
@@ -868,6 +829,49 @@ public class FormEditDataActivity extends BaseActivity implements EndDateDialog.
     @Override
     public void notConnect(String msg) {
         Helper.createAlert(this, strInfo, "Tidak ada jaringan");
+    }
+
+    private TextWatcher onTextChangedListener() {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                edtSalary.removeTextChangedListener(this);
+
+                try {
+                    String originalString = s.toString();
+
+                    Long longval;
+                    if (originalString.contains(",")) {
+                        originalString = originalString.replaceAll(",", "");
+                    }
+                    longval = Long.parseLong(originalString);
+
+                    DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.US);
+                    formatter.applyPattern("#,###,###,###");
+                    String formattedString = formatter.format(longval);
+
+                    //setting text after format to EditText
+                    edtSalary.setText(formattedString);
+                    edtSalary.setSelection(edtSalary.getText().length());
+
+                } catch (NumberFormatException nfe) {
+                    nfe.printStackTrace();
+                }
+
+                edtSalary.addTextChangedListener(this);
+
+            }
+        };
     }
 
 }

@@ -8,6 +8,7 @@ import android.support.multidex.MultiDex;
 
 import com.amkuds.app.features.auth.LoginActivity;
 import com.amkuds.app.utils.Helper;
+import com.amkuds.app.utils.SharedPref;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.amkuds.app.model.BaseResponse;
@@ -21,7 +22,6 @@ import java.net.HttpURLConnection;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -106,14 +106,14 @@ public class AmkUdsApp extends Application {
      * @return String email from preferences
      */
     public String getEmail() {
-        return Prefs().getString(Consts.EMAIL, null);
+        return SharedPref.getString(Consts.EMAIL);
     }
 
     /**
      * @return String token from preferences
      */
     public String getToken() {
-        return Prefs().getString(Consts.TOKEN, null);
+        return SharedPref.getString(Consts.TOKEN);
     }
 
     /**
@@ -137,17 +137,13 @@ public class AmkUdsApp extends Application {
                 .baseUrl(AmkUdsApp.getInstance().getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .client(new OkHttpClient.Builder()
-                        .addInterceptor(new HttpLoggingInterceptor()
-                                .setLevel(HttpLoggingInterceptor.Level.BODY))
+//                        .addInterceptor(new HttpLoggingInterceptor()
+//                                .setLevel(HttpLoggingInterceptor.Level.BODY))
                         .addInterceptor(new Interceptor() {
                             @Override
                             public okhttp3.Response intercept(Chain chain) throws IOException {
 
                                 Request ori = chain.request();
-
-                                /*if (AmkUdsApp.getInstance().isLogin() && isUnauthorized(ori)){
-                                    handleUnauthorized();
-                                }*/
 
                                 Request.Builder reqBuilder = ori.newBuilder()
                                         .addHeader("Content-Type","application/json")
@@ -156,7 +152,6 @@ public class AmkUdsApp extends Application {
                                 String token = AmkUdsApp.getInstance().getToken();
 
                                 if (token != null) {
-                                    /*reqBuilder.addHeader(Consts.TOKEN, token);*/
                                     reqBuilder.addHeader("Authorization", "Bearer " + token);
                                 }
 
@@ -195,18 +190,6 @@ public class AmkUdsApp extends Application {
             }
         });
 
-    }
-
-    private boolean isUnauthorized(Response response) {
-        return response.code() == HttpURLConnection.HTTP_UNAUTHORIZED;
-    }
-
-    private void handleUnauthorized() {
-        Context context = AmkUdsApp.getContext();
-
-        Intent intent = new Intent(context, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
     }
 
     public Call<BaseResponse> getRequest() {

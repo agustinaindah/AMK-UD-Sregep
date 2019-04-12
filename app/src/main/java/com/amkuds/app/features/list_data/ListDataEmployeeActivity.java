@@ -1,10 +1,15 @@
 package com.amkuds.app.features.list_data;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -18,11 +23,15 @@ import android.widget.Toast;
 
 import com.amkuds.app.R;
 import com.amkuds.app.base.BaseActivity;
+import com.amkuds.app.features.MyFirebaseMessagingService;
+import com.amkuds.app.features.list_data.detail.ListDetailEmployeeActivity;
+import com.amkuds.app.features.main.MainActivity;
 import com.amkuds.app.model.ItemKaryawan;
 import com.amkuds.app.utils.CallbackInterface;
 import com.amkuds.app.utils.Consts;
 import com.amkuds.app.utils.EndlessScrollListener;
 import com.amkuds.app.utils.Helper;
+import com.amkuds.app.utils.NotificationUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,8 +40,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class ListDataEmployeeActivity extends BaseActivity implements
-        ListDataEmployeePresenter.View {
+public class ListDataEmployeeActivity extends BaseActivity implements ListDataEmployeePresenter.View {
 
     @BindView(R.id.rvListEmployee)
     RecyclerView rvListEmployee;
@@ -55,9 +63,13 @@ public class ListDataEmployeeActivity extends BaseActivity implements
     private ListDataEmployeeAdapter mAdapter;
     private LinearLayoutManager linearLayoutManager;
     private int lastCount = 0;
+    private int totalData = 0;
     private ListDataEmployeePresenter mPresenter;
     private String mSearch;
     private String[] listItems;
+
+    private Fragment mFragment = null;
+    private FragmentManager fm;
 
     @Override
     protected void onActivityCreated(Bundle savedInstanceState) {
@@ -65,7 +77,7 @@ public class ListDataEmployeeActivity extends BaseActivity implements
         getSupportActionBar().setTitle("List Data Karyawan");
 
         mPresenter = new ListDataEmployeePresenterImpl(this);
-        mPresenter.getListEmployee(Consts.FIRST_PAGE);
+//        mPresenter.getListEmployee(Consts.FIRST_PAGE);
 
         listItems = getResources().getStringArray(R.array.data_key_search);
 
@@ -73,7 +85,7 @@ public class ListDataEmployeeActivity extends BaseActivity implements
         rvListEmployee.addOnScrollListener(new EndlessScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int nextPage) {
-                if (lastCount == Consts.LIMIT) {
+                if (lastCount > totalData) {
                     mPresenter.getListEmployee(nextPage);
                     //mPresenter.getSearch(getQueryRequest(nextPage));
                 }
@@ -84,6 +96,14 @@ public class ListDataEmployeeActivity extends BaseActivity implements
     @Override
     protected int setView() {
         return R.layout.activity_list_karyawan;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        lastCount = 0;
+        mAdapter = null;
+        mPresenter.getListEmployee(Consts.FIRST_PAGE);
     }
 
     @OnClick(R.id.imgBtnFilter)
@@ -107,6 +127,8 @@ public class ListDataEmployeeActivity extends BaseActivity implements
         if (mSearch == null || edtSearch.getText() == null) {
             Toast.makeText(this, "Pilih dan isi untuk melakukan pencarian", Toast.LENGTH_SHORT).show();
         } else {
+            mAdapter = null;
+            lastCount = 0;
             mPresenter.getSearch(getQueryRequest(Consts.FIRST_PAGE));
         }
     }
@@ -124,14 +146,15 @@ public class ListDataEmployeeActivity extends BaseActivity implements
     }
 
     @Override
-    public void successListEmployee(List<ItemKaryawan> itemKaryawans, int page) {
-        lastCount = itemKaryawans.size();
+    public void successListEmployee(List<ItemKaryawan> itemKaryawans, int totalData) {
+        lastCount = lastCount + itemKaryawans.size();
+        this.totalData = totalData;
 
-        if (page == Consts.FIRST_PAGE) {
+        if (mAdapter == null) {
             txtNoData.setVisibility((itemKaryawans.size() == 0) ? View.VISIBLE : View.GONE);
 
             mAdapter = new ListDataEmployeeAdapter(itemKaryawans, this);
-
+            mAdapter.setActivity(this);
             rvListEmployee.setHasFixedSize(true);
             rvListEmployee.setLayoutManager(linearLayoutManager);
             rvListEmployee.setAdapter(mAdapter);
@@ -145,6 +168,25 @@ public class ListDataEmployeeActivity extends BaseActivity implements
                 mAdapter.notifyDataSetChanged();
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent = null;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                intent = new Intent(this, MainActivity.class);
+                break;
+            default:
+                break;
+        }
+        if (intent != null) {
+            startActivity(intent);
+        }
+        if (mFragment != null) {
+            gotoFragment(fm, mFragment);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

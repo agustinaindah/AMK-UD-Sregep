@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">AMK UD.Sregep</string>
 
-    <string name="base_url">http://amk-uds.treva.id/api/v1/</string>
-    <!--<string name="base_url">http://192.168.1.48/amk-ud-sregep/api/v1/</string>-->
+    <string name="base_url">http://manajemen-karyawan.udsregep.com/api/v1/</string>
+    <string name="url_image">http://manajemen-karyawan.udsregep.com</string>
+    <!-- <string name="base_url">http://amk-uds.treva.id/api/v1/</string>-->
+    <!--<string name="base_url">http://192.168.123.235/amk-ud-sregep/api/v1/</string>-->
+    <!--<string name="base_url">http://10.0.7.210/amk-ud-sregep/api/v1/</string>
+    <string name="url_image">http://10.0.7.210/amk-ud-sregep</string>-->
+   <!-- <string name="url_image">http://amk-uds.treva.id</string>-->
     <string name="X_API_KEY"></string>
 
     <string name="action_back_pressed">If you click once again the app will be closed</string>
@@ -80,95 +85,6 @@
     </string-array>
 
     <string name="title_activity_list_detail_employee">ListDetailEmployeeActivity</string>
-    <string name="large_text">
-        "Material is the metaphor.\n\n"
-
-        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
-        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
-        "technologically advanced and open to imagination and magic.\n"
-        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
-        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
-        "flexibility of the material creates new affordances that supercede those in the physical "
-        "world, without breaking the rules of physics.\n"
-        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
-        "interact, and exist in space and in relation to each other. Realistic lighting shows "
-        "seams, divides space, and indicates moving parts.\n\n"
-
-        "Bold, graphic, intentional.\n\n"
-
-        "The foundational elements of print based design typography, grids, space, scale, color, "
-        "and use of imagery guide visual treatments. These elements do far more than please the "
-        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
-        "imagery, large scale typography, and intentional white space create a bold and graphic "
-        "interface that immerse the user in the experience.\n"
-        "An emphasis on user actions makes core functionality immediately apparent and provides "
-        "waypoints for the user.\n\n"
-
-        "Motion provides meaning.\n\n"
-
-        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
-        "inflection points that initiate motion, transforming the whole design.\n"
-        "All action takes place in a single environment. Objects are presented to the user without "
-        "breaking the continuity of experience even as they transform and reorganize.\n"
-        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
-        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
-
-        "3D world.\n\n"
-
-        "The material environment is a 3D space, which means all objects have x, y, and z "
-        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
-        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
-        "position along the z-axis and has a standard 1dp thickness.\n"
-        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
-        "emulated by manipulating the y-axis.\n\n"
-
-        "Light and shadow.\n\n"
-
-        "Within the material environment, virtual lights illuminate the scene. Key lights create "
-        "directional shadows, while ambient light creates soft shadows from all angles.\n"
-        "Shadows in the material environment are cast by these two light sources. In Android "
-        "development, shadows occur when light sources are blocked by sheets of material at "
-        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
-        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
-
-        "Resting elevation.\n\n"
-
-        "All material objects, regardless of size, have a resting elevation, or default elevation "
-        "that does not change. If an object changes elevation, it should return to its resting "
-        "elevation as soon as possible.\n\n"
-
-        "Component elevations.\n\n"
-
-        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
-        "does not vary from 6dp in one app to 16dp in another app).\n"
-        "Components may have different resting elevations across platforms, depending on the depth "
-        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
-
-        "Responsive elevation and dynamic elevation offsets.\n\n"
-
-        "Some component types have responsive elevation, meaning they change elevation in response "
-        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
-        "changes are consistently implemented using dynamic elevation offsets.\n"
-        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
-        "to the component’s resting state. They ensure that elevation changes are consistent "
-        "across actions and component types. For example, all components that lift on press have "
-        "the same elevation change relative to their resting elevation.\n"
-        "Once the input event is completed or cancelled, the component will return to its resting "
-        "elevation.\n\n"
-
-        "Avoiding elevation interference.\n\n"
-
-        "Components with responsive elevations may encounter other components as they move between "
-        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
-        "through other material, components avoid interfering with one another any number of ways, "
-        "whether on a per component basis or using the entire app layout.\n"
-        "On a component level, components can move or be removed before they cause interference. "
-        "For example, a floating action button (FAB) can disappear or move off screen before a "
-        "user picks up a card, or it can move if a snackbar appears.\n"
-        "On the layout level, design your app layout to minimize opportunities for interference. "
-        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
-        "when a user tries to pick up one of cards.\n\n"
-    </string>
     <string name="action_settings">Settings</string>
     <string name="no_data">Tidak ada data</string>
     <string name="label_list_data">List Data Karyawan</string>
@@ -177,5 +93,6 @@
     <string name="fcm_message">Amk UD Sregep</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+    <string name="doc">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</string>
 
 </resources>

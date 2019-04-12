@@ -11,9 +11,10 @@ public class Consts {
     public static final String ROLE             = "role";
     public static final String LOGOUT           = "logout";
     public static final String AUTHORIZATION    = "authorization";
+    public static final String TOKENID          = "tokenid";
 
     public static final int LIMIT = 10;
-    public static final int FIRST_PAGE = 1;
+    public static final int FIRST_PAGE = 0;
 
     public static final String STR_INFO    = "Info";
     public static final String STR_LOADING = "Loading...";
@@ -22,7 +23,6 @@ public class Consts {
     public static final String LOG_DEBUG  = "Log-Debug";
 
     //for arguments
-    public static final String CATEGORY   = "Category";
     public static final String FRAGMENT   = "fragment";
     public static final String DIALOG   = "DIALOG";
 
@@ -36,8 +36,5 @@ public class Consts {
     public static final String TYPE_DATE        = "yyyy-MM-dd";
 
     public static final String FIRST_RUN    = "FIRST_RUN";
-
-    public static final String TIDAK = "tidak";
-    public static final String PANJANG = "perpanjang";
 
 }

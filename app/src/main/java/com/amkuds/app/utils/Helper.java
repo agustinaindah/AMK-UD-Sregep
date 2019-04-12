@@ -3,8 +3,10 @@ package com.amkuds.app.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.text.format.DateUtils;
@@ -29,10 +31,6 @@ import com.google.gson.JsonSerializer;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -199,11 +197,16 @@ public class Helper {
      * @param isFitCenter
      */
     public static void displayImage(Context context, String url, ImageView imgView, boolean isFitCenter) {
-        RequestCreator creator = Picasso.with(context).load(url);
-        if (isFitCenter) {
-            creator.fit().centerInside();
+        try {
+
+            RequestCreator creator = Picasso.with(context).load(url);
+            if (isFitCenter) {
+                creator.fit().centerInside();
+            }
+            creator.placeholder(R.drawable.no_image).into(imgView);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        creator.placeholder(R.drawable.no_image).into(imgView);
     }
 
     /**
@@ -371,10 +374,10 @@ public class Helper {
         return gson;
     }
 
-    public static String capitalize(String capString){
+    public static String capitalize(String capString) {
         StringBuffer capBuffer = new StringBuffer();
         Matcher capMatcher = Pattern.compile("([a-z])([a-z]*)", Pattern.CASE_INSENSITIVE).matcher(capString);
-        while (capMatcher.find()){
+        while (capMatcher.find()) {
             capMatcher.appendReplacement(capBuffer, capMatcher.group(1).toUpperCase() + capMatcher.group(2).toLowerCase());
         }
 
